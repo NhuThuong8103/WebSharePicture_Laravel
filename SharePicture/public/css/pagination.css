@@ -1,0 +1,41 @@
+#page-navi {
+  width:50%;
+  margin:10px auto;
+  margin-bottom:10px;
+  padding: 0px;
+  text-align: center;
+  overflow: hidden;
+}
+
+#page-navi li {
+  list-style: none;
+  display: inline;
+}
+
+#page-navi li a {
+  padding: 8px 10px;
+  background: #3c5999;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 3px;
+  font-family: "Quicksand",sans-serif;
+  border: 1px solid transparent;
+  margin-top: 10px;
+  color:#fff;
+}
+
+#page-navi li:last-child a {
+  margin-right: 0px;
+}
+
+#page-navi li a.current,
+#page-navi li a.disable,
+#page-navi li a:hover {
+  background: #fff;
+  color: #3c5999;
+  border: 1px solid #3c5999;
+}

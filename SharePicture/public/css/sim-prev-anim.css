@@ -1,0 +1,145 @@
+.sim-anim-1{
+	position: relative;
+	}
+
+.sim-anim-1 img, .title-album{
+  position: absolute;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  } 
+.sim-anim-1 img{
+  z-index: 1;
+  }
+.sim-anim-1 img:nth-child(1){
+   -ms-transform: rotate(-8deg); 
+    -webkit-transform: rotate(-8deg); 
+    transform: rotate(-8deg);
+  }
+.sim-anim-1 img:nth-child(2){
+   -ms-transform: rotate(-3deg); 
+    -webkit-transform: rotate(-3deg); 
+    transform: rotate(-3deg);
+  }
+.sim-anim-1 img:nth-child(3), .title-album{
+    -ms-transform: scale(0.9,0.9); 
+    -webkit-transform: scale(0.9,0.9); 
+    transform: scale(0.9,0.9); 
+  } 
+
+
+  /*hoever*/
+
+.sim-anim-1:hover img, .albums-inner:hover img{
+  z-index: 1;
+  }
+.sim-anim-1:hover img:nth-child(1), .albums-inner:hover img:nth-child(1){
+   -ms-transform: rotate(10deg); 
+    -webkit-transform: rotate(10deg); 
+    transform: rotate(10deg);
+  }
+.sim-anim-1:hover img:nth-child(2), .albums-inner:hover img:nth-child(2){
+   -ms-transform: rotate(5deg); 
+    -webkit-transform: rotate(5deg); 
+    transform: rotate(5deg);
+  }
+.sim-anim-1:hover img:nth-child(3), .albums-inner:hover img:nth-child(3){
+    -ms-transform: scale(1,1); 
+    -webkit-transform: scale(1,1); 
+    transform: scale(1,1); 
+  } 
+  .albums-inner:hover .title-album{
+    -ms-transform: scale(1,1); 
+    -webkit-transform: scale(1,1); 
+    transform: scale(1,1); 
+    /*top: 6%;*/
+  } 
+
+/*=====================================       hieu ung cho feeds album    ===================================*/
+  .sim-anim-2{
+    position: relative;
+    }
+
+  .sim-anim-2 img{
+    position: absolute;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    } 
+  .sim-anim-2 img{
+    z-index: 1;
+    }
+  .sim-anim-2 img:nth-child(1){
+     -ms-transform: rotate(10deg); 
+      -webkit-transform: rotate(10deg); 
+      transform: rotate(10deg);
+    }
+  .sim-anim-2 img:nth-child(2){
+     -ms-transform: rotate(5deg); 
+      -webkit-transform: rotate(5deg); 
+      transform: rotate(5deg);
+    }
+  .sim-anim-2 img:nth-child(3){
+      -ms-transform: scale(1,1); 
+      -webkit-transform: scale(1,1); 
+      transform: scale(1,1); 
+    } 
+    /*==========================      hover hieu ung feeds album      ======================*/
+    .sim-anim-2{
+    position: relative;
+    }
+
+  .sim-anim-2:hover img{
+    position: absolute;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    } 
+  .sim-anim-2:hover img{
+    z-index: 1;
+    }
+  .sim-anim-2:hover img:nth-child(1){
+     -ms-transform: rotate(7deg); 
+      -webkit-transform: rotate(7deg); 
+      transform: rotate(7deg);
+    }
+  .sim-anim-2:hover img:nth-child(2){
+     -ms-transform: rotate(3deg); 
+      -webkit-transform: rotate(3deg); 
+      transform: rotate(3deg);
+    }
+  .sim-anim-2:hover img:nth-child(3){
+      -ms-transform: scale(0.9,0.9); 
+      -webkit-transform: scale(0.9,0.9); 
+      transform: scale(0.9,0.9); 
+    } 
+  
+
+/*=====================================       hieu ung cho feeds photo    ====================================*/
+  .sim-anim-3{
+    position: relative;
+    }
+
+  .sim-anim-3 img{
+    position: absolute;
+    -ms-transform: scale(1,1); 
+      -webkit-transform: scale(1,1); 
+      transform: scale(1,1); 
+    } 
+  .sim-anim-3 img{
+    z-index: 1;
+    }
+
+    .sim-anim-3:hover img{
+    position: absolute;
+    -ms-transform: scale(1.1,1.1); 
+      -webkit-transform: scale(1.1,1.1); 
+      transform: scale(1.1,1.1); 
+      transition: 0.4s all ease;
+    } 
+  .sim-anim-3:hover img{
+    z-index: 1;
+    }
