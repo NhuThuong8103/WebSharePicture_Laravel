@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Cookie;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailResetPassword;
 use App\Mail\SendMail;
 use Carbon\Carbon;
 use Session;
@@ -100,5 +102,45 @@ class LoginController extends BaseController
         Session::put('kt','login');
 
 		return back()->with('thongbao_activesuccess',"Account actived, please login :V"); 
+	}
+
+	function getEmailForReset(Request $request){
+		$request->session()->put('kt', 'forgot');
+		Validator::make($request->all(),[
+			'email_reset'  =>  'bail|required|email'
+		])->validate();
+
+		$email = $request->get('email_reset');
+
+		Mail::to($email)->send(new SendMailResetPassword($email));
+
+		return back()->with('thongbao_forgotsuccess',"Please check your mail for reset password!");
+	}
+
+	function viewResetPassword($email){
+		return view('resetpassword',compact('email'));
+	}
+
+	function updatePasswordReset(Request $request){
+		$request->session()->put('reset');
+		Validator::make($request->all(),[
+			'new_password'  	=> 'bail|required|min:6|max:64',
+			'confirm_password'  => 'bail|required|min:6|max:64',
+			'email_reset'		=> 'bail|required|email',
+		])->validate();
+
+		$new_password = $request->get('new_password');
+		$confirm_password = $request->get('confirm_password');
+		$email = $request->get('email_reset');
+
+		if($confirm_password != $new_password)
+			return back()->with('thongbao_resetorror',"Password confirm must be the same as the password!");
+		Session::put('reset');
+		DB::table('taikhoan')
+		->where('email',$email)
+		->limit(1)
+		->update(array('password' => Hash::make($new_password)));
+		
+		return back()->with('thongbao_resetsuccess',"Password has been changed!");
 	}
 }

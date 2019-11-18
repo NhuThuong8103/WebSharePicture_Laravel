@@ -7,11 +7,12 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendMail extends Mailable
+class SendMailResetPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
     protected $email;
+
     /**
      * Create a new message instance.
      *
@@ -19,7 +20,7 @@ class SendMail extends Mailable
      */
     public function __construct($email)
     {
-        $this->email=$email;
+        $this->email = $email;
     }
 
     /**
@@ -29,6 +30,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('nhahang6789pro@gmail.com')->subject('[Fotobook]Register Account')->view('sendmail.mailRegister')->with('email',$this->email);
+        //return $this->view('view.name');
+        return $this->from('nhahang6789pro@gmail.com')->subject('[Fotobook] Reset Your Password')->view('sendmail.mailResetPassword')->with('email', $this->email);
     }
 }

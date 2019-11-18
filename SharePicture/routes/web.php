@@ -36,5 +36,12 @@ Route::group(['prefix' => '/login'], function(){
 	Route::get('/activeaccount/{email}','LoginController@activeAccount');
 });
 
+Route::post('/password/reset','LoginController@getEmailForReset'); // goi link
+
+Route::get('/password/reset/{email}', 'LoginController@viewResetPassword'); // return view
+
+Route::post('/password/reset_success','LoginController@updatePasswordReset');
+
+
 
 //Auth::routes();

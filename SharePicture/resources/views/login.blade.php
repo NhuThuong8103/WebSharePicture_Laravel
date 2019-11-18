@@ -172,12 +172,28 @@
 										</form>					              
 									</div>
 
+									@if(Session::get('kt')=='forgot')
+									<div id="forgot" class="tab-pane active">
+									@else
 									<div id="forgot" class="tab-pane">
+									@endif
 										<h2 class="text-center login-title">Forgot password</h2>
-										<form class="form-signin" method="post">
+										@if(Session::get('kt')=='forgot')
+											@include('error')
+										@endif
+										<div>
+											@if(Session::get('thongbao_forgotsuccess'))
+											<div class="alert alert-success">
+												<button type="button" class="close" data-dismiss="alert">x</button>
+												<strong>{{ Session::get('thongbao_forgotsuccess') }}</strong>
+											</div>
+											@endif
+										</div>
+										<form class="form-signin" method="post" action="{{url('/password/reset')}}">
+											{{ csrf_field() }}
 											<label>Enter your valid Email</label>
-											<input type="text" class="form-control" placeholder="Email" required autofocus>
-											<button class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit">Recovery</button>
+											<input type="text" class="form-control" placeholder="Email" required autofocus name="email_reset">
+											<input class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit" value="Recovery">
 										</form>					              
 									</div>
 								</div>
