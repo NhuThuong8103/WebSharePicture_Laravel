@@ -4,6 +4,10 @@ Use Frameword Laravel to build photo sharing websites in PHP
 make 1 file .env
 add 1 file m
 config file .env
+
+
+<br>
+
 APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:iBad+WewcNimTY38QKGRuYrfDdvI7C03FJsvmT+2w8M=
