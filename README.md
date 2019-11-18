@@ -2,10 +2,10 @@
 Use Frameword Laravel to build photo sharing websites in PHP
 
 make 1 file .env
+<br>
 add 1 file m
+<br>
 config file .env
-
-
 <br>
 
 APP_NAME=Laravel
