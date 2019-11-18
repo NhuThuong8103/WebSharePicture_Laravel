@@ -7,6 +7,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 use Carbon\Carbon;
 use Session;
 use Validator;
@@ -36,7 +38,24 @@ class LoginController extends BaseController
 
 		if(Auth::attempt($userData)){
 			if(Auth::user()->phephoatdong)
-				return redirect('index');
+			{
+				$kt=DB::table('taikhoan')
+					->join('phanquyen','taikhoan.quyen_id','=','phanquyen.id')
+					->where('taikhoan.quyen_id','=',Auth::user()->quyen_id)
+					->where('taikhoan.email','=',Auth::user()->email)
+					->select('phanquyen.loaiquyen')
+					->get();
+				if($kt[0]->loaiquyen==false)
+				{
+					return Redirect('index');
+				}
+				else {
+					return Redirect('admin/index');
+				}
+
+
+
+			}
 			else {
 				return back()->with('thongbaoerror',"Account of you is temporarily locked!!!");
 			}
@@ -65,8 +84,21 @@ class LoginController extends BaseController
 			return back()->with('thongbao_register',"Wrong confirm password!!!");
 		}
 
-		DB::insert('insert into taikhoan (email, password,thoigian_dncuoi, ho,ten, phephoatdong,quyen_id) values (?, ?, ?, ?, ?, ?, ?)', [$email,Hash::make($pass), Carbon::now('GMT+7'),$lastname, $firstname,true,1]);
-		return back()->with('thongbao_registersuccess',"Sign Up Success :V"); 
+		Mail::to($email)->send(new SendMail($email));
 
+		DB::insert('insert into taikhoan (email, password,thoigian_dncuoi, ho,ten, phephoatdong,quyen_id) values (?, ?, ?, ?, ?, ?, ?)', [$email,Hash::make($pass), Carbon::now('GMT+7'),$lastname, $firstname,false,1]);
+		return back()->with('thongbao_registersuccess',"Please check your mail for active account :V"); 
+
+	}
+
+	function activeAccount($email){
+		DB::table('taikhoan')
+        ->where('email', $email)  // find your user by their email
+        ->limit(1)  // optional - to ensure only one record is updated.
+        ->update(array('phephoatdong' => true));  // update the record in the DB.
+
+        Session::put('kt','login');
+
+		return back()->with('thongbao_activesuccess',"Account actived, please login :V"); 
 	}
 }

@@ -10,18 +10,31 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.home');
 });
 
-//Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/index', function () {
+    return view('user.home');
+});
 
-Route::get('/login','LoginController@showLogin');
+Route::get('/admin/index',function(){
+	return view('admin.home');
+});
 
-Route::post('/login/checkLogin','LoginController@checkLogin');
+//Route::get('/index', 'HomeController@index')->name('home');
+//Route::get('/index', 'HomeController@index');http://127.0.0.1:8000/login/activeaccount
 
-Route::post('/login/register','LoginController@register');
+Route::group(['prefix' => '/login'], function(){
+	Route::get('','LoginController@showLogin');
+
+	Route::post('/checkLogin','LoginController@checkLogin');
+
+	Route::post('/register','LoginController@register');
+
+	Route::get('/activeaccount/{email}','LoginController@activeAccount');
+});
+
+
 //Auth::routes();

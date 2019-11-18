@@ -95,7 +95,7 @@
 									@else
 										<div id="login" class="tab-pane">
 									@endif
-
+									
 										<h2 class="text-center login-title">Fotobook Login</h2>
 										<img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
 										@if(Session::get('kt')=='login')
@@ -106,6 +106,12 @@
 											<div class="alert alert-danger">
 												<button type="button" class="close" data-dismiss="alert">x</button>
 												<strong>{{ Session::get('thongbaoerror') }}</strong>
+											</div>
+											@endif
+											@if(Session::get('thongbao_activesuccess'))
+											<div class="alert alert-success">
+												<button type="button" class="close" data-dismiss="alert">x</button>
+												<strong>{{ Session::get('thongbao_activesuccess') }}</strong>
 											</div>
 											@endif
 										</div>
@@ -123,7 +129,7 @@
 												<a href="#"><i class="fab fa-google-plus"></i></a>
 											</div>
 										</form>
-									</div>
+									</div> 
 
 									@if( Session::get('kt')=='register' )
 										<div id="signup" class="tab-pane active">
@@ -178,9 +184,12 @@
 
 								<div class="text-center mt-2">
 									<ul class="list-inline mb-0">
-										<li class="mt-2"><a class="text-muted" href="#login" data-toggle="tab">Login</a></li>
-										<li class="mt-2"><a class="text-muted" href="#forgot" data-toggle="tab">Forgot password</a></li>
-										<li class="mt-2"><a class="text-muted" href="#signup" data-toggle="tab">Create an account</a></li>
+										<li class="mt-2">
+											<a class="text-muted" href="#login" data-toggle="tab">Login</a></li>
+										<li class="mt-2">
+											<a class="text-muted" href="#forgot" data-toggle="tab">Forgot password</a></li>
+										<li class="mt-2">
+											<a class="text-muted" href="#signup" data-toggle="tab">Create an account</a></li>
 									</ul>
 								</div>
 							</div>
