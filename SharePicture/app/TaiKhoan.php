@@ -11,6 +11,8 @@ class TaiKhoan extends Model
 {
     public $table="taikhoan";
 
+    protected $fillable = ['id','email','password','thoigian_dncuoi','ho','ten','anhdaidien','phephoatdong','quyen_id'];
+
     public function phanquyen(){
     	return $this->hasOne(PhanQuyen::class,"id");
     }
