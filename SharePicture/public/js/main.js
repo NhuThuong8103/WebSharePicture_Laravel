@@ -146,32 +146,81 @@ function uploadImageAvatarUser() {
   })
 }
 
+// function dropzone(){
+//   Dropzone.autoDiscover = false;
+//   var dropzone = new Dropzone('#demo-upload', {
+//     previewTemplate: document.querySelector('#preview-template').innerHTML,
+//     parallelUploads: 2,
+//     thumbnailHeight: 120,
+//     thumbnailWidth: 120,
+//     maxFilesize: 10,
+//     filesizeBase: 1000,
+//     thumbnail: function(file, dataUrl) {
+//       if (file.previewElement) {
+//         file.previewElement.classList.remove("dz-file-preview");
+//         var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+//         for (var i = 0; i < images.length; i++) {
+//           var thumbnailElement = images[i];
+//           thumbnailElement.alt = file.name;
+//           thumbnailElement.src = dataUrl;
+//         }
+//         setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+//       }
+//     }
+
+//   });
+//   dropzone.on("complete", function(file) {
+//     myDropzone.removeFile(file);
+//   });
+// }
+
+
 function dropzone(){
   Dropzone.autoDiscover = false;
   var dropzone = new Dropzone('#demo-upload', {
-    previewTemplate: document.querySelector('#preview-template').innerHTML,
-    parallelUploads: 2,
-    thumbnailHeight: 120,
-    thumbnailWidth: 120,
-    maxFilesize: 10,
-    filesizeBase: 1000,
-    thumbnail: function(file, dataUrl) {
-      if (file.previewElement) {
-        file.previewElement.classList.remove("dz-file-preview");
-        var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-        for (var i = 0; i < images.length; i++) {
-          var thumbnailElement = images[i];
-          thumbnailElement.alt = file.name;
-          thumbnailElement.src = dataUrl;
-        }
-        setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
-      }
-    }
+      maxFilesize: 12,
+      renameFile: function(file) {
+      var dt = new Date();  
+      var time = dt.getTime();
+          return time+file.name;
+      },
+      acceptedFiles: ".jpeg,.jpg,.png,.gif",
+      addRemoveLinks: true,
+      timeout: 5000,
+
+          removedfile: function(file) 
+            {
+                var name = file.upload.filename;
+                $.ajax({
+                    headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            },
+                    type: 'POST',
+                    url: 'public/image/upload_images/',
+                    data: {filename: name},
+                    success: function (data){
+                        console.log("File has been successfully removed!!");
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }});
+                    var fileRef;
+                    return (fileRef = file.previewElement) != null ? 
+                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
+            },
+          success: function(file, response) 
+            {
+              console.log(response);
+            },
+          error: function(file, response)
+            {
+               return false;
+            }
 
   });
-  dropzone.on("complete", function(file) {
-    myDropzone.removeFile(file);
-  });
+  // dropzone.on("complete", function(file) {
+  //   myDropzone.removeFile(file);
+  // });
 }
 
 
