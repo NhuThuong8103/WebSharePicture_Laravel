@@ -50,12 +50,12 @@ class LoginController extends BaseController
 
 				$kt = $taikhoan->loaiQuyen(Auth::user()->id);
 				
-				if(!$kt)
+				if($kt)
 				{
-					return Redirect('index');
+					return Redirect('admin/index');
 				}
 				else {
-					return Redirect('admin/index');
+					return Redirect('index');
 				}
 
 
@@ -77,21 +77,26 @@ class LoginController extends BaseController
 			'emailre'		=>'bail|required|email',
 			'firstname'		=>'bail|required|max:25',
 			'lastname'		=>'bail|required|max:25',
-			'password'		=>'bail|required|min:6|max:64',
+			'passwordre'		=>'bail|required|min:6|max:64',
 			'passconfirm'	=>'bail|required|min:6|max:64'
 		])->validate();
 		$email=$request->get('emailre');
 		$firstname=$request->get('firstname');
 		$lastname=$request->get('lastname');
-		$pass=$request->get('password');
+		$pass=$request->get('passwordre');
 		$repass=$request->get('passconfirm');
 		if($repass !=$pass){
 			return back()->with('thongbao_register',"Wrong confirm password!!!");
 		}
 
+		$taikhoan = new TaiKhoan();
+
+		if(!$taikhoan->checkExistEmail($email)){
+			return back()->with('thongbao_register',"Email already exists");
+		}
+
 		Mail::to($email)->send(new SendMail($email));
 
-		$taikhoan = new TaiKhoan();
 
 		$taikhoan['email']=$email;
 		$taikhoan['password']=Hash::make($pass);
@@ -123,6 +128,12 @@ class LoginController extends BaseController
 
 		$email = $request->get('email_reset');
 
+		$taikhoan = new TaiKhoan();
+
+		if($taikhoan->checkExistEmail($email)){
+			return back()->with('thongbao_forgot',"Email not exist,Please enter the correct email");
+		}
+
 		Mail::to($email)->send(new SendMailResetPassword($email));
 
 		return back()->with('thongbao_forgotsuccess',"Please check your mail for reset password!");
@@ -147,10 +158,7 @@ class LoginController extends BaseController
 		if($confirm_password != $new_password)
 			return back()->with('thongbao_resetorror',"Password confirm must be the same as the password!");
 		Session::put('reset');
-		DB::table('taikhoan')
-		->where('email',$email)
-		->limit(1)
-		->update(array('password' => Hash::make($new_password)));
+		TaiKhoan::where('email',$email)->update(['password' => Hash::make($new_password) ]);
 		
 		return back()->with('thongbao_resetsuccess',"Password has been changed!");
 	}

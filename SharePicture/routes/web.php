@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Middleware\checkAdminLogin;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,17 +11,19 @@
 |
 */
 Route::get('/', function () {
-    return view('user.home');
+	return view('user.home');
 });
 
 
 Route::get('/index', function () {
-    return view('user.home');
+	return view('user.home');
 });
 
-Route::get('/admin/index',function(){
-	return view('admin.home');
-});
+Route::group(['middleware' => 'checkAdmin'],function(){
+	Route::get('/admin/index',function(){
+		return view('admin.home');
+	});
+});	
 
 //Route::get('/index', 'HomeController@index')->name('home');
 //Route::get('/index', 'HomeController@index');http://127.0.0.1:8000/login/activeaccount
@@ -36,7 +38,7 @@ Route::group(['prefix' => '/login'], function(){
 	Route::get('/activeaccount/{email}','LoginController@activeAccount');
 });
 
-Route::post('/password/reset','LoginController@getEmailForReset'); // goi link
+Route::post('/password/reset','LoginController@getEmailForReset')->name('postResetPassword'); // goi link
 
 Route::get('/password/reset/{email}', 'LoginController@viewResetPassword'); // return view
 

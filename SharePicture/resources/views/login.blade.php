@@ -159,12 +159,12 @@
 											{{ csrf_field() }}
 											<label class="label-signup">Email</label>
 											<input type="Email" name="emailre" id="emailre" class="form-control" placeholder="example@gmail.com" required autofocus>
-											<label class="label-signup">First Name</label>
+											<label class="label-signup">First Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
 											<input type="text" name="firstname" id="firstname" class="form-control" placeholder="First Name" required>
-											<label class="label-signup">Last Name</label>
+											<label class="label-signup">Last Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
 											<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last Name" required>
-											<label class="label-signup">New Password</label>
-											<input type="password" name="password" id="password" class="form-control" placeholder="******" required>
+											<label class="label-signup">New Password &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+											<input type="password" name="passwordre" id="passwordre" class="form-control" placeholder="******" required>
 											<label class="label-signup">Password Confirmation</label>
 											<input type="password" name="passconfirm" id="passconfirm" class="form-control" placeholder="******" required>
 											<input type="submit" class="btn btn-lg btn-primary btn-block w-50 btn-login" value="Sign Up">
@@ -181,6 +181,12 @@
 										@if(Session::get('kt')=='forgot')
 											@include('error')
 										@endif
+										@if(Session::get('thongbao_forgot'))
+											<div class="alert alert-danger">
+												<button type="button" class="close" data-dismiss="alert">x</button>
+												<strong>{{ Session::get('thongbao_forgot') }}</strong>
+											</div>
+											@endif
 										<div>
 											@if(Session::get('thongbao_forgotsuccess'))
 											<div class="alert alert-success">
@@ -189,8 +195,8 @@
 											</div>
 											@endif
 										</div>
-										<form class="form-signin" method="post" action="{{url('/password/reset')}}">
-											{{ csrf_field() }}
+										<form class="form-signin" method="post" action="{{ url('/password/reset')}}">
+											{{ csrf_field() }} 
 											<label>Enter your valid Email</label>
 											<input type="text" class="form-control" placeholder="Email" required autofocus name="email_reset">
 											<input class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit" value="Recovery">
@@ -237,7 +243,8 @@
 						},
 						password:{
 							required:true,
-							minlength:6
+							minlength:6,
+							maxlength:64
 						}
 					},
 					messages:{
@@ -247,7 +254,59 @@
 						},
 						password:{
 							required:"Please enter password",
-							minlength:"Please enter more than 5 characters"
+							minlength:"Please enter more than 5 characters",
+							maxlength:"Please enter less than 65 characters"
+						}
+					}
+				});
+
+				$('#form-register').validate({
+					rules:{
+						emailre:{
+							required:true,
+							email:true
+						},
+						firstname:{
+							required:true,
+							maxlength:25
+						},
+						lastname:{
+							required:true,
+							maxlength:25
+						},
+						passwordre:{
+							required:true,
+							minlength:6,
+							maxlength:64
+						},
+						passconfirm:{
+							required:true,
+							minlength:6,
+							maxlength:64
+						}
+					},
+					messages:{
+						emailre:{
+							required:"Please enter email",
+							email:"Please enter the correct email"
+						},
+						firstname:{
+							required:"Please enter firstname",
+							maxlength:"Please enter firstname less than 25 characters"
+						},
+						lastname:{
+							required:"Please enter lastname",
+							maxlength:"Please enter lastname less than 25 characters"
+						},
+						passwordre:{
+							required:"Please enter password",
+							minlength:"Please enter more than 5 characters",
+							maxlength:"Please enter less than 65 characters"
+						},
+						passconfirm:{
+							required:"Please enter password confirm",
+							minlength:"Please enter more than 5 characters",
+							maxlength:"Please enter less than 65 characters"
 						}
 					}
 				});
