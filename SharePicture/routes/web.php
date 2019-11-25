@@ -69,12 +69,15 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 });
 
+<<<<<<< HEAD
 
 
 
 
 //Route::get('/index', 'HomeController@index')->name('home');
 //Route::get('/index', 'HomeController@index');http://127.0.0.1:8000/login/activeaccount
+=======
+>>>>>>> ce3a26436d0f2fdf863a8e3087a4b9ab569f9469
 
 Route::group(['prefix' => '/login'], function(){
 	Route::get('','LoginController@showLogin');
@@ -92,27 +95,9 @@ Route::get('/password/reset/{email}', 'LoginController@viewResetPassword'); // r
 
 Route::post('/password/reset_success','LoginController@updatePasswordReset');
 
-// upload album
-
-//Route::post('/myalbums/newalbum_upload/save','AlbumUserController@saveNewAlbum');
-
-//Route::get('/myalbums/newalbum__upload/image', 'AlbumUserController@fileCreate');
-
- //Route::post('/myalbums/newalbum_upload','DetailAlbumUserController@fileStore');
-
-// Route::post('/myalbums/newalbum/image/delete','ImageUploadController@fileDestroy');
-
-//Route::post('/myalbums/image/upload', 'DetailAlbumUserController@fileUpload');
 
 
-//Route::get('image/upload','ImageUploadController@fileCreate');
-Route::post('/myalbums/newalbum_upload/store','DetailAlbumUserController@fileStore');
-Route::post('/myalbums/delete','DetailAlbumUserController@fileDestroy');
-
-//Route::remove('/myalbums/image/remove', 'DetailAlbumUserController@removeUpload');
-
-
-
+Route::get('/my','LoginController@thuong');
 
 
 

@@ -15,6 +15,22 @@ class TaiKhoan extends Model
     	return $this->hasOne(PhanQuyen::class,"id");
     }
 
+    public function photo(){
+        return $this->hasMany(Photo::class,"taikhoan_id_photo");
+    }
+
+    public function likephoto(){
+        return $this->hasMany(LikePhoto::class,'taikhoan_id');
+    }
+
+    public function likealbum(){
+        return $this->hasMany(LikeAlbum::class,'album_id');
+    }
+
+    public function album(){
+        return $this->hasMany(Album::class,'taikhoan_id');
+    }
+
     public function loaiQuyen($id){
     	$check=TaiKhoan::find(Auth::user()->id)->phanquyen()->first();
 
@@ -28,6 +44,8 @@ class TaiKhoan extends Model
     		return false;
     	return true;
     }
+
+    
 
 
 }
