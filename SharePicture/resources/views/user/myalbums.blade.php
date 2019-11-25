@@ -7,85 +7,18 @@
 
 
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 
-    <link href="{{URL::asset('css/style.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{URL::asset('css/style.css')}}" rel="stylesheet" type="text/css">
 
-    <link href="{{ URL::asset('css/main_hover_album.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ URL::asset('css/main_hover_album.css') }}" rel="stylesheet" type="text/css"/>
 
-    <link href="{{ URL::asset('css/sim-prev-anim.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ URL::asset('css/sim-prev-anim.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ URL::asset('css/pagination.css') }}" rel="stylesheet" type="text/css">
-
-
-
+	<link href="{{ URL::asset('css/pagination.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body id="myAlbum">
-	<header>
-		<div class="container">
-			<div class="row p-1">
-				<div class="col-lg-2 col-md-3 col-sm-4 col-4">
-					<div class="logo-head">
-						<span class="title-header">Fotobook</span>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-5 col-sm-5 col-6 pl-0">
-					<form>
-						<div class="form-group">
-							<input type="text" class="form-control input-search" id="search-foto" placeholder="Search Photo / Album">
-						</div>
-					</form>
-				</div>
-				<div class="col-lg-3 col-md-3 d-none d-md-block">
-					<div class="name-user">
-						<a href="google.com" title="Trang ca nhan">
-							<span class="icon-user">
-								Nhu Thuong
-							</span>
-							<img src="{{ URL::asset('image/icon-user.jpg') }}" class="boder-icon">
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-1 col-md-1 d-none d-md-block">
-					<div class="logout-acount">
-						<a href="#" title="Logout">
-							<span class="link-log">Logout</span>
-						</a>
-					</div>
-				</div>
-                    <!-- <div class="col-sm-3 d-md-none d-none d-sm-block">
-                        <div class="name-user">
-                            <a href="google.com" title="Trang ca nhan">
-                                <img src="image/icon-user.jpg" class="boder-icon">
-                                <img src="image/icon-user.jpg" class="boder-icon">
-                            </a>
-                        </div>
-                    </div> -->
-                <div class="col-2 d-md-none">
-                    <a href="#" title="Menu quản lý">
-                    	<!-- <h6 style="font-size: 16px;margin-top: 2%;float: right;">menu</h6> -->
-                    	<span class="navTrigger">
-                    		<i></i>
-                    		<i></i>
-                    		<i></i>
-                    	</span>
-                    </a>
-
-                </div>
-                <div id="menu-mobile" class="menu-lists d-md-none">
-                    <ul>
-                    	<li>Hi, Nhu Thuong <3 </li>
-                    		<li>Feeds</li>
-                    		<li>My Photos</li>
-                    		<li>My Albums</li>
-                    		<li>Sign In</li>
-                    	</ul>
-                </div>
-            </div>
-        </div>
-     	<div class="backdrop"></div>
-    </header>
-
+	@include('user.header');
 	<main>
 		<div class="container">
 			<div class="row">
@@ -590,19 +523,17 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
-		<script type="text/javascript" src="js/pagination.js"></script>
+		<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 		
 		<script>
 			$('#tab').pagination({ // phaan trang danh sach album cua user
-		        items: 12,
-		        contents: 'album-lists', 
-		        previous: 'Previous',
-		        next: 'Next',
-		        position: 'bottom',
-		    });
+				items: 12,
+				contents: 'album-lists', 
+				previous: 'Previous',
+				next: 'Next',
+				position: 'bottom',
+			});
 		</script>
-
-		<script type="text/javascript" src="js/main.js"></script>
-		
 	</body>
 	</html>
