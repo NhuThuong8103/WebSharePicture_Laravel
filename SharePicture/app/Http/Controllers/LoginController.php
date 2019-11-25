@@ -15,6 +15,10 @@ use Validator;
 use Auth;
 use Hash;
 use DB;
+use App\TaiKhoan;
+use App\PhanQuyen;
+
+
 
 class LoginController extends BaseController
 {
@@ -24,8 +28,9 @@ class LoginController extends BaseController
 		return view('login');
 	}
 
-	function checkLogin(Request $request){
+	function checkLogin(Request $request){//where("email","=",Auth::user()->email)->where("quyen_id","=",Auth::user()->quyen_id)
 		$request->session()->put('kt','login');
+
 		Validator::make($request->all(), [
 			'email'			=>'bail|required|email',
 			'password'		=>'bail|required|min:6'
@@ -39,13 +44,11 @@ class LoginController extends BaseController
 		if(Auth::attempt($userData)){
 			if(Auth::user()->phephoatdong)
 			{
-				$kt=DB::table('taikhoan')
-					->join('phanquyen','taikhoan.quyen_id','=','phanquyen.id')
-					->where('taikhoan.quyen_id','=',Auth::user()->quyen_id)
-					->where('taikhoan.email','=',Auth::user()->email)
-					->select('phanquyen.loaiquyen')
-					->get();
-				if($kt[0]->loaiquyen==false)
+				$taikhoan=new TaiKhoan();
+
+				$kt = $taikhoan->loaiQuyen(Auth::user()->id);
+				
+				if(!$kt)
 				{
 					return Redirect('index');
 				}
@@ -86,16 +89,24 @@ class LoginController extends BaseController
 
 		Mail::to($email)->send(new SendMail($email));
 
-		DB::insert('insert into taikhoan (email, password,thoigian_dncuoi, ho,ten, phephoatdong,quyen_id) values (?, ?, ?, ?, ?, ?, ?)', [$email,Hash::make($pass), Carbon::now('GMT+7'),$lastname, $firstname,false,1]);
+		$taikhoan = new TaiKhoan();
+
+		$taikhoan['email']=$email;
+		$taikhoan['password']=Hash::make($pass);
+		$taikhoan['thoigian_dncuoi']=Carbon::now('GMT+7');
+		$taikhoan['ho']=$lastname;
+		$taikhoan['ten']= $firstname;
+		$taikhoan['phephoatdong']=false;
+		$taikhoan['quyen_id']=1;
+		$taikhoan->save();
+ 		// DB::insert('insert into taikhoan (email, password,thoigian_dncuoi, ho,ten, phephoatdong,quyen_id) values (?, ?, ?, ?, ?, ?, ?)', [$email,Hash::make($pass), Carbon::now('GMT+7'),$lastname, $firstname,false,1]);
 		return back()->with('thongbao_registersuccess',"Please check your mail for active account :V"); 
 
 	}
 
 	function activeAccount($email){
-		DB::table('taikhoan')
-        ->where('email', $email)  // find your user by their email
-        ->limit(1)  // optional - to ensure only one record is updated.
-        ->update(array('phephoatdong' => true));  // update the record in the DB.
+
+		TaiKhoan::where('email',$email)->update(['phephoatdong'=>true]);
 
         Session::put('kt','login');
 

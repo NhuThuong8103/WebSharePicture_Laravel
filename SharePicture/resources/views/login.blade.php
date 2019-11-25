@@ -115,10 +115,10 @@
 											</div>
 											@endif
 										</div>
-										<form class="form-login" method="post" action="{{ url('/login/checkLogin') }}">
+										<form class="form-login" method="post" action="{{ url('/login/checkLogin') }}" id="form-login">
 											{{ csrf_field() }}
-											<input type="Email" name="email" class="form-control input-log" placeholder="Email" required autofocus>
-											<input type="password" name="password" class="form-control input-log" placeholder="Password" required>
+											<input type="Email" name="email" id="email" class="form-control input-log" placeholder="Email" required autofocus>
+											<input type="password" name="password" id="password" class="form-control input-log" placeholder="Password" required>
 											<!-- <input class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit">Sign in</button> -->	
 											<input type="submit" class="btn btn-lg btn-primary btn-block w-50 btn-login" value="Sign In">			
 											<div class="text-info-login text-center mt-3">
@@ -155,18 +155,18 @@
 											</div>
 											@endif
 										</div>
-										<form class="form-signin" method="post" action="{{ url('/login/register') }}">
+										<form class="form-signin" method="post" action="{{ url('/login/register') }}" id="form-register">
 											{{ csrf_field() }}
 											<label class="label-signup">Email</label>
-											<input type="Email" name="emailre" class="form-control" placeholder="example@gmail.com" required autofocus>
+											<input type="Email" name="emailre" id="emailre" class="form-control" placeholder="example@gmail.com" required autofocus>
 											<label class="label-signup">First Name</label>
-											<input type="text" name="firstname" class="form-control" placeholder="First Name" required>
+											<input type="text" name="firstname" id="firstname" class="form-control" placeholder="First Name" required>
 											<label class="label-signup">Last Name</label>
-											<input type="text" name="lastname" class="form-control" placeholder="Last Name" required>
+											<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last Name" required>
 											<label class="label-signup">New Password</label>
-											<input type="password" name="password" class="form-control" placeholder="******" required>
+											<input type="password" name="password" id="password" class="form-control" placeholder="******" required>
 											<label class="label-signup">Password Confirmation</label>
-											<input type="password" name="passconfirm" class="form-control" placeholder="******" required>
+											<input type="password" name="passconfirm" id="passconfirm" class="form-control" placeholder="******" required>
 											<input type="submit" class="btn btn-lg btn-primary btn-block w-50 btn-login" value="Sign Up">
 											{{-- <button class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit">Signup</button> --}}
 										</form>					              
@@ -210,7 +210,32 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
-
+			{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type="text/javascript" charset="utf-8" async defer></script> --}}
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+			<script >
+				$('#form-login').validate({
+					rules:{
+						email:{
+							required:true,
+							email:true
+						},
+						password:{
+							required:true,
+							minlength:6
+						}
+					},
+					messages:{
+						email:{
+							required:"Please enter email",
+							email:"Please enter the correct email"
+						},
+						password:{
+							required:"Please enter password",
+							minlength:"Please enter more than 5 characters"
+						}
+					}
+				});
+			</script>
 			<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 		</body>
 		</html>
