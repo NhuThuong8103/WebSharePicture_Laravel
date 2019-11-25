@@ -108,7 +108,7 @@ class LoginController extends BaseController
 		$taikhoan['ho']=$lastname;
 		$taikhoan['ten']= $firstname;
 		$taikhoan['phephoatdong']=false;
-		$taikhoan['quyen_id']=1;
+		$taikhoan['quyen_id']=2;
 		$taikhoan->save();
  		// DB::insert('insert into taikhoan (email, password,thoigian_dncuoi, ho,ten, phephoatdong,quyen_id) values (?, ?, ?, ?, ?, ?, ?)', [$email,Hash::make($pass), Carbon::now('GMT+7'),$lastname, $firstname,false,1]);
 		return back()->with('thongbao_registersuccess',"Please check your mail for active account :V"); 
