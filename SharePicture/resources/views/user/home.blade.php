@@ -30,8 +30,8 @@
                         <div class="first-row-body p-3 text-center">
                             <div class="btn-group btn-group-toggle">
 
-                                <a href="feedsPhoto.html" class="btn btn-secondary radio-seentype active">Photo</a>
-                                <a href="feedsAlbum.html" class="btn btn-secondary radio-seentype">Album</a>
+                                <a href="{{ url('/') }}" class="btn btn-secondary radio-seentype active">Photo</a>
+                                <a href="{{ url('/feedsAlbum') }}" class="btn btn-secondary radio-seentype">Album</a>
                             </div>
                         </div>
                     </div>

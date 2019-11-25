@@ -5,13 +5,13 @@
 				<span class="icon-user">
 					{{ Auth::user()->ho}}&nbsp;{{ Auth::user()->ten }}
 				</span>
-				<img src="image/icon-user.jpg" class="boder-icon">
+				<img src="{{ URL::asset('image/icon-user.jpg') }}" class="boder-icon">
 			</a>
 		</div>
 	</div>
 	<div class="col-lg-1 col-md-1 d-none d-md-block">
 		<div class="logout-acount">
-			<a href="{{ Auth::logout()}}" title="Logout">
+			<a href="{{ url('\logout')}}" title="Logout">
 				<span class="link-log">Logout</span>
 			</a>
 		</div>

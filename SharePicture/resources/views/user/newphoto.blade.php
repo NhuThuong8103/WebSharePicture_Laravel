@@ -5,10 +5,8 @@
 	<title>New Photos</title>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-	<!-- <link rel="stylesheet" href="css/pagination.css"> -->
 	<link href="{{ URL::asset('css/pagination.css') }}" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
-	<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
 	<link href="{{URL::asset('css/style.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body id="new-photo">

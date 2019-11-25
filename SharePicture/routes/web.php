@@ -1,5 +1,6 @@
 <?php
 use App\Http\Middleware\checkAdminLogin;
+use Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +11,12 @@ use App\Http\Middleware\checkAdminLogin;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/logout',function(){
+	Auth::logout();
+	return view('user.home');
+
+});
+
 Route::get('/', function () {
 	return view('user.home');
 });
@@ -19,24 +26,52 @@ Route::get('/index', function () {
 	return view('user.home');
 });
 
-Route::group(['middleware' => 'checkAdmin'],function(){
-	Route::get('/admin/index',function(){
+Route::get('/feedsAlbum',function(){
+	return view('user.feedsalbum');
+});
+
+Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
+	Route::get('/',function(){
 		return view('admin.home');
+	});
+
+	Route::get('/index',function(){
+		return view('admin.home');
+	});
+
+	Route::get('/managerAlbums', function() {
+	    return view('admin.managerAlbums');
+	});
+
+	Route::get('/managerUsers', function() {
+	    return view('admin.managerUsers');
 	});
 });	
 
 //thuong
-Route::get('/myalbums', function(){
-	return view('user.myalbums');
+
+Route::group(['middleware' => 'ckUserLogin'], function() {
+	Route::get('/myphotos', function(){
+		return view('user.myphotos');
+	});
+
+	Route::get('/myalbums', function(){
+		return view('user.myalbums');
+	});
+
+	Route::get('/myalbums/newalbum_upload', function(){
+		return view('user.new_album');
+	});
+
+	Route::get('/myphotos/newPhoto', function(){
+		return view('user.newphoto');
+	});
+
 });
 
-Route::get('/myalbums/newalbum_upload', function(){
-	return view('user.new_album');
-});
 
-Route::get('/newphoto', function(){
-	return view('user.newphoto');
-});
+
+
 
 //Route::get('/index', 'HomeController@index')->name('home');
 //Route::get('/index', 'HomeController@index');http://127.0.0.1:8000/login/activeaccount

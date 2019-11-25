@@ -18,21 +18,14 @@
 	<link href="{{ URL::asset('css/pagination.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body id="myAlbum">
-	@include('user.header');
+	@include('admin.header');
 	<main>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-2">
-					@include('user.sidebar')
+					@include('admin.sidebar')
 				</div>
 				<div class="col-lg-8 bg-white mt-3">
-					<div class="row">
-						<div class="first-row-body">
-							<a href="{{url('/myalbums/newalbum_upload')}}" class="btn btn-success add-Album">Add new Album</a>
-							<hr class="highlight-bt mb-0 ml-3 mr-3">
-						</div>
-
-					</div>
 					<div class="row album-lists">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-6">
 							<div class="one-album">
