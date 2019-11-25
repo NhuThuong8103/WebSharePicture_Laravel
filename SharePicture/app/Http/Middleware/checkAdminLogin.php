@@ -22,7 +22,7 @@ class checkAdminLogin
 
             $taikhoan=new TaiKhoan();
 
-            $kt = $taikhoan->loaiQuyen(Auth::user()->id);
+            $kt = $taikhoan->loaiQuyen(Auth::user()->quyen_id);
 
             if($kt){
                 return $next($request);
