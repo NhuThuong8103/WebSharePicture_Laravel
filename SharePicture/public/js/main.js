@@ -179,16 +179,15 @@ function dropzone(){
   Dropzone.autoDiscover = false;
   var dropzone = new Dropzone('#demo-upload', {
       maxFilesize: 12,
-      renameFile: function(file) {
-      var dt = new Date();  
-      var time = dt.getTime();
-          return time+file.name;
-      },
-      acceptedFiles: ".jpeg,.jpg,.png,.gif",
-      addRemoveLinks: true,
-      timeout: 5000,
-
-          removedfile: function(file) 
+            renameFile: function(file) {
+                var dt = new Date();
+                var time = dt.getTime();
+               return time+file.name;
+            },
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 50000,
+            removedfile: function(file) 
             {
                 var name = file.upload.filename;
                 $.ajax({
@@ -196,7 +195,7 @@ function dropzone(){
                                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                             },
                     type: 'POST',
-                    url: 'public/image/upload_images/',
+                    url: '{{ url("/myalbums/delete") }}',
                     data: {filename: name},
                     success: function (data){
                         console.log("File has been successfully removed!!");
@@ -208,19 +207,20 @@ function dropzone(){
                     return (fileRef = file.previewElement) != null ? 
                     fileRef.parentNode.removeChild(file.previewElement) : void 0;
             },
-          success: function(file, response) 
+       
+            success: function(file, response) 
             {
-              console.log(response);
+                console.log(response);
             },
-          error: function(file, response)
+            error: function(file, response)
             {
                return false;
             }
 
   });
-  // dropzone.on("complete", function(file) {
-  //   myDropzone.removeFile(file);
-  // });
+  dropzone.on("complete", function(file) {
+    myDropzone.removeFile(file);
+  });
 }
 
 

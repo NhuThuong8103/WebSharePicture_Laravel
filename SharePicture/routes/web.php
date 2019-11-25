@@ -65,7 +65,12 @@ Route::post('/password/reset_success','LoginController@updatePasswordReset');
 
 // Route::post('/myalbums/newalbum/image/delete','ImageUploadController@fileDestroy');
 
-Route::post('/myalbums/image/upload', 'DetailAlbumUserController@fileUpload');
+//Route::post('/myalbums/image/upload', 'DetailAlbumUserController@fileUpload');
+
+
+//Route::get('image/upload','ImageUploadController@fileCreate');
+Route::post('/myalbums/newalbum_upload/store','DetailAlbumUserController@fileStore');
+Route::post('/myalbums/delete','DetailAlbumUserController@fileDestroy');
 
 //Route::remove('/myalbums/image/remove', 'DetailAlbumUserController@removeUpload');
 

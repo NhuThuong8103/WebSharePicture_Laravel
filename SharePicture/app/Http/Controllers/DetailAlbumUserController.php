@@ -17,20 +17,6 @@ class DetailAlbumUserController extends Controller
 
         $image->move($uploadPath,$filename);
 
-        
-
-        // $customImageUrl = ('public/image/upload_images/').$filename;
-
-        
-        // $imageUpload = new ImageUpload();
-
-        // $imageUpload->filename = $imageName;
-
-        
-        // $imageUpload->save();
-
-        // return response()->json(['success'=>$imageName]);
-
         echo json_encode($filename);
     }
 
@@ -47,4 +33,28 @@ class DetailAlbumUserController extends Controller
     	}
     	return json_encode($emage);
     }
+
+    function fileStore(Request $request){
+        $image = $request->file('file');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('/public/image/upload_images/'),$imageName);
+        
+        $imageUpload = new ImageUpload();
+        $imageUpload->filename = $imageName;
+        $imageUpload->save();
+        return response()->json(['success'=>$imageName]);
+    }
+
+    function fileDestroy(Request $request){
+        $filename =  $request->get('filename');
+        ImageUpload::where('filename',$filename)->delete();
+        $path=public_path().'/images/'.$filename;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        return $filename;  
+    }
+
+
+
 }
