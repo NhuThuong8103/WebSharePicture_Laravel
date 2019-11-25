@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Fotobook</title>
 
 
 
@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="backdrop"></div>
-            </header>
+    </header>
 
             <main>
                 <div class="container">
@@ -97,8 +97,8 @@
                             <div class="sidebar">
                                 <ul>
                                     <li><a href="feedsAlbum.html">Feeds</a> </li>
-                                    <li><a href="myphoto.html">My Photo</a></li>
-                                    <li class="active" style="color: #359624"><a href="myalbum.html">My Album</a></li>
+                                    <li><a href="{{url('/newphoto')}}">My Photo</a></li>
+                                    <li class="active" style="color: #359624"><a href="{{url('/myalbums')}}">My Album</a></li>
                                 </ul>
                             </div>
                         </div>

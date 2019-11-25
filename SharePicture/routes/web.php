@@ -25,6 +25,19 @@ Route::group(['middleware' => 'checkAdmin'],function(){
 	});
 });	
 
+//thuong
+Route::get('/myalbums', function(){
+	return view('user.myalbums');
+});
+
+Route::get('/myalbums/newalbum_upload', function(){
+	return view('user.new_album');
+});
+
+Route::get('/newphoto', function(){
+	return view('user.newphoto');
+});
+
 //Route::get('/index', 'HomeController@index')->name('home');
 //Route::get('/index', 'HomeController@index');http://127.0.0.1:8000/login/activeaccount
 
@@ -43,6 +56,23 @@ Route::post('/password/reset','LoginController@getEmailForReset')->name('postRes
 Route::get('/password/reset/{email}', 'LoginController@viewResetPassword'); // return view
 
 Route::post('/password/reset_success','LoginController@updatePasswordReset');
+
+// upload album
+
+//Route::post('/myalbums/newalbum_upload/save','AlbumUserController@saveNewAlbum');
+
+//Route::get('/myalbums/newalbum__upload/image', 'AlbumUserController@fileCreate');
+
+ //Route::post('/myalbums/newalbum_upload','DetailAlbumUserController@fileStore');
+
+// Route::post('/myalbums/newalbum/image/delete','ImageUploadController@fileDestroy');
+
+Route::post('/myalbums/image/upload', 'DetailAlbumUserController@fileUpload');
+
+//Route::remove('/myalbums/image/remove', 'DetailAlbumUserController@removeUpload');
+
+
+
 
 
 
