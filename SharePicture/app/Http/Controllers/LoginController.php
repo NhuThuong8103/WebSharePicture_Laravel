@@ -49,8 +49,11 @@ class LoginController extends BaseController
 			{
 				$taikhoan=new TaiKhoan();
 
-				$kt = $taikhoan->loaiQuyen(Auth::user()->quyen_id);
+				$kt = $taikhoan->loaiQuyen(Auth::user()->quyen_id);//lấy quyền đangư nhập 
 				
+				//update time login last
+				$taikhoan->find(Auth::user()->id)->update(['thoigian_dncuoi' => Carbon::now('GMT+7')]);
+
 				if($kt)
 				{
 					return Redirect('admin/index');
