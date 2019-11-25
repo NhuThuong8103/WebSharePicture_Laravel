@@ -19,6 +19,7 @@ use Hash;
 use DB;
 use App\TaiKhoan;
 use App\PhanQuyen;
+use App\Album;
 
 
 
@@ -162,4 +163,12 @@ class LoginController extends BaseController
 		
 		return back()->with('thongbao_resetsuccess',"Password has been changed!");
 	}
+
+
+	function thuong(){
+		$p = TaiKhoan::find(1)->Album()->first();
+		//$p['so_like_album'];
+		print_r($p['tieude_album']);
+	}
+
 }
