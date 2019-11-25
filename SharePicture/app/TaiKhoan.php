@@ -20,4 +20,14 @@ class TaiKhoan extends Model
 
     	return $check['loaiquyen'];
     }
+
+    public function checkExistEmail($email)
+    {
+    	$check=TaiKhoan::where('email',$email)->count();
+    	if($check!=0)
+    		return false;
+    	return true;
+    }
+
+
 }

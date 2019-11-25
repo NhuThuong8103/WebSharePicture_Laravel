@@ -12,8 +12,8 @@ class PhanQuyenTableSeeder extends Seeder
     public function run()
     {
         DB::table('phanquyen')->insert([
-        	'tenquyen'=>'user',
-        	'loaiquyen'=>false
+        	'tenquyen'=>'admin',
+        	'loaiquyen'=>true
         ]);
     }
 }
