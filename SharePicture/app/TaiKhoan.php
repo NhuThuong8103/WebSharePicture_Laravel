@@ -31,8 +31,8 @@ class TaiKhoan extends Model
         return $this->hasMany(Album::class,'taikhoan_id');
     }
 
-    public function loaiQuyen($id){
-    	$check=TaiKhoan::find($id)->phanquyen()->first();
+    public function loaiQuyen($id_quyen){
+    	$check=PhanQuyen::where('id',$id_quyen)->first();
 
     	return $check['loaiquyen'];
     }
