@@ -1,7 +1,7 @@
 <?php
 use App\Http\Middleware\checkAdminLogin;
-use Auth;
-/*
+//use Auth;
+/*	
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -69,16 +69,6 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 });
 
-<<<<<<< HEAD
-
-
-
-
-//Route::get('/index', 'HomeController@index')->name('home');
-//Route::get('/index', 'HomeController@index');http://127.0.0.1:8000/login/activeaccount
-=======
->>>>>>> ce3a26436d0f2fdf863a8e3087a4b9ab569f9469
-
 Route::group(['prefix' => '/login'], function(){
 	Route::get('','LoginController@showLogin');
 
@@ -95,10 +85,3 @@ Route::get('/password/reset/{email}', 'LoginController@viewResetPassword'); // r
 
 Route::post('/password/reset_success','LoginController@updatePasswordReset');
 
-
-
-Route::get('/my','LoginController@thuong');
-
-
-
-//Auth::routes();
