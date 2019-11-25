@@ -32,7 +32,7 @@ class TaiKhoan extends Model
     }
 
     public function loaiQuyen($id){
-    	$check=TaiKhoan::find(Auth::user()->id)->phanquyen()->first();
+    	$check=TaiKhoan::find($id)->phanquyen()->first();
 
     	return $check['loaiquyen'];
     }
