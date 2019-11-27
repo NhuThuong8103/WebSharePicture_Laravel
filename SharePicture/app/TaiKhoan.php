@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\PhanQuyen;
 use Auth;
 
 
@@ -11,7 +10,7 @@ class TaiKhoan extends Model
 {
     public $table="taikhoan";
 
-    protected $fillable = ['id','email','password','thoigian_dncuoi','ho','ten','anhdaidien','phephoatdong','quyen_id'];
+    protected $fillable = ['id','email','password','thoigian_dncuoi','ho','ten','anhdaidien','phephoatdong','id_phanquyen'];
 
     public function phanquyen(){
     	return $this->hasOne(PhanQuyen::class,"id");
@@ -33,12 +32,6 @@ class TaiKhoan extends Model
         return $this->hasMany(Album::class,'taikhoan_id');
     }
 
-    public function loaiQuyen($id_quyen){
-    	$check=PhanQuyen::where('id',$id_quyen)->first();
-
-    	return $check['loaiquyen'];
-    }
-
     public function checkExistEmail($email)
     {
     	$check=TaiKhoan::where('email',$email)->count();
@@ -46,6 +39,8 @@ class TaiKhoan extends Model
     		return false;
     	return true;
     }
+
+
 
     
 

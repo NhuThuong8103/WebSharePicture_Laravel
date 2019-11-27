@@ -1260,8 +1260,8 @@ header .logout-acount {
 
 .label-signup {
   margin-bottom: 1%;
-    font-weight: bold;
-    margin-top: 3%;
+  font-weight: bold;
+  margin-top: 3%;
 }
 .form-signin input[type="text"]
 {
@@ -1281,28 +1281,28 @@ header .logout-acount {
 
 /* =====================================================    RESETPASSWORD   =====================================*/
 .form-reset {
-    max-width: 90%;
-    padding: 15px;
-    margin: 0 auto;
+  max-width: 90%;
+  padding: 15px;
+  margin: 0 auto;
 }
 
 .form-control.input-reset {
-    font-size: 13px;
-    position: relative;
-    height: auto;
-    padding: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-top: -4%;
+  font-size: 13px;
+  position: relative;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: -4%;
 }
 
 .btn.btn-lg.btn-primary.btn-block.w-50.btn-reset {
-    background-color: 
-    #315598;
-    text-align: center;
-    margin-top: 12%;
-    margin-left: 25%;
+  background-color: 
+  #315598;
+  text-align: center;
+  margin-top: 12%;
+  margin-left: 25%;
 }
 
 #loading_reset {
@@ -1668,40 +1668,7 @@ main .one-photo{
 
     /*==================================            Tha tim             =========================================== */
 
-    [id="heart"] {
-      position: absolute;
-      left: -100vw;
+    .far.fa-heart {
+      font-size: 25px;
+      color:red;
     }
-
-    [for="heart"] {
-      color: #aab8c2;
-      cursor: pointer;
-      font-size: 1em;
-      align-self: center;  
-      transition: color 0.2s ease-in-out;
-    }
-
-    [for="heart"]:hover {
-      color: grey;
-    }
-
-    [for="heart"]::selection {
-      color: none;
-      background: transparent;
-    }
-
-    [for="heart"]::moz-selection {
-      color: none;
-      background: transparent;
-    }
-
-    [id="heart"]:checked + label {
-      color: #e2264d;
-      will-change: font-size;
-      /*animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);*/
-    }
-
-
-
-    @keyframes heart {0%, 17.5% {font-size: 0;}}
-

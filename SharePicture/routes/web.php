@@ -14,17 +14,17 @@ use App\Http\Middleware\checkAdminLogin;
 */
 Route::get('/logout',function(){
 	Auth::logout();
-	return view('user.home');
+	return view('user.feedsphoto');
 
 });
 
 Route::get('/', function () {
-	return view('user.home');
+	return view('user.feedsphoto');
 });
 
 
 Route::get('/index', function () {
-	return view('user.home');
+	return view('user.feedsphoto');
 });
 
 Route::get('/feedsAlbum',function(){

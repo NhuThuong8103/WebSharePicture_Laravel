@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-use App\TaiKhoan;
-
+use App\PhanQuyen;
 use Closure;
 use Auth;
 
@@ -20,11 +19,11 @@ class checkAdminLogin
         if(Auth::check()){
             $user= Auth::user();
 
-            $taikhoan=new TaiKhoan();
+            $phanquyen=new PhanQuyen();
 
-            $kt = $taikhoan->loaiQuyen(Auth::user()->quyen_id);
+            $kt = $phanquyen->loaiQuyen(Auth::user()->id_phanquyen);//lấy quyền đangư nhập 
 
-            if($kt){
+            if($kt=='admin'){
                 return $next($request);
             }
             else {

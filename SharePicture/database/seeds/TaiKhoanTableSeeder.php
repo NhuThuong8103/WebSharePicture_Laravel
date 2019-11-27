@@ -21,7 +21,7 @@ class TaiKhoanTableSeeder extends Seeder
         	'ten'			=>'nguyen',
         	'anhdaidien'			=>'sang.png',
         	'phephoatdong'			=>true,
-        	'quyen_id'	=>1
+        	'id_phanquyen'	=>1
         ]);
         DB::table('taikhoan')->insert([
             'email'             =>'sangnguyen07dhth01@gmail.com',
@@ -31,7 +31,7 @@ class TaiKhoanTableSeeder extends Seeder
             'ten'           =>'nguyen',
             'anhdaidien'            =>'sang.png',
             'phephoatdong'          =>true,
-            'quyen_id'  =>2
+            'id_phanquyen'  =>2
         ]);
     }
 }

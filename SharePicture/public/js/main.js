@@ -1,14 +1,28 @@
 $(document).ready(function(){
-	
+
+  //active tab page login
+  $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+    localStorage.setItem('activeTab', $(e.target).attr('href'));
+  });
+  var activeTab = localStorage.getItem('activeTab');
+  if(activeTab){
+    $('#myTab a[href="' + activeTab + '"]').tab('show');
+  }
+
+
+
+  $(".far.fa-heart").click(function() {
+    $(this).toggleClass("far fa-heart");
+  });
 
   //dùng để hieeuj ung cho login
-  $('.list-inline li > a').click(function() {
-    var activeForm = $(this).attr('href') + ' > form';
-    $(activeForm).addClass('animated fadeIn');
-    setTimeout(function() {
-      $(activeForm).removeClass('animated fadeIn');
-    }, 1000);
-  });
+  // $('.list-inline li > a').click(function() {
+  //   var activeForm = $(this).attr('href') + ' > form';
+  //   $(activeForm).addClass('animated fadeIn');
+  //   setTimeout(function() {
+  //     $(activeForm).removeClass('animated fadeIn');
+  //   }, 1000);
+  // });
 
 
 
@@ -178,46 +192,46 @@ function uploadImageAvatarUser() {
 function dropzone(){
   Dropzone.autoDiscover = false;
   var dropzone = new Dropzone('#demo-upload', {
-      maxFilesize: 12,
-            renameFile: function(file) {
-                var dt = new Date();
-                var time = dt.getTime();
-               return time+file.name;
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 50000,
-            removedfile: function(file) 
-            {
-                var name = file.upload.filename;
-                $.ajax({
-                    headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            },
-                    type: 'POST',
-                    url: '{{ url("/myalbums/delete") }}',
-                    data: {filename: name},
-                    success: function (data){
-                        console.log("File has been successfully removed!!");
-                    },
-                    error: function(e) {
-                        console.log(e);
-                    }});
-                    var fileRef;
-                    return (fileRef = file.previewElement) != null ? 
-                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
-            },
-       
-            success: function(file, response) 
-            {
-                console.log(response);
-            },
-            error: function(file, response)
-            {
-               return false;
-            }
+    maxFilesize: 12,
+    renameFile: function(file) {
+      var dt = new Date();
+      var time = dt.getTime();
+      return time+file.name;
+    },
+    acceptedFiles: ".jpeg,.jpg,.png,.gif",
+    addRemoveLinks: true,
+    timeout: 50000,
+    removedfile: function(file) 
+    {
+      var name = file.upload.filename;
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        type: 'POST',
+        url: '{{ url("/myalbums/delete") }}',
+        data: {filename: name},
+        success: function (data){
+          console.log("File has been successfully removed!!");
+        },
+        error: function(e) {
+          console.log(e);
+        }});
+      var fileRef;
+      return (fileRef = file.previewElement) != null ? 
+      fileRef.parentNode.removeChild(file.previewElement) : void 0;
+    },
 
-  });
+    success: function(file, response) 
+    {
+      console.log(response);
+    },
+    error: function(file, response)
+    {
+     return false;
+   }
+
+ });
   dropzone.on("complete", function(file) {
     myDropzone.removeFile(file);
   });
