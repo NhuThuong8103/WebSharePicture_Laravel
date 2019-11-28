@@ -64,9 +64,18 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 		return view('user.new_album');
 	});
 
+	Route::post('/myalbums/newalbum_upload','AlbumUserController@saveNewAlbum'); // luu album
+
 	Route::get('/myphotos/newPhoto', function(){
 		return view('user.newphoto');
 	});
+
+	Route::post('projects/media', 'AlbumUserController@storeMedia')->name('projects.storeMedia');
+
+
+
+
+	//Route::get('/myphotos/newPhoto/store','DriveController@store');
 
 });
 

@@ -47,7 +47,7 @@
 								</div>
 							</div>
 							<div class="group-btn">
-								<a href="#" class="btn btn-primary">
+								<a href="{{url('/myphotos/newPhoto/store')}}" class="btn btn-primary">
 									<i class="fas fa-save mr-2"></i>Save
 								</a>
 							</div>

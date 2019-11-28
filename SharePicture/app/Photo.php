@@ -16,4 +16,14 @@ class Photo extends Model
     public function likephoto(){
     	return $this->hasMany(LikePhoto::class,'photo_id');
     }
+
+    //26/11/2019
+    protected $fillable = [
+        'hinhanh',
+        'mota',
+        'tieude',
+        'chedo_photo',
+    ];
+
+
 }

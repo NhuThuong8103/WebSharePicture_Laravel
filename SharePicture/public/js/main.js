@@ -48,6 +48,7 @@ $(document).ready(function(){
 
 
 //dropzone();
+//dropzoneProcess();
 uploadOneImage();
 uploadImage();
 uploadImageAvatar();
@@ -172,56 +173,11 @@ function uploadImageAvatarUser() {
 //   dropzone.on("complete", function(file) {
 //     myDropzone.removeFile(file);
 //   });
+
+
+
 // }
 
-
-function dropzone(){
-  Dropzone.autoDiscover = false;
-  var dropzone = new Dropzone('#demo-upload', {
-      maxFilesize: 12,
-            renameFile: function(file) {
-                var dt = new Date();
-                var time = dt.getTime();
-               return time+file.name;
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 50000,
-            removedfile: function(file) 
-            {
-                var name = file.upload.filename;
-                $.ajax({
-                    headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            },
-                    type: 'POST',
-                    url: '{{ url("/myalbums/delete") }}',
-                    data: {filename: name},
-                    success: function (data){
-                        console.log("File has been successfully removed!!");
-                    },
-                    error: function(e) {
-                        console.log(e);
-                    }});
-                    var fileRef;
-                    return (fileRef = file.previewElement) != null ? 
-                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
-            },
-       
-            success: function(file, response) 
-            {
-                console.log(response);
-            },
-            error: function(file, response)
-            {
-               return false;
-            }
-
-  });
-  dropzone.on("complete", function(file) {
-    myDropzone.removeFile(file);
-  });
-}
 
 
 

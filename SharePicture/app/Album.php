@@ -9,6 +9,19 @@ class Album extends Model
     //
     public $table ="album";
 
+    protected $fillable = [
+        'tieude_album',
+        'mota_album',
+        'chedo_album',
+        'taikhoan_id',
+    ];
+
+
+
+
+
+
+
     public function chitiet_album(){
     	return $this->hasMany(ChitietAlbum::class,'album_id');
     }
