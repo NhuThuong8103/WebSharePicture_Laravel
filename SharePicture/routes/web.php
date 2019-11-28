@@ -14,17 +14,17 @@ use App\Http\Middleware\checkAdminLogin;
 */
 Route::get('/logout',function(){
 	Auth::logout();
-	return view('user.home');
+	return view('user.feedsphoto');
 
 });
 
 Route::get('/', function () {
-	return view('user.home');
+	return view('user.feedsphoto');
 });
 
 
 Route::get('/index', function () {
-	return view('user.home');
+	return view('user.feedsphoto');
 });
 
 Route::get('/feedsAlbum',function(){
@@ -33,11 +33,11 @@ Route::get('/feedsAlbum',function(){
 
 Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 	Route::get('/',function(){
-		return view('admin.home');
+		return view('admin.managerPhotos');
 	});
 
 	Route::get('/index',function(){
-		return view('admin.home');
+		return view('admin.managerPhotos');
 	});
 
 	Route::get('/managerAlbums', function() {
@@ -45,7 +45,7 @@ Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 	});
 
 	Route::get('/managerUsers', function() {
-	    return view('admin.managerUsers');
+	    //return view('admin.managerUsers');
 	});
 });	
 
@@ -64,7 +64,12 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 		return view('user.new_album');
 	});
 
+
 	Route::post('/myalbums/newalbum_upload','AlbumUserController@saveNewAlbum'); // luu album
+
+	Route::post('/myalbums/newalbum_upload', 'AlbumUserController@store')->name('dropzoneJs');
+
+
 
 	Route::get('/myphotos/newPhoto', function(){
 		return view('user.newphoto');

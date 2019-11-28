@@ -8,11 +8,13 @@ use App\TaiKhoan;
 
 class PhanQuyen extends Model
 {
-    public $table ="phanquyen";
+	public $table ="phanquyen";
 
-    protected $fillable = ['id','tenquyen','loaiquyen'];
+	protected $fillable = ['id','tenquyen','slug'];
 
-    public function taikhoan(){
-    	return $this->belongsTo(TaiKhoan::class,"id");
-    } 
+	public function taikhoan(){
+		return $this->belongsTo(TaiKhoan::class,"id");
+	} 
+
+	
 }

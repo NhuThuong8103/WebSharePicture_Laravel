@@ -68,227 +68,216 @@
 					<div class="col-10 col-sm-8 col-md-6 col-md-offset-4 col-lg-4">
 						<div class="account-wall">
 							<div class="tab-content">
-								@if(Session::get('kt')==''  || Session::get('kt')=='login' )
 								<div id="login" class="tab-pane active">
-									@else
-									<div id="login" class="tab-pane">
+									<h2 class="text-center login-title">Fotobook Login</h2>
+									<img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+
+									@include('error')
+
+									<div>
+										@if(Session::get('thongbaoerror'))
+										<div class="alert alert-danger">
+											<button type="button" class="close" data-dismiss="alert">x</button>
+											<strong>{{ Session::get('thongbaoerror') }}</strong>
+										</div>
 										@endif
-
-										<h2 class="text-center login-title">Fotobook Login</h2>
-										<img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
-										@if(Session::get('kt')=='login')
-										@include('error')
+										@if(Session::get('thongbao_activesuccess'))
+										<div class="alert alert-success">
+											<button type="button" class="close" data-dismiss="alert">x</button>
+											<strong>{{ Session::get('thongbao_activesuccess') }}</strong>
+										</div>
 										@endif
-										<div>
-											@if(Session::get('thongbaoerror'))
-											<div class="alert alert-danger">
-												<button type="button" class="close" data-dismiss="alert">x</button>
-												<strong>{{ Session::get('thongbaoerror') }}</strong>
-											</div>
-											@endif
-											@if(Session::get('thongbao_activesuccess'))
-											<div class="alert alert-success">
-												<button type="button" class="close" data-dismiss="alert">x</button>
-												<strong>{{ Session::get('thongbao_activesuccess') }}</strong>
-											</div>
-											@endif
-										</div>
-										<form class="form-login" method="post" action="{{ url('/login/checkLogin') }}" id="form-login">
-											{{ csrf_field() }}
-											<input type="Email" name="email" id="email" class="form-control input-log" placeholder="Email" required autofocus>
-											<input type="password" name="password" id="password" class="form-control input-log" placeholder="Password" required>
-											<!-- <input class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit">Sign in</button> -->	
-											<input type="submit" class="btn btn-lg btn-primary btn-block w-50 btn-login" value="Sign In">			
-											<div class="text-info-login text-center mt-3">
-												<span class="text-center mt-2">Or Sign up Using</span>
-											</div>					                		
-											<div class="icon-login mt-3 text-center">
-												<a href="feedsAlbum.html"><i class="fab fa-facebook"></i></a>
-												<a href="#"><i class="fab fa-google-plus"></i></a>
-											</div>
-										</form>
-									</div> 
-
-									@if( Session::get('kt')=='register' )
-									<div id="signup" class="tab-pane active">
-										@else
-										<div id="signup" class="tab-pane">
-											@endif
-											<h2 class="text-center login-title">Fotobook Signup</h2>
-											@if(Session::get('kt')=='register')
-											@include('error')
-											@endif
-											<div>
-												@if(Session::get('thongbao_register'))
-												<div class="alert alert-danger">
-													<button type="button" class="close" data-dismiss="alert">x</button>
-													<strong>{{ Session::get('thongbao_register') }}</strong>
-												</div>
-												@endif
-
-												@if(Session::get('thongbao_registersuccess'))
-												<div class="alert alert-success">
-													<button type="button" class="close" data-dismiss="alert">x</button>
-													<strong>{{ Session::get('thongbao_registersuccess') }}</strong>
-												</div>
-												@endif
-											</div>
-											<form class="form-signin" method="post" action="{{ url('/login/register') }}" id="form-register">
-												{{ csrf_field() }}
-												<label class="label-signup">Email</label>
-												<input type="Email" name="emailre" id="emailre" class="form-control" placeholder="example@gmail.com" required autofocus>
-												<label class="label-signup">First Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
-												<input type="text" name="firstname" id="firstname" class="form-control" placeholder="First Name" required>
-												<label class="label-signup">Last Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
-												<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last Name" required>
-												<label class="label-signup">New Password &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
-												<input type="password" name="passwordre" id="passwordre" class="form-control" placeholder="******" required>
-												<label class="label-signup">Password Confirmation</label>
-												<input type="password" name="passconfirm" id="passconfirm" class="form-control" placeholder="******" required>
-												<input type="submit" class="btn btn-lg btn-primary btn-block w-50 btn-login" value="Sign Up">
-												{{-- <button class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit">Signup</button> --}}
-											</form>					              
-										</div>
-
-										@if(Session::get('kt')=='forgot')
-										<div id="forgot" class="tab-pane active">
-											@else
-											<div id="forgot" class="tab-pane">
-												@endif
-												<h2 class="text-center login-title">Forgot password</h2>
-												@if(Session::get('kt')=='forgot')
-												@include('error')
-												@endif
-												@if(Session::get('thongbao_forgot'))
-												<div class="alert alert-danger">
-													<button type="button" class="close" data-dismiss="alert">x</button>
-													<strong>{{ Session::get('thongbao_forgot') }}</strong>
-												</div>
-												@endif
-												<div>
-													@if(Session::get('thongbao_forgotsuccess'))
-													<div class="alert alert-success">
-														<button type="button" class="close" data-dismiss="alert">x</button>
-														<strong>{{ Session::get('thongbao_forgotsuccess') }}</strong>
-													</div>
-													@endif
-												</div>
-												<form class="form-signin" method="post" action="{{ url('/password/reset')}}">
-													{{ csrf_field() }} 
-													<label>Enter your valid Email</label>
-													<input type="text" class="form-control" placeholder="Email" required autofocus name="email_reset">
-													<input class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit" value="Recovery">
-												</form>					              
-											</div>
-										</div>
-
-										<div class="text-center mt-2">
-											<ul class="list-inline mb-0">
-												<li class="mt-2">
-													<a class="text-muted" href="#login" data-toggle="tab">Login</a></li>
-													<li class="mt-2">
-														<a class="text-muted" href="#forgot" data-toggle="tab">Forgot password</a></li>
-														<li class="mt-2">
-															<a class="text-muted" href="#signup" data-toggle="tab">Create an account</a></li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-1 col-sm-2 col-md-3 col-lg-4"></div>
-										</div>
 									</div>
-								</section>
+									<form class="form-login" method="post" action="{{ url('/login/checkLogin') }}" id="form-login">
+										{{ csrf_field() }}
+										<input type="Email" name="email" id="email" class="form-control input-log" placeholder="Email" required autofocus>
+										<input type="password" name="password" id="password" class="form-control input-log" placeholder="Password" required>
+										<!-- <input class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit">Sign in</button> -->	
+										<input type="submit" class="btn btn-lg btn-primary btn-block w-50 btn-login" value="Sign In">			
+										<div class="text-info-login text-center mt-3">
+											<span class="text-center mt-2">Or Sign up Using</span>
+										</div>					                		
+										<div class="icon-login mt-3 text-center">
+											<a href="feedsAlbum.html"><i class="fab fa-facebook"></i></a>
+											<a href="#"><i class="fab fa-google-plus"></i></a>
+										</div>
+									</form>
+								</div> 
 
-								<footer>
+								<div id="signup" class="tab-pane">
+									<h2 class="text-center login-title">Fotobook Signup</h2>
 
-								</footer>
+									@include('error')
 
-								<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+									<div>
+										@if(Session::get('thongbao_register'))
+										<div class="alert alert-danger">
+											<button type="button" class="close" data-dismiss="alert">x</button>
+											<strong>{{ Session::get('thongbao_register') }}</strong>
+										</div>
+										@endif
 
-								<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+										@if(Session::get('thongbao_registersuccess'))
+										<div class="alert alert-success">
+											<button type="button" class="close" data-dismiss="alert">x</button>
+											<strong>{{ Session::get('thongbao_registersuccess') }}</strong>
+										</div>
+										@endif
+									</div>
+									<form class="form-signin" method="post" action="{{ url('/login/register') }}" id="form-register">
+										{{ csrf_field() }}
+										<label class="label-signup">Email</label>
+										<input type="Email" name="emailre" id="emailre" class="form-control" placeholder="example@gmail.com" required autofocus>
+										<label class="label-signup">First Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+										<input type="text" name="firstname" id="firstname" class="form-control" placeholder="First Name" required>
+										<label class="label-signup">Last Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+										<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last Name" required>
+										<label class="label-signup">New Password &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+										<input type="password" name="passwordre" id="passwordre" class="form-control" placeholder="******" required>
+										<label class="label-signup">Password Confirmation</label>
+										<input type="password" name="passconfirm" id="passconfirm" class="form-control" placeholder="******" required>
+										<input type="submit" class="btn btn-lg btn-primary btn-block w-50 btn-login" value="Sign Up">
+										{{-- <button class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit">Signup</button> --}}
+									</form>					              
+								</div>
 
-								<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+								<div id="forgot" class="tab-pane">
+									<h2 class="text-center login-title">Forgot password</h2>
 
-								<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
-								{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type="text/javascript" charset="utf-8" async defer></script> --}}
-								<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-								<script >
-									$('#form-login').validate({
-										rules:{
-											email:{
-												required:true,
-												email:true
-											},
-											password:{
-												required:true,
-												minlength:6,
-												maxlength:64
-											}
-										},
-										messages:{
-											email:{
-												required:"Please enter email",
-												email:"Please enter the correct email"
-											},
-											password:{
-												required:"Please enter password",
-												minlength:"Please enter more than 5 characters",
-												maxlength:"Please enter less than 65 characters"
-											}
-										}
-									});
+									@include('error')
 
-									$('#form-register').validate({
-										rules:{
-											emailre:{
-												required:true,
-												email:true
-											},
-											firstname:{
-												required:true,
-												maxlength:25
-											},
-											lastname:{
-												required:true,
-												maxlength:25
-											},
-											passwordre:{
-												required:true,
-												minlength:6,
-												maxlength:64
-											},
-											passconfirm:{
-												required:true,
-												minlength:6,
-												maxlength:64
-											}
-										},
-										messages:{
-											emailre:{
-												required:"Please enter email",
-												email:"Please enter the correct email"
-											},
-											firstname:{
-												required:"Please enter firstname",
-												maxlength:"Please enter firstname less than 25 characters"
-											},
-											lastname:{
-												required:"Please enter lastname",
-												maxlength:"Please enter lastname less than 25 characters"
-											},
-											passwordre:{
-												required:"Please enter password",
-												minlength:"Please enter more than 5 characters",
-												maxlength:"Please enter less than 65 characters"
-											},
-											passconfirm:{
-												required:"Please enter password confirm",
-												minlength:"Please enter more than 5 characters",
-												maxlength:"Please enter less than 65 characters"
-											}
-										}
-									});
-								</script>
-								<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
-							</body>
-							</html>
+									@if(Session::get('thongbao_forgot'))
+									<div class="alert alert-danger">
+										<button type="button" class="close" data-dismiss="alert">x</button>
+										<strong>{{ Session::get('thongbao_forgot') }}</strong>
+									</div>
+									@endif
+									<div>
+										@if(Session::get('thongbao_forgotsuccess'))
+										<div class="alert alert-success">
+											<button type="button" class="close" data-dismiss="alert">x</button>
+											<strong>{{ Session::get('thongbao_forgotsuccess') }}</strong>
+										</div>
+										@endif
+									</div>
+									<form class="form-signin" method="post" action="{{ url('/password/reset')}}">
+										{{ csrf_field() }} 
+										<label>Enter your valid Email</label>
+										<input type="text" class="form-control" placeholder="Email" required autofocus name="email_reset">
+										<input class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit" value="Recovery">
+									</form>					              
+								</div>
+							</div>
+							<div class="text-center mt-2">
+								<ul class="list-inline mb-0" id="myTab">
+									<li class="mt-2">
+										<a class="text-muted " href="#login" data-toggle="tab" onclick="location.reload(true); ">Login</a>
+									</li>
+									<li class="mt-2">
+										<a class="text-muted" href="#forgot" data-toggle="tab" onclick="location.reload(true); ">Forgot password</a>
+									</li>
+									<li class="mt-2">
+										<a class="text-muted" href="#signup" data-toggle="tab" onclick="location.reload(true); ">Create an account</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-1 col-sm-2 col-md-3 col-lg-4"></div>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+
+		</footer>
+
+		<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
+		{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type="text/javascript" charset="utf-8" async defer></script> --}}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+		<script >
+			$('#form-login').validate({
+				rules:{
+					email:{
+						required:true,
+						email:true
+					},
+					password:{
+						required:true,
+						minlength:6,
+						maxlength:64
+					}
+				},
+				messages:{
+					email:{
+						required:"Please enter email",
+						email:"Please enter the correct email"
+					},
+					password:{
+						required:"Please enter password",
+						minlength:"Please enter more than 5 characters",
+						maxlength:"Please enter less than 65 characters"
+					}
+				}
+			});
+
+			$('#form-register').validate({
+				rules:{
+					emailre:{
+						required:true,
+						email:true
+					},
+					firstname:{
+						required:true,
+						maxlength:25
+					},
+					lastname:{
+						required:true,
+						maxlength:25
+					},
+					passwordre:{
+						required:true,
+						minlength:6,
+						maxlength:64
+					},
+					passconfirm:{
+						required:true,
+						minlength:6,
+						maxlength:64
+					}
+				},
+				messages:{
+					emailre:{
+						required:"Please enter email",
+						email:"Please enter the correct email"
+					},
+					firstname:{
+						required:"Please enter firstname",
+						maxlength:"Please enter firstname less than 25 characters"
+					},
+					lastname:{
+						required:"Please enter lastname",
+						maxlength:"Please enter lastname less than 25 characters"
+					},
+					passwordre:{
+						required:"Please enter password",
+						minlength:"Please enter more than 5 characters",
+						maxlength:"Please enter less than 65 characters"
+					},
+					passconfirm:{
+						required:"Please enter password confirm",
+						minlength:"Please enter more than 5 characters",
+						maxlength:"Please enter less than 65 characters"
+					}
+				}
+			});
+		</script>
+		<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
+	</body>
+	</html>

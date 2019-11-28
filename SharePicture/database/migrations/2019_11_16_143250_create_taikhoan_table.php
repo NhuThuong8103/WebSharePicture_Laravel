@@ -22,9 +22,9 @@ class CreateTaikhoanTable extends Migration
             $table->string('ten',30);
             $table->string('anhdaidien',255)->default('user.png');
             $table->boolean('phephoatdong');
-            $table->integer('quyen_id')->unsigned();
+            $table->integer('id_phanquyen')->unsigned();
             $table->timestamps();
-            $table->foreign('quyen_id')->references('id')->on('phanquyen');
+            $table->foreign('id_phanquyen')->references('id')->on('phanquyen');
         });
     }
 

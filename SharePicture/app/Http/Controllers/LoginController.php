@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\loginValidate;
+use App\Http\Requests\registerValidate;
+use App\Http\Requests\resetPasswordValidate;
+use App\Http\Requests\updatePasswordValidate;
 use Cookie;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -13,31 +17,21 @@ use App\Mail\SendMailResetPassword;
 use App\Mail\SendMail;
 use Carbon\Carbon;
 use Session;
-use Validator;
 use Auth;
 use Hash;
-use DB;
-use App\TaiKhoan;
-use App\PhanQuyen;
 use App\Album;
-
+use App\TaiKhoan;
+use App\Services\PhanQuyenService;
+use App\Services\TaiKhoanService;
 
 
 class LoginController extends BaseController
 {
 	public function showLogin(){
-		if(!Session::has('kt'))
-			Session::put('kt','login');
 		return view('login');
 	}
 
-	function checkLogin(Request $request){//where("email","=",Auth::user()->email)->where("quyen_id","=",Auth::user()->quyen_id)
-		$request->session()->put('kt','login');
-
-		Validator::make($request->all(), [
-			'email'			=>'bail|required|email',
-			'password'		=>'bail|required|min:6'
-		])->validate();
+	function checkLogin(loginValidate $request){
 
 		$userData=array(
 			'email'			=>$request->get('email'),
@@ -47,23 +41,18 @@ class LoginController extends BaseController
 		if(Auth::attempt($userData)){
 			if(Auth::user()->phephoatdong)
 			{
-				$taikhoan=new TaiKhoan();
-
-				$kt = $taikhoan->loaiQuyen(Auth::user()->quyen_id);//lấy quyền đangư nhập 
+				$kt=PhanQuyenService::loaiQuyen(Auth::user()->id_phanquyen);//lấy quyền đangư nhập 
 				
 				//update time login last
-				$taikhoan->find(Auth::user()->id)->update(['thoigian_dncuoi' => Carbon::now('GMT+7')]);
+				TaiKhoan::find(Auth::user()->id)->update(['thoigian_dncuoi' => Carbon::now('GMT+7')]);
 
-				if($kt)
+				if($kt=='admin')
 				{
 					return Redirect('admin/index');
 				}
 				else {
 					return Redirect('index');
 				}
-
-
-
 			}
 			else {
 				return back()->with('thongbaoerror',"Account of you is temporarily locked!!!");
@@ -75,42 +64,34 @@ class LoginController extends BaseController
 
 	}
 
-	function register(Request $request){
-		$request->session()->put('kt','register');
-		Validator::make($request->all(), [
-			'emailre'		=>'bail|required|email',
-			'firstname'		=>'bail|required|max:25',
-			'lastname'		=>'bail|required|max:25',
-			'passwordre'		=>'bail|required|min:6|max:64',
-			'passconfirm'	=>'bail|required|min:6|max:64'
-		])->validate();
-		$email=$request->get('emailre');
+	function register(registerValidate $request){
+		
+		$email    =$request->get('emailre');
 		$firstname=$request->get('firstname');
-		$lastname=$request->get('lastname');
-		$pass=$request->get('passwordre');
-		$repass=$request->get('passconfirm');
+		$lastname =$request->get('lastname');
+		$pass     =$request->get('passwordre');
+		$repass   =$request->get('passconfirm');
 		if($repass !=$pass){
 			return back()->with('thongbao_register',"Wrong confirm password!!!");
 		}
 
-		$taikhoan = new TaiKhoan();
-
-		if(!$taikhoan->checkExistEmail($email)){
+		if(!TaiKhoanService::checkExistEmail($email)){
 			return back()->with('thongbao_register',"Email already exists");
 		}
 
 		Mail::to($email)->send(new SendMail($email));
 
+		$id= PhanQuyenService::getID_SlugWithUser();
+		TaiKhoan::create(array(
+			'email'				=>$email,
+			'password' 			=>Hash::make($pass),
+			'thoigian_dncuoi'	=>Carbon::now('GMT+7'),
+			'ho'				=>$lastname,
+			'ten'				=>$firstname,
+			'phephoatdong'		=>false,
+			'id_phanquyen'		=>$id,
+		));
 
-		$taikhoan['email']=$email;
-		$taikhoan['password']=Hash::make($pass);
-		$taikhoan['thoigian_dncuoi']=Carbon::now('GMT+7');
-		$taikhoan['ho']=$lastname;
-		$taikhoan['ten']= $firstname;
-		$taikhoan['phephoatdong']=false;
-		$taikhoan['quyen_id']=2;
-		$taikhoan->save();
- 		// DB::insert('insert into taikhoan (email, password,thoigian_dncuoi, ho,ten, phephoatdong,quyen_id) values (?, ?, ?, ?, ?, ?, ?)', [$email,Hash::make($pass), Carbon::now('GMT+7'),$lastname, $firstname,false,1]);
 		return back()->with('thongbao_registersuccess',"Please check your mail for active account :V"); 
 
 	}
@@ -119,22 +100,16 @@ class LoginController extends BaseController
 
 		TaiKhoan::where('email',$email)->update(['phephoatdong'=>true]);
 
-        Session::put('kt','login');
-
 		return back()->with('thongbao_activesuccess',"Account actived, please login :V"); 
 	}
 
-	function getEmailForReset(Request $request){
-		$request->session()->put('kt', 'forgot');
-		Validator::make($request->all(),[
-			'email_reset'  =>  'bail|required|email'
-		])->validate();
+	function getEmailForReset(resetPasswordValidate $request){
+		
+		$validated=$request->validated();
 
 		$email = $request->get('email_reset');
 
-		$taikhoan = new TaiKhoan();
-
-		if($taikhoan->checkExistEmail($email)){
+		if(TaiKhoanService::checkExistEmail($email)){
 			return back()->with('thongbao_forgot',"Email not exist,Please enter the correct email");
 		}
 
@@ -147,21 +122,14 @@ class LoginController extends BaseController
 		return view('resetpassword',compact('email'));
 	}
 
-	function updatePasswordReset(Request $request){
-		$request->session()->put('reset');
-		Validator::make($request->all(),[
-			'new_password'  	=> 'bail|required|min:6|max:64',
-			'confirm_password'  => 'bail|required|min:6|max:64',
-			'email_reset'		=> 'bail|required|email',
-		])->validate();
-
+	function updatePasswordReset(updatePasswordValidate $request){
+		
 		$new_password = $request->get('new_password');
 		$confirm_password = $request->get('confirm_password');
 		$email = $request->get('email_reset');
 
 		if($confirm_password != $new_password)
 			return back()->with('thongbao_resetorror',"Password confirm must be the same as the password!");
-		Session::put('reset');
 		TaiKhoan::where('email',$email)->update(['password' => Hash::make($new_password) ]);
 		
 		return back()->with('thongbao_resetsuccess',"Password has been changed!");
