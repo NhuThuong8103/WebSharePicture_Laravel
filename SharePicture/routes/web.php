@@ -33,11 +33,11 @@ Route::get('/feedsAlbum',function(){
 
 Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 	Route::get('/',function(){
-		return view('admin.home');
+		return view('admin.managerPhotos');
 	});
 
 	Route::get('/index',function(){
-		return view('admin.home');
+		return view('admin.managerPhotos');
 	});
 
 	Route::get('/managerAlbums', function() {
@@ -45,7 +45,7 @@ Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 	});
 
 	Route::get('/managerUsers', function() {
-	    return view('admin.managerUsers');
+	    //return view('admin.managerUsers');
 	});
 });	
 
@@ -63,6 +63,9 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 	Route::get('/myalbums/newalbum_upload', function(){
 		return view('user.new_album');
 	});
+
+	Route::post('/myalbums/newalbum_upload', 'AlbumUserController@store')->name('dropzoneJs');
+
 
 	Route::get('/myphotos/newPhoto', function(){
 		return view('user.newphoto');

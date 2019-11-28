@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-use App\PhanQuyen;
+use App\Services\PhanQuyenService;
 use Closure;
 use Auth;
 
@@ -19,9 +19,7 @@ class checkAdminLogin
         if(Auth::check()){
             $user= Auth::user();
 
-            $phanquyen=new PhanQuyen();
-
-            $kt = $phanquyen->loaiQuyen(Auth::user()->id_phanquyen);//lấy quyền đangư nhập 
+            $kt = PhanQuyenService::loaiQuyen(Auth::user()->id_phanquyen);//lấy quyền đangư nhập 
 
             if($kt=='admin'){
                 return $next($request);

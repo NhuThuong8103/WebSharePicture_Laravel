@@ -29,7 +29,7 @@
 	</div>
 	<div class="col-lg-1 col-md-1 d-none d-md-block">
 		<div class="logout-acount">
-			<a href="{{ url('/login')}}" title="Login">
+			<a href="{{ url('/login')}}" title="Login" onclick="location.reload(true); >
 				<span class="link-log">Login</span>
 			</a>
 		</div>

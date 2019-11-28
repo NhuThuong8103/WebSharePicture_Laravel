@@ -16,15 +16,5 @@ class PhanQuyen extends Model
 		return $this->belongsTo(TaiKhoan::class,"id");
 	} 
 
-	public function loaiQuyen($id_quyen){
-		$check=PhanQuyen::where('id',$id_quyen)->first();
-
-		return $check['slug'];
-	}
 	
-	public function getID_SlugWithUser(){
-		$check=PhanQuyen::where('slug','user')->first();
-
-		return $check['id'];
-	}
 }

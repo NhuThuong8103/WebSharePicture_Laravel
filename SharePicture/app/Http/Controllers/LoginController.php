@@ -19,11 +19,10 @@ use Carbon\Carbon;
 use Session;
 use Auth;
 use Hash;
-use DB;
-use App\TaiKhoan;
-use App\PhanQuyen;
 use App\Album;
-
+use App\TaiKhoan;
+use App\Services\PhanQuyenService;
+use App\Services\TaiKhoanService;
 
 
 class LoginController extends BaseController
@@ -34,8 +33,6 @@ class LoginController extends BaseController
 
 	function checkLogin(loginValidate $request){
 
-		$validated = $request->validated();
-
 		$userData=array(
 			'email'			=>$request->get('email'),
 			'password' 		=>$request->get('password')
@@ -44,13 +41,10 @@ class LoginController extends BaseController
 		if(Auth::attempt($userData)){
 			if(Auth::user()->phephoatdong)
 			{
-				$phanquyen=new PhanQuyen();
-				$taikhoan=new TaiKhoan();
-
-				$kt = $phanquyen->loaiQuyen(Auth::user()->id_phanquyen);//lấy quyền đangư nhập 
+				$kt=PhanQuyenService::loaiQuyen(Auth::user()->id_phanquyen);//lấy quyền đangư nhập 
 				
 				//update time login last
-				$taikhoan->find(Auth::user()->id)->update(['thoigian_dncuoi' => Carbon::now('GMT+7')]);
+				TaiKhoan::find(Auth::user()->id)->update(['thoigian_dncuoi' => Carbon::now('GMT+7')]);
 
 				if($kt=='admin')
 				{
@@ -72,8 +66,6 @@ class LoginController extends BaseController
 
 	function register(registerValidate $request){
 		
-		$validated=$request->validated();
-
 		$email    =$request->get('emailre');
 		$firstname=$request->get('firstname');
 		$lastname =$request->get('lastname');
@@ -83,16 +75,13 @@ class LoginController extends BaseController
 			return back()->with('thongbao_register',"Wrong confirm password!!!");
 		}
 
-		$taikhoan = new TaiKhoan();
-
-		if(!$taikhoan->checkExistEmail($email)){
+		if(!TaiKhoanService::checkExistEmail($email)){
 			return back()->with('thongbao_register',"Email already exists");
 		}
 
 		Mail::to($email)->send(new SendMail($email));
 
-		$phanquyen= new PhanQuyen();
-		$id= $phanquyen->getID_SlugWithUser();
+		$id= PhanQuyenService::getID_SlugWithUser();
 		TaiKhoan::create(array(
 			'email'				=>$email,
 			'password' 			=>Hash::make($pass),
@@ -120,9 +109,7 @@ class LoginController extends BaseController
 
 		$email = $request->get('email_reset');
 
-		$taikhoan = new TaiKhoan();
-
-		if($taikhoan->checkExistEmail($email)){
+		if(TaiKhoanService::checkExistEmail($email)){
 			return back()->with('thongbao_forgot',"Email not exist,Please enter the correct email");
 		}
 
@@ -137,8 +124,6 @@ class LoginController extends BaseController
 
 	function updatePasswordReset(updatePasswordValidate $request){
 		
-		$validated=$request->validated();
-
 		$new_password = $request->get('new_password');
 		$confirm_password = $request->get('confirm_password');
 		$email = $request->get('email_reset');

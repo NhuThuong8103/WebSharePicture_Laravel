@@ -32,17 +32,4 @@ class TaiKhoan extends Model
         return $this->hasMany(Album::class,'taikhoan_id');
     }
 
-    public function checkExistEmail($email)
-    {
-    	$check=TaiKhoan::where('email',$email)->count();
-    	if($check!=0)
-    		return false;
-    	return true;
-    }
-
-
-
-    
-
-
 }
