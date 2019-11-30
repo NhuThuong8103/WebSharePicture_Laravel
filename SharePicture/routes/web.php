@@ -44,9 +44,15 @@ Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 	    return view('admin.managerAlbums');
 	});
 
-	Route::get('/managerUsers', function() {
-	    //return view('admin.managerUsers');
-	});
+	Route::get('/managerUsers','ManagerUserController@index')->name('managerUserProfile');
+
+	Route::post('/managerUsers/delete','ManagerUserController@deleteUser')->name('deleteUser');
+
+	Route::get('/managerUsers/edit/{id}','ManagerUserController@editUser');
+
+	Route::post('/managerUsers/edit/save','ManagerUserController@saveUserProfile')->name('saveUserProfile');
+
+
 });	
 
 //thuong
