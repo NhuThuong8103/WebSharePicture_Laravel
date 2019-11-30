@@ -65,7 +65,7 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 	});
 
 
-	Route::post('/myalbums/newalbum_upload','AlbumUserController@saveNewAlbum'); // luu album
+	Route::post('/myalbums/newalbum','AlbumUserController@saveNewAlbum'); // luu album
 
 	Route::post('/myalbums/newalbum_upload', 'AlbumUserController@store')->name('dropzoneJs');
 

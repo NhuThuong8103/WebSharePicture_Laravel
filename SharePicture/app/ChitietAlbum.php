@@ -6,13 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChitietAlbum extends Model
 {
-    public $table="chitietAlbum";
 
-    protected $fillable = [
+	protected $fillable = [
+		'id',
         'hinhanh_album',
         'album_id',
     ];
 
+
+
+
+    public $table="chitietAlbum";
+
+    
 
 
 

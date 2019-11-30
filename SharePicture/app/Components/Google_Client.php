@@ -1,12 +1,12 @@
 <?php
-use Google_Client as BaseGoogleClient;
-use App\Components\GoogleClient;
+//use Google_Client as BaseGoogleClient;
+use App\Components\Google_Client;
 
 /**
  * Class GoogleClient
  * @package App\Components
  */
-class Google_Client
+class GoogleClient
 {
     /**
      * @var BaseGoogleClient

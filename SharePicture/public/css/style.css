@@ -43,6 +43,15 @@ body{
   width: 50%;
 }
 
+.mode{
+  float: left;
+}
+
+.submit-hidden{
+  visibility: hidden;
+  float: right;
+}
+
 main h6{
   font-weight: bold;
 }

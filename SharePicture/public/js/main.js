@@ -24,6 +24,9 @@ $(document).ready(function(){
   //   }, 1000);
   // });
 
+  $('#other').click(function(){
+    $('#target').click();
+  });
 
 
   // modal nhap xem 1 anh

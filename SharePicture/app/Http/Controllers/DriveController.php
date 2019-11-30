@@ -21,17 +21,14 @@ class DriveController extends Controller
 
     public function uploadPhoto_Thuong()
     {
-        //return view('newphoto');
     }
 
     public function store(Request $request)
 	{
-	    // if ($request->hasFile('pic')) {
-	    //     $imageID = $this->getImageID($request->file('pic'));
-	    //     echo "File ID = ".$imageID;
-	    //     exit;
-	    // }
-	    ChitietAlbum::create($request->all());
+	    //ChitietAlbum::create($request->all());
+	    ChitietAlbum::create(array_merge($request->all(), [
+		    'id' => $imageID
+		]));
 	}
 
 	

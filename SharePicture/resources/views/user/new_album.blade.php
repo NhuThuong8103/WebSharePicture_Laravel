@@ -24,7 +24,7 @@
 			<hr class="border-below mt-5">
 		</div>
 	</div>
-
+	<form action="{{ url('/myalbums/newalbum') }}" method="post" novalidate>{{ csrf_field() }}
 	<div class="row pt-2">
 		<div class="col-lg-6">
 			<h6>Title</h6>
@@ -36,19 +36,19 @@
 			</div>
 			<br>
 			<h6>Sharing mode</h6>
-			<select name="chedo_album" id="" class="form-control control-select">
+			<select name="chedo_album" id="" class="form-control control-select mode">
 				<option value="1">Public</option>
 				<option value="2">Private</option>
 			</select>
-
-
+			<input type="submit" id="target" name="submit" value="Save" class="btn btn-primary submit-hidden">
 		</div>
 		<div class="col-lg-6 d-none d-lg-block">
 			<h6>Description</h6>
 			<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_album"></textarea>
 		</div>
 	</div>
-
+	</form>
+	
 	<div class="row">
 		<div class="col-lg-12 mb-3 mt-3">
  			<form action="{{ route('dropzoneJs') }}" enctype="multipart/form-data" class="dropzone" id="fileupload" method="POST">
@@ -62,9 +62,10 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="group-btn mb-3">
-				<a href="#" class="btn btn-primary">
+				{{-- <a href="#" class="btn btn-primary">
 					<i class="fas fa-save mr-2"></i>Save
-				</a>
+				</a> --}}
+				<input type="submit" id="other" name="submit" value="Save" class="btn btn-primary">
 			</div>
 		</div>
 	</div>
@@ -79,6 +80,9 @@
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 
 	<script type="text/javascript">
+
+
+
   Dropzone.options.fileupload = {
     accept: function (file, done) {
       if (file.type != "application/vnd.ms-excel" && file.type != "image/jpeg, image/png, image/jpg") {
