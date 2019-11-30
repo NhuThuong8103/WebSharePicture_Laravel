@@ -129,7 +129,7 @@ function uploadImageAvatar() {
     reader.onload = function(event) {
       $('#change .image').remove();
       images.prepend('<div class="image" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"></div>')
-
+      alert(event.target.result);
     }
     reader.readAsDataURL(uploader[0].files[0]);
   })
@@ -150,8 +150,7 @@ function uploadImageAvatarUser() {
     var reader = new FileReader()
     reader.onload = function(event) {
       $('#change-avatar .image').remove();
-      images.prepend('<div class="image" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"></div>')
-
+      images.prepend('<div class="image" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"></div> <input type="hidden" name="avatarImageUser" value="'+ uploader.val().replace(/.*(\/|\\)/, '')+ '">')
     }
     reader.readAsDataURL(uploader[0].files[0]);
   })
