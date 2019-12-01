@@ -5,6 +5,8 @@ use App\TaiKhoan;
 use App\PhanQuyen;
 use Illuminate\Support\Arr;
 use App\Services\PhanQuyenService;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailDeleteUser;
 
 
 class ManagerUserService{
@@ -20,7 +22,13 @@ class ManagerUserService{
 
 	public static function deleteUser($id)
 	{
+		$email=TaiKhoan::find($id)->get('email');
+
+		Mail::to($email)->send(new SendMailDeleteUser($email));
+
 		TaiKhoan::find($id)->delete();
+
+
 	}
 
 	public static function getProFileUser($id)

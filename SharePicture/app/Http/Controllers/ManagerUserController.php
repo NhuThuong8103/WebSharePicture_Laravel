@@ -5,6 +5,9 @@ use Hash;
 use App\TaiKhoan;
 use Illuminate\Http\Request;
 use App\Services\ManagerUserService;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailUpdateActiveUser;
+use App\Http\Requests\editUserProfileValidate;
 
 
 class ManagerUserController extends Controller
@@ -24,7 +27,7 @@ class ManagerUserController extends Controller
     	return view('admin.editUserProfile')->with('user',ManagerUserService::getProFileUser($id));
     }
 
-    public function saveUserProfile(Request $request)
+    public function saveUserProfile(editUserProfileValidate $request)
     {
     	$id=$request->idUser;
 
@@ -42,6 +45,12 @@ class ManagerUserController extends Controller
     		'ten'		=>$request->firstname,
     		'phephoatdong'=>$active
     	]);
+
+        if($active==false){
+            Mail::to($request->email)->send(new SendMailUpdateActiveUser($request->email));
+        }
+
+        return back()->with('thongbaosaveUserProfile',"User profile has been changed");
 
     }
 }

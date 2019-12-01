@@ -1,0 +1,1 @@
+<p>We are sorry to inform you that your account has been deleted</p>

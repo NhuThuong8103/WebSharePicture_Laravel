@@ -67,57 +67,57 @@ $(document).ready(function(){
 
 //dropzone();
 //dropzoneProcess();
-uploadOneImage();
-uploadImage();
+// uploadOneImage();
+// uploadImage();
 uploadImageAvatar();
 uploadImageAvatarUser();
 
-function uploadOneImage(){
-  var button = $('.upload-images .pic');
-  var uploader = $('<input type="file" accept="image/*" />');
-  var images = $('.upload-images');
+// function uploadOneImage(){
+//   var button = $('.upload-images .pic');
+//   var uploader = $('<input type="file" accept="image/*" />');
+//   var images = $('.upload-images');
 
-  button.click(function() {
-    uploader.click();
-    /* Act on the event */
-  });
-  uploader.on('change', function () {
-    var reader = new FileReader()
-    reader.onload = function(event) {
-      images.prepend('<div class="img" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"><span><i class="far fa-trash-alt mr-2"></i>remove</span></div>')
-      $('.pic').css('display', 'none');
-    }
-    reader.readAsDataURL(uploader[0].files[0]);
-  })
+//   button.click(function() {
+//     uploader.click();
+//     /* Act on the event */
+//   });
+//   uploader.on('change', function () {
+//     var reader = new FileReader()
+//     reader.onload = function(event) {
+//       images.prepend('<div class="img" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"><span><i class="far fa-trash-alt mr-2"></i>remove</span></div>')
+//       $('.pic').css('display', 'none');
+//     }
+//     reader.readAsDataURL(uploader[0].files[0]);
+//   })
 
-  images.on('click', '.img', function () {
-    $(this).remove()
-    $('.pic').css('display', '');
-  })
-}
+//   images.on('click', '.img', function () {
+//     $(this).remove()
+//     $('.pic').css('display', '');
+//   })
+// }
 
 
-function uploadImage() {
-  var button = $('.images .pic')
-  var uploader = $('<input type="file" accept="image/*" />')
-  var images = $('.images')
+// function uploadImage() {
+//   var button = $('.images .pic')
+//   var uploader = $('<input type="file" accept="image/*" />')
+//   var images = $('.images')
 
-  button.on('click', function () {
-    uploader.click()
-  })
-  uploader.on('change', function () {
-    var reader = new FileReader()
-    reader.onload = function(event) {
-      images.prepend('<div class="img col-lg-3" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"><span>remove</span></div>')
+//   button.on('click', function () {
+//     uploader.click()
+//   })
+//   uploader.on('change', function () {
+//     var reader = new FileReader()
+//     reader.onload = function(event) {
+//       images.prepend('<div class="img col-lg-3" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"><span>remove</span></div>')
 
-    }
-    reader.readAsDataURL(uploader[0].files[0]);
-  })
+//     }
+//     reader.readAsDataURL(uploader[0].files[0]);
+//   })
 
-  images.on('click', '.img', function () {
-    $(this).remove()
-  })
-}
+//   images.on('click', '.img', function () {
+//     $(this).remove()
+//   })
+// }
 
 
 function uploadImageAvatar() {
@@ -132,8 +132,7 @@ function uploadImageAvatar() {
     var reader = new FileReader()
     reader.onload = function(event) {
       $('#change .image').remove();
-      images.prepend('<div class="image" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"></div>')
-      alert(event.target.result);
+      images.prepend('<div class="image" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"></div>  <input type="hidden" name="ValueImageUser" value="'+ event.target.result+ '"><input type="hidden" name="avatarImageUser" value="'+ uploader.val().replace(/.*(\/|\\)/, '')+ '">')
     }
     reader.readAsDataURL(uploader[0].files[0]);
   })
@@ -154,7 +153,7 @@ function uploadImageAvatarUser() {
     var reader = new FileReader()
     reader.onload = function(event) {
       $('#change-avatar .image').remove();
-      images.prepend('<div class="image" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"></div> <input type="hidden" name="avatarImageUser" value="'+ uploader.val().replace(/.*(\/|\\)/, '')+ '">')
+      images.prepend('<div class="image" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"></div>  <input type="hidden" name="ValueImageUser" value="'+ event.target.result+ '"><input type="hidden" name="avatarImageUser" value="'+ uploader.val().replace(/.*(\/|\\)/, '')+ '">')
     }
     reader.readAsDataURL(uploader[0].files[0]);
   })
@@ -164,84 +163,6 @@ function uploadImageAvatarUser() {
   })
 }
 
-// function dropzone(){
-//   Dropzone.autoDiscover = false;
-//   var dropzone = new Dropzone('#demo-upload', {
-//     previewTemplate: document.querySelector('#preview-template').innerHTML,
-//     parallelUploads: 2,
-//     thumbnailHeight: 120,
-//     thumbnailWidth: 120,
-//     maxFilesize: 10,
-//     filesizeBase: 1000,
-//     thumbnail: function(file, dataUrl) {
-//       if (file.previewElement) {
-//         file.previewElement.classList.remove("dz-file-preview");
-//         var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-//         for (var i = 0; i < images.length; i++) {
-//           var thumbnailElement = images[i];
-//           thumbnailElement.alt = file.name;
-//           thumbnailElement.src = dataUrl;
-//         }
-//         setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
-//       }
-//     }
-
-//   });
-//   dropzone.on("complete", function(file) {
-//     myDropzone.removeFile(file);
-//   });
-
-
-
-// }
-
-// function dropzone(){
-//   Dropzone.autoDiscover = false;
-//   var dropzone = new Dropzone('#demo-upload', {
-//     maxFilesize: 12,
-//     renameFile: function(file) {
-//       var dt = new Date();
-//       var time = dt.getTime();
-//       return time+file.name;
-//     },
-//     acceptedFiles: ".jpeg,.jpg,.png,.gif",
-//     addRemoveLinks: true,
-//     timeout: 50000,
-//     removedfile: function(file) 
-//     {
-//       var name = file.upload.filename;
-//       $.ajax({
-//         headers: {
-//           'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-//         },
-//         type: 'POST',
-//         url: '{{ url("/myalbums/delete") }}',
-//         data: {filename: name},
-//         success: function (data){
-//           console.log("File has been successfully removed!!");
-//         },
-//         error: function(e) {
-//           console.log(e);
-//         }});
-//       var fileRef;
-//       return (fileRef = file.previewElement) != null ? 
-//       fileRef.parentNode.removeChild(file.previewElement) : void 0;
-//     },
-
-//     success: function(file, response) 
-//     {
-//       console.log(response);
-//     },
-//     error: function(file, response)
-//     {
-//      return false;
-//    }
-
-//  });
-//   dropzone.on("complete", function(file) {
-//     myDropzone.removeFile(file);
-//   });
-// }
 
 
 

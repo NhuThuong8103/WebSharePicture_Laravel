@@ -4,7 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>@yield('title')</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 	@yield('style')
+	
 </head>
 <body>
 	@include('admin.header')

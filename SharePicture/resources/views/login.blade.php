@@ -7,6 +7,10 @@
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js" type="text/javascript" charset="utf-8" async defer></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css">
 
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/style.css')}}">
 
@@ -15,7 +19,6 @@
 
 
 	<link rel="stylesheet" href="{{URL::asset('css/animate.css')}}">
-
 </head>
 <body>
 	<header>
@@ -66,6 +69,7 @@
 				<div class="row">
 					<div class="col-1 col-sm-2 col-md-3 col-lg-4"></div>
 					<div class="col-10 col-sm-8 col-md-6 col-md-offset-4 col-lg-4">
+						<div class="messages"></div>
 						<div class="account-wall">
 							<div class="tab-content">
 								<div id="login" class="tab-pane active">
@@ -76,16 +80,26 @@
 
 									<div>
 										@if(Session::get('thongbaoerror'))
-										<div class="alert alert-danger">
-											<button type="button" class="close" data-dismiss="alert">x</button>
-											<strong>{{ Session::get('thongbaoerror') }}</strong>
-										</div>
+											<script>
+												setTimeout(function() {
+													Swal.fire({
+													  icon: 'error',
+													  title: 'Oops...',
+													  text: '{{ Session::get('thongbaoerror') }}',
+													})
+												},500);
+											</script>
 										@endif
 										@if(Session::get('thongbao_activesuccess'))
-										<div class="alert alert-success">
-											<button type="button" class="close" data-dismiss="alert">x</button>
-											<strong>{{ Session::get('thongbao_activesuccess') }}</strong>
-										</div>
+											<script>
+												setTimeout(function() {
+													Swal.fire(
+													  'Congratulations <3',
+													  '{{ Session::get('thongbao_activesuccess') }}',
+													  'success'
+													)
+												},500);
+											</script>
 										@endif
 									</div>
 									<form class="form-login" method="post" action="{{ url('/login/checkLogin') }}" id="form-login">
@@ -111,17 +125,27 @@
 
 									<div>
 										@if(Session::get('thongbao_register'))
-										<div class="alert alert-danger">
-											<button type="button" class="close" data-dismiss="alert">x</button>
-											<strong>{{ Session::get('thongbao_register') }}</strong>
-										</div>
+											<script>
+												setTimeout(function() {
+													Swal.fire({
+														  icon: 'error',
+														  title: 'Oops...',
+														  text: '{{ Session::get('thongbao_register') }}',
+														})
+												},500);
+											</script>
 										@endif
 
 										@if(Session::get('thongbao_registersuccess'))
-										<div class="alert alert-success">
-											<button type="button" class="close" data-dismiss="alert">x</button>
-											<strong>{{ Session::get('thongbao_registersuccess') }}</strong>
-										</div>
+											<script>
+												setTimeout(function() {
+													Swal.fire(
+													  'Congratulations <3',
+													  '{{ Session::get('thongbao_registersuccess') }}',
+													  'success'
+													)
+												},500);
+											</script>
 										@endif
 									</div>
 									<form class="form-signin" method="post" action="{{ url('/login/register') }}" id="form-register">
@@ -147,17 +171,27 @@
 									@include('error')
 
 									@if(Session::get('thongbao_forgot'))
-									<div class="alert alert-danger">
-										<button type="button" class="close" data-dismiss="alert">x</button>
-										<strong>{{ Session::get('thongbao_forgot') }}</strong>
-									</div>
+										<script>
+											setTimeout(function() {
+												Swal.fire({
+													  icon: 'error',
+													  title: 'Oops...',
+													  text: '{{Session::get('thongbao_forgot')}}',
+													})
+											},500);
+										</script>
 									@endif
 									<div>
 										@if(Session::get('thongbao_forgotsuccess'))
-										<div class="alert alert-success">
-											<button type="button" class="close" data-dismiss="alert">x</button>
-											<strong>{{ Session::get('thongbao_forgotsuccess') }}</strong>
-										</div>
+											<script>
+												setTimeout(function() {
+													Swal.fire(
+													  'Congratulations <3',
+													  '{{ Session::get('thongbao_forgotsuccess') }}',
+													  'success'
+													)
+												},500);
+											</script>
 										@endif
 									</div>
 									<form class="form-signin" method="post" action="{{ url('/password/reset')}}">
@@ -191,16 +225,11 @@
 		<footer>
 
 		</footer>
-
-		<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
-		{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type="text/javascript" charset="utf-8" async defer></script> --}}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+		
 		<script >
 			$('#form-login').validate({
 				rules:{

@@ -1,0 +1,1 @@
+<p>We regret to inform you that your account has been locked</p>
