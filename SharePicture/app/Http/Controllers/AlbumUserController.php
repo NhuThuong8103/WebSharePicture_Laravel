@@ -105,7 +105,7 @@ class AlbumUserController extends BaseController
                 $root = $value['path'];
         }
         //dd($root);
-        $dirSub = '/'.$root;
+        $dirSub = '/'.$root.'/';
         $recursiveSub = true;
         $contentsSub = collect(Storage::disk('google')->listContents($dirSub, $recursiveSub));
         $dirSub = $contentsSub->where('type', '=', 'dir')
@@ -132,8 +132,7 @@ class AlbumUserController extends BaseController
 
       
 
-    public function store(Request $request)
-    {   
+    public function store(Request $request){   
         $userID = Auth::user()->id;
 
         $image = $request->file('file');
