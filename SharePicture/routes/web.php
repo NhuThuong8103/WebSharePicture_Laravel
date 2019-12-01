@@ -58,6 +58,14 @@ Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 //thuong
 
 Route::group(['middleware' => 'ckUserLogin'], function() {
+	Route::get('/profile',function(){
+		return view('user.editprofile');
+	})->name('usereditprofile');
+
+	Route::post('/profile/editpassword','ProfileUserController@userEditPassword')->name('usereditpassword');
+
+	Route::post('/profile/editinfo', 'ProfileUserController@userEditInformation')->name('usereditinfo');
+
 	Route::get('/myphotos', function(){
 		return view('user.myphotos');
 	});

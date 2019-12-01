@@ -88,6 +88,7 @@ class LoginController extends BaseController
 			'thoigian_dncuoi'	=>Carbon::now('GMT+7'),
 			'ho'				=>$lastname,
 			'ten'				=>$firstname,
+			'anhdaidien'		=>'avatar.png',
 			'phephoatdong'		=>false,
 			'id_phanquyen'		=>$id,
 		));
