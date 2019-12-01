@@ -11,4 +11,9 @@ class TaiKhoanService{
     		return false;
     	return true;
     }
+
+    public static function getIdUser($email){
+    	$idUser = TaiKhoan::where('email', $email)->first();
+    	return $idUser->id;
+    }
 }

@@ -10,6 +10,7 @@ use App\Album;
 use Auth;
 use Storage;
 use File;
+use App\Services\FolderGoogleDriveService;
 
 
 
@@ -85,26 +86,31 @@ class AlbumUserController extends BaseController
 
 
 
-        # xong roi upload len driver va xoa: dung de xoa anh khi da upload thanh cong len driver
+        # tạo thư mục có tên là id: (luư tất cả folder ảnh của user đó)
 
-        Storage::disk('google')->makeDirectory($idUser);
-        $dir = '/';
-        $recursive = false;
-        $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
-        $dir = $contents->where('type', '=', 'dir')
-                        ->where('filename', '=', $idUser)
-                        ->first(); // There could be duplicate directory names!
-        if ( ! $dir) {
-            //return 'Directory does not exist!';
-        }
-        Storage::disk('google')->makeDirectory($dir['path'].'/'.$tieude);
-        Storage::disk('google')->makeDirectory($dir['path'].'/'.'Avatar');
-        $root = "";
-        foreach ($contents as $key => $value) {
-            if($value['name'] == $tieude)
-                $root = $value['path'];
-        }
-        //dd($root);
+        //Storage::disk('google')->makeDirectory($idUser);
+        
+        // $dir = '/';
+        // $recursive = false;
+        // $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
+        // $dir = $contents->where('type', '=', 'dir')
+        //                 ->where('filename', '=', $idUser)
+        //                 ->first(); // There could be duplicate directory names!
+        // if ( ! $dir) {
+        // }
+        // Storage::disk('google')->makeDirectory($dir['path'].'/'.$tieude);
+        
+
+
+        // $root = "";
+        // foreach ($contents as $key => $value) {
+        //     if($value['name'] == $tieude)
+        //         $root = $value['path'];
+        // }
+
+        $root = FolderGoogleDriveService::createSubFoderGoogleDrive($idUser, $tieude);
+
+        #đường dẫn vào thư mục id của user và lấy đường dẫn album mới vừa tạo
         $dirSub = '/'.$root.'/';
         $recursiveSub = true;
         $contentsSub = collect(Storage::disk('google')->listContents($dirSub, $recursiveSub));
@@ -112,21 +118,18 @@ class AlbumUserController extends BaseController
                             ->where('filename', '=', $tieude)
                             ->first();
 
-
+        # lấy file ảnh trong thư mục tạo ở local, rồi lưu lên thư mục album vừa tạo ở trên
         if ($handle = opendir($filePath)) {
 
             while (false !== ($entry = readdir($handle))) {
                 if ($entry != "." && $entry != "..") {  
                     $fileData = File::get($userID.'/'.$entry);
-                    //Storage::disk('google')->put($entry, $fileData);
                     Storage::disk('google')->put($dirSub['path'].'/'.$entry, $fileData);
                     File::delete($userID.'/'.$entry);
                 }
             }
             closedir($handle);
-
         }
-        //print_r($folder->name); Storage::cloud()->put($dir['path'].'/test.txt', 'Hello World');
     }
 
 
