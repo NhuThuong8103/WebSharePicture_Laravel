@@ -11,7 +11,7 @@ use Auth;
 use Storage;
 use File;
 use App\Services\FolderGoogleDriveService;
-
+use App\Http\Requests\newAlbumValidate;
 
 
 
@@ -37,15 +37,9 @@ class AlbumUserController extends BaseController
         return $folder->id;
     }
 
-    public function saveNewAlbum(Request $request){
+    public function saveNewAlbum(newAlbumValidate $request){
         
         $userID = Auth::user()->id;
-        
-        $request->validate([
-            'tieude_album'      =>  'bail|required',
-            'mota_album'        =>  'bail|required',
-            'chedo_album'       =>  'bail|required',
-        ]);
 
         $tieude = $request->get('tieude_album');
         $mota = $request->get('mota_album');
@@ -84,39 +78,9 @@ class AlbumUserController extends BaseController
             ));
         }
 
-
-
-        # tạo thư mục có tên là id: (luư tất cả folder ảnh của user đó)
-
-        //Storage::disk('google')->makeDirectory($idUser);
-        
-        // $dir = '/';
-        // $recursive = false;
-        // $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
-        // $dir = $contents->where('type', '=', 'dir')
-        //                 ->where('filename', '=', $idUser)
-        //                 ->first(); // There could be duplicate directory names!
-        // if ( ! $dir) {
-        // }
-        // Storage::disk('google')->makeDirectory($dir['path'].'/'.$tieude);
-        
-
-
-        // $root = "";
-        // foreach ($contents as $key => $value) {
-        //     if($value['name'] == $tieude)
-        //         $root = $value['path'];
-        // }
-
         $root = FolderGoogleDriveService::createSubFoderGoogleDrive($idUser, $tieude);
 
-        #đường dẫn vào thư mục id của user và lấy đường dẫn album mới vừa tạo
-        $dirSub = '/'.$root.'/';
-        $recursiveSub = true;
-        $contentsSub = collect(Storage::disk('google')->listContents($dirSub, $recursiveSub));
-        $dirSub = $contentsSub->where('type', '=', 'dir')
-                            ->where('filename', '=', $tieude)
-                            ->first();
+        $subPath = FolderGoogleDriveService::getPathFolderAlbumGoogleDrive($idUser, $tieude, $root);
 
         # lấy file ảnh trong thư mục tạo ở local, rồi lưu lên thư mục album vừa tạo ở trên
         if ($handle = opendir($filePath)) {
@@ -124,7 +88,7 @@ class AlbumUserController extends BaseController
             while (false !== ($entry = readdir($handle))) {
                 if ($entry != "." && $entry != "..") {  
                     $fileData = File::get($userID.'/'.$entry);
-                    Storage::disk('google')->put($dirSub['path'].'/'.$entry, $fileData);
+                    Storage::disk('google')->put($subPath.'/'.$entry, $fileData);
                     File::delete($userID.'/'.$entry);
                 }
             }

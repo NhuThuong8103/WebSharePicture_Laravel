@@ -40,7 +40,7 @@
 	        Storage::disk('google')->put($dirSub['path'].'/avatar.png', $fileData);	        
 		}
 
-		public static function createSubFoderGoogleDrive($idUser, $tieude){
+		public static function createSubFoderGoogleDrive($idUser, $tieude){ // tao thu muc ten album 
 			$dir = '/';
 	        $recursive = false;
 	        $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
@@ -57,6 +57,16 @@
 	                $root = $value['path'];
 	        }
 	        return $root;
+		}
+
+		public static function getPathFolderAlbumGoogleDrive($idUser, $tieude, $root){// lay duong dan thu muc album
+			$dirSub = '/'.$root.'/';
+	        $recursiveSub = true;
+	        $contentsSub = collect(Storage::disk('google')->listContents($dirSub, $recursiveSub));
+	        $dirSub = $contentsSub->where('type', '=', 'dir')
+	                            ->where('filename', '=', $tieude)
+	                            ->first();
+	        return $dirSub['path'];
 		}
 	}
 ?>

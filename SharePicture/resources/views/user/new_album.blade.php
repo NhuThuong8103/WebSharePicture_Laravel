@@ -6,6 +6,10 @@
 @section('style')
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js" type="text/javascript" charset="utf-8" async defer></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css">
 	<link href="{{ URL::asset('css/pagination.css') }}" rel="stylesheet" type="text/css">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
@@ -24,7 +28,7 @@
 			<hr class="border-below mt-5">
 		</div>
 	</div>
-	<form action="{{ url('/myalbums/newalbum') }}" method="post" novalidate>{{ csrf_field() }}
+	<form id="form-newalbum" action="{{ url('/myalbums/newalbum') }}" method="post" novalidate>{{ csrf_field() }}
 	<div class="row pt-2">
 		<div class="col-lg-6">
 			<h6>Title</h6>
@@ -38,7 +42,7 @@
 			<h6>Sharing mode</h6>
 			<select name="chedo_album" id="" class="form-control control-select mode">
 				<option value="1">Public</option>
-				<option value="2">Private</option>
+				<option value="0">Private</option>
 			</select>
 			<input type="submit" id="target" name="submit" value="Save" class="btn btn-primary submit-hidden">
 		</div>
@@ -74,9 +78,37 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
+
+	<script>
+		$('#form-newalbum').validate({
+			rules:{
+				tieude_album:{
+					required:true,
+					maxlength:140
+				},
+				mota_album:{
+					required:true,
+					maxlength:300
+				},
+			},
+			messages:{
+				tieude_album:{
+					required:"Please enter album title",
+					maxlength:"Please enter the album title more than 140 character"
+				},
+				mota_album:{
+					required:"Please enter description",
+					maxlength:"Please enter the description more than 300 character"
+				}
+			}
+		});
+		
+	</script>
+
 
 	<script type="text/javascript">
 
