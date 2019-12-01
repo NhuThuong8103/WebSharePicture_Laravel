@@ -17,14 +17,34 @@ class GoogleDriveServiceProvider extends ServiceProvider
             $client->setClientSecret($config['clientSecret']);
             $client->refreshToken($config['refreshToken']);
             $client->addScope("https://www.googleapis.com/auth/drive");
-            $client->setAccessToken('ya29.ImCzB85RUd5Dub1e-JMpy4QXPrapsbjrNsyyvPD4FLaSFi_wz5H3SU7L6lewuf7q14TpR689LmA8_g8EjnuJzllptsqfq1wEtnOU2fjnnR-yulAt3ovVKHQnT57I_v5NBIo');
-            //$client->setAccessToken('ya29.Il-zB-NMs_-sJaUdUzXLsGcRkbtFr3DxKtI_BhFmwbx1oHUxNghweg_zUC7Rbp-mOhfdpgiXuqDYq7RoQIJLyf1NIpAOpk7LlIuTMomFL9sVY1uILaHZCO-23P26745BHg');
+            
+
+            $client->setApprovalPrompt('auto');
+            $client->setAccessType('offline');         // generates refresh token
+
+            // this line gets the new token if the cookie token was not present
+            // otherwise, the same cookie token
+            $token = $client->getAccessToken();
+            //dd($token);
+            // if token is present in cookie
+            if($token){
+                // use the same token
+                $client->setAccessToken($token);
+            }
+            //$_COOKIE['ACCESSTOKEN']=$token; // chua dung drn-----------------
+
+            if($client->isAccessTokenExpired()){  // if token expired
+                $refreshToken = json_decode($token)->refresh_token;
+
+                // refresh the token
+                $client->refreshToken($refreshToken);
+            }
+
             $service = new \Google_Service_Drive($client);
             $options = [];
             if(isset($config['teamDriveId'])) {
                 $options['teamDriveId'] = $config['teamDriveId'];
             }
-            //$adapter = new GoogleDriveAdapter($service, $config['folderId'], $options);
             $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, $config['folderId']);
             return new \League\Flysystem\Filesystem($adapter);
         });
