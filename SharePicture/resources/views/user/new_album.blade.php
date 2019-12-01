@@ -53,18 +53,17 @@
 		<div class="col-lg-12 mb-3 mt-3">
  			<form action="{{ route('dropzoneJs') }}" enctype="multipart/form-data" class="dropzone" id="fileupload" method="POST">
             @csrf
+            {{ csrf_field() }}
             <div class="fallback">
               <input name="file" type="files" multiple accept="image/jpeg, image/png, image/jpg" />
             </div>
+            <input type="submit" id="target-image" name="submit" value="Save" class="btn btn-primary submit-hidden">
           </form>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="group-btn mb-3">
-				{{-- <a href="#" class="btn btn-primary">
-					<i class="fas fa-save mr-2"></i>Save
-				</a> --}}
 				<input type="submit" id="other" name="submit" value="Save" class="btn btn-primary">
 			</div>
 		</div>
@@ -96,6 +95,24 @@
 Dropzone.options.fileupload = {
   acceptedFiles: "image/jpeg, image/png, image/jpg",
   addRemoveLinks: true,
+  removedfile : function(file){
+  	var name = file.name;
+  	$.ajaxSetup({
+  		headers:{
+  			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  		}
+  	});
+  	$.ajax({
+  		type:'POST', 
+  		url:'{{ route('deleteFile') }}',
+  		data:{
+  			"_token": "{{ csrf_token() }}",
+  			"name": name
+  		},
+  	});
+  	var _ref;
+	return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0; 
+  }
 }
 
 if (typeof Dropzone != 'undefined') {

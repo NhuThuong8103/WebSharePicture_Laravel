@@ -73,15 +73,17 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 	Route::post('/myalbums/newalbum','AlbumUserController@saveNewAlbum'); // luu album
 
+	Route::post('/myalbums/createFile','AlbumUserController@test');
+
 	Route::post('/myalbums/newalbum_upload', 'AlbumUserController@store')->name('dropzoneJs');
 
-
+	Route::post('/myalbums/GetFileNameDelete', 'AlbumUserController@getFileName')->name('deleteFile');
 
 	Route::get('/myphotos/newPhoto', function(){
 		return view('user.newphoto');
 	});
 
-	Route::post('projects/media', 'AlbumUserController@storeMedia')->name('projects.storeMedia');
+	//Route::post('projects/media', 'AlbumUserController@storeMedia')->name('projects.storeMedia');
 
 
 

@@ -26,6 +26,7 @@ $(document).ready(function(){
 
   $('#other').click(function(){
     $('#target').click();
+    //$('#target-image').click();
   });
 
 
