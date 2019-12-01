@@ -17,13 +17,14 @@ class GoogleDriveServiceProvider extends ServiceProvider
             $client->setClientSecret($config['clientSecret']);
             $client->refreshToken($config['refreshToken']);
             $client->addScope("https://www.googleapis.com/auth/drive");
+
             $client->setApprovalPrompt('auto');
             $client->setAccessType('offline');         // generates refresh token
 
             // this line gets the new token if the cookie token was not present
             // otherwise, the same cookie token
             $token = $client->getAccessToken();
-            dd($token);
+            //dd($token);
             // if token is present in cookie
             if($token){
                 // use the same token
@@ -37,6 +38,7 @@ class GoogleDriveServiceProvider extends ServiceProvider
                 // refresh the token
                 $client->refreshToken($refreshToken);
             }
+
             $service = new \Google_Service_Drive($client);
             $options = [];
             if(isset($config['teamDriveId'])) {

@@ -23,6 +23,7 @@ use App\Album;
 use App\TaiKhoan;
 use App\Services\PhanQuyenService;
 use App\Services\TaiKhoanService;
+use App\Services\FolderGoogleDriveService;
 
 
 class LoginController extends BaseController
@@ -101,7 +102,12 @@ class LoginController extends BaseController
 
 		TaiKhoan::where('email',$email)->update(['phephoatdong'=>true]);
 
-		return back()->with('thongbao_activesuccess',"Account actived, please login :V"); 
+		$idUser = TaiKhoanService::getIdUser($email);
+
+		FolderGoogleDriveService::createFoderGoogleDriveIdUser($idUser);
+
+		return back()->with('thongbao_activesuccess',"Account actived, please login :V");
+
 	}
 
 	function getEmailForReset(resetPasswordValidate $request){
