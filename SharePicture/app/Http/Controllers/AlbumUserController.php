@@ -11,6 +11,7 @@ use Auth;
 use Storage;
 use File;
 use App\Services\FolderGoogleDriveService;
+use App\Services\AlbumUserService;
 use App\Http\Requests\newAlbumValidate;
 
 
@@ -18,24 +19,6 @@ use App\Http\Requests\newAlbumValidate;
 class AlbumUserController extends BaseController
 {
     private $drive;
-
-    public function test(){
-        $filePath = 'images/15751104793.png';
-        $fileData = File::get($filePath);
-        Storage::disk('google')->put('images', $fileData);
-    }
-
-    function createFolder($folder_name){
-        $folder_meta = new Google_Service_Drive_DriveFile(array(
-            'name' => $folder_name,
-            'mimeType' => 'application/vnd.google-apps.folder'));
-        // $folder = $this->drive->files->create($folder_meta, array(
-        //     'fields' => 'id'));
-        $folder = $drive->files->create($folder_meta, array(
-            'fields' => 'id',
-        ));
-        return $folder->id;
-    }
 
     public function saveNewAlbum(newAlbumValidate $request){
         
@@ -96,9 +79,6 @@ class AlbumUserController extends BaseController
         }
     }
 
-
-      
-
     public function store(Request $request){   
         $userID = Auth::user()->id;
 
@@ -129,6 +109,13 @@ class AlbumUserController extends BaseController
             }
             closedir($handle);
         }
+    }
+
+    public function loadAlbum(){  
+        $userID = Auth::user()->id;
+
+        $arr=AlbumUserService::loadAlbumUser($userID);
+        return view('user.myalbums')->with(['array'=>$arr]);
     }
 
 

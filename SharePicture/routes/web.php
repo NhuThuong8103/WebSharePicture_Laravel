@@ -70,13 +70,16 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 		return view('user.myphotos');
 	});
 
-	Route::get('/myalbums', function(){
-		return view('user.myalbums');
-	});
+	// Route::get('/myalbums', function(){
+	// 	return view('user.myalbums');
+	// });
+	Route::get('/myalbums','AlbumUserController@loadAlbum');
 
 	Route::get('/myalbums/newalbum_upload', function(){
 		return view('user.new_album');
 	});
+
+
 
 
 	Route::post('/myalbums/newalbum','AlbumUserController@saveNewAlbum'); // luu album
