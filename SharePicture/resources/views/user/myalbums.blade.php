@@ -28,10 +28,7 @@
 				<div class="albums">
 					<div class="albums-inner">						
 						<div class="albums-tab-thumb sim-anim-1">
-							{{-- <img src="{{ URL::asset('image/p.jpg') }}" class="all studio img-thumbnail"/>
-							<img src="{{ URL::asset('image/p.jpg') }}" class="all studio img-thumbnail"/>
-							<img src="{{ URL::asset('image/p.jpg') }}" class="all studio img-thumbnail"/>			 --}}
-							<img src="{{$album['data']}}" class="all studio img-thumbnail"/>
+							<img src="{{ $album['data']}}" class="all studio img-thumbnail"/>
 							<img src="{{ $album['data']}}" class="all studio img-thumbnail"/>
 							<img src="{{ $album['data'] }}" class="all studio img-thumbnail"/>			
 						</div>
