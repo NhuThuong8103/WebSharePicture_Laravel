@@ -18,6 +18,8 @@ Route::get('/logout',function(){
 
 });
 
+Route::get('/iconUser','LoginController@showIconUser')->name('iconUser');
+
 Route::get('/', function () {
 	return view('user.feedsphoto');
 });
