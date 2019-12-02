@@ -19,14 +19,13 @@
 	                        ->where('filename', '=', $idUser)
 	                        ->first(); // There could be duplicate directory names!
 	        if ( ! $dir) {
-	            //return 'Directory does not exist!';
 	        }
 	        Storage::disk('google')->makeDirectory($dir['path'].'/Photo');
 	        Storage::disk('google')->makeDirectory($dir['path'].'/Avatar');
 
 	        $root = "";
 	        foreach ($contents as $key => $value) {
-	            if($value['name'] == 'Photo')
+	            if($value['name'] == 'Avatar')
 	                $root = $value['path'];
 	        }
 	        $filePath = 'image/avatar.png';
@@ -37,7 +36,8 @@
 	        $dirSub = $contentsSub->where('type', '=', 'dir')
 	                            ->where('filename', '=', 'Avatar')
 	                            ->first();
-	        Storage::disk('google')->put($dirSub['path'].'/avatar.png', $fileData);	        
+	        Storage::disk('google')->put($dirSub['path'].'/avatar.png', $fileData);
+
 		}
 
 		public static function createSubFoderGoogleDrive($idUser, $tieude){ // tao thu muc ten album 
@@ -68,5 +68,27 @@
 	                            ->first();
 	        return $dirSub['path'];
 		}
-	}
+
+		public static function getImageOfAlbumGoogleDrive($idUser){
+
+			$dir = '/';
+	        $recursive = false;
+			$contents = collect(Storage::disk('google')->listContents($dir, $recursive));
+			$dir = $contents->where('type', '=', 'dir')
+	                        ->where('filename', '=', $idUser)
+	                        ->first();
+	        $contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
+			$dir = $contents->where('type', '=', 'dir')
+	                        ->where('filename', '!==', 'Photo')
+	                        ->where('filename', '!==', 'Avatar');
+
+	        $array=array();
+	        foreach ($dir as $key => $value) {
+	        	$contentsSub = collect(Storage::disk('google')->listContents($value['path'], $recursive));
+		    	$file = $contentsSub->where('type','=','file')->first();
+		    	array_push($array,['ten_album'=>$value['name'],'data'=> $file['path'],'mimetype'=>$file['mimetype']]);
+	        }
+	        return $array;
+		}
+	} 
 ?>
