@@ -5,7 +5,7 @@
 				<span class="icon-user">
 					{{ Auth::user()->ho}}&nbsp;{{ Auth::user()->ten }}
 				</span>
-				<img src="{{ URL::asset('image/avatar.png') }}" class="boder-icon">
+				<img src="" class="boder-icon">
 			</a>
 		</div>
 	</div>

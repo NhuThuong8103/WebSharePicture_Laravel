@@ -56,8 +56,8 @@
 						<td>
 							<div id="change">
 								<div class="image" style="background-image: url('{{ URL::asset('image/avatar.png') }}')"></div>
-								<input type="hidden" name="ValueImageUser" value="">
-								<input type="hidden" name="avatarImageUser" value="avatar.png">
+								<input class="img" type="hidden" name="ValueImageUser" value="">
+								<input class="img" type="hidden" name="avatarImageUser" value="avatar.png">
 								<a href="#" class="btn-overlay btn btn-default">
 									Change
 								</a>

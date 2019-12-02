@@ -19,19 +19,43 @@
                 </div>
                 <div class="col-lg-8 bg-white mt-3">
 
-                   @yield('content')
+                 @yield('content')
 
-                </div>
-                <div class="col-lg-2">
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer>
+             </div>
+             <div class="col-lg-2">
+             </div>
+         </div>
+     </div>
+ </main>
+ <footer>
 
-    </footer>
+ </footer>
 
-    @yield('script')
+ @yield('script')
+ <script>
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.$.ajax({
+            url: '/path/to/file',
+            type: 'GET',
+            dataType: 'text',
+            data: {data: 'ok'},
+        })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+    });
+</script>
 
 </body>
 </html>

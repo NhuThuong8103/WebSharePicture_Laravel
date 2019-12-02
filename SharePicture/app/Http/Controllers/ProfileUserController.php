@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\userEditInformationValidate;
 use App\Http\Requests\userEditPasswordValidate;
+use App\Services\GetFileGoogleDriveService;
 use App\Services\ProfileUserService;
 use Auth;
 
@@ -13,12 +14,16 @@ class ProfileUserController extends Controller
 {
     function userEditInformation(userEditInformationValidate $request)
     {
+        $data= GetFileGoogleDriveService::getOneFileImage('avatar.png');
+
+        //dd($data);
     	$data=$request->ValueImageUser;
     	// //get the base-64 from data
-     //    $base64_str = substr($data['base64_image'], strpos($data['base64_image'], ",")+1);
+         $base64_str = substr($data, strpos($data, ",")+1);
 
         //decode base64 strings
-        $image = base64_decode($data);
+        $image = base64_decode($base64_str);
+        dd($image);
     	$avatarImageUser=$request->avatarImageUser;
     	$firstname=$request->firstname;
     	$lastname=$request->lastname;
