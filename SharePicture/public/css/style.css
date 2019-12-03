@@ -9,6 +9,13 @@ body{
   background-color: #f8f8f8;
 }
 
+.one-album .private-img{
+  right: 15%;
+  /* left: auto; */
+  position: absolute;
+  bottom: 16%;
+}
+
 .error{
   color: red;
   font-weight: bold;
@@ -48,7 +55,8 @@ body{
 }
 
 .submit-hidden{
-  visibility: hidden;
+  display: none;
+  /* visibility: hidden; */
   float: right;
 }
 
@@ -75,6 +83,14 @@ main h6{
   box-shadow: none;
 }
 
+form#fileupload.dropzone.newphoto{
+  padding: 0px 12px;
+}
+
+form#fileupload.dropzone.newphoto .dz-default.dz-message{
+    text-align: center;
+    margin: 35% 0;
+}
 .dropzone {
   background: white;
   border-radius: 5px;

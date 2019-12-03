@@ -33,6 +33,13 @@
 							<img src="{{ $album['data']}}" class="all studio img-thumbnail"/>
 							<img src="{{ $album['data'] }}" class="all studio img-thumbnail"/>			
 						</div>
+						@if($album['chedo_album']==0)
+							<div class="private-img">
+								<h7>
+									<i class="fas fa-lock"></i>
+								</h7>
+							</div>
+						@endif
 						<div class="title-album">
 							<p class="info-album">{{ substr($album['mota_album'],0,10).' ...'}}</p>
 							<a href="https://www.google.com.vn/?hl=vi" target="_blank"><i class="far fa-edit edit-icon"></i></a>

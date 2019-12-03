@@ -66,10 +66,6 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 	Route::post('/profile/editinfo', 'ProfileUserController@userEditInformation')->name('usereditinfo');
 
-	Route::get('/myphotos', function(){
-		return view('user.myphotos');
-	});
-
 	// Route::get('/myalbums', function(){
 	// 	return view('user.myalbums');
 	// });
@@ -94,9 +90,12 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 		return view('user.newphoto');
 	});
 
+	Route::get('/myphotos','PhotoUserController@index');
+
+	Route::post('/myphotos/savenewphoto','PhotoUserController@newPhoto')->name('savePhoto');
 	//Route::post('projects/media', 'AlbumUserController@storeMedia')->name('projects.storeMedia');
 
-
+	Route::get('/myphotos/editphoto/{idPhoto}','PhotoUserController@editPhoto')->name('editPhoto');
 
 
 	//Route::get('/myphotos/newPhoto/store','DriveController@store');

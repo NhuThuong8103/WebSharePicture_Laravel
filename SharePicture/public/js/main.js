@@ -17,6 +17,10 @@ $(document).ready(function(){
     $('#target').click();
     //$('#target-image').click();
   });
+  $('#submit-main-photo').click(function(){
+    $('#save-photo').click();
+    //$('#target-image').click();
+  });
 
 
   // modal nhap xem 1 anh

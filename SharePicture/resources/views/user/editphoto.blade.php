@@ -1,6 +1,6 @@
 @extends('user.home')
 
-@section('title','New Photo')
+@section('title','Edit Photo')
 
 @section('style')
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -15,7 +15,12 @@
 	<div class="row pt-3">
 		<div class="col-12">
 			<div class="main-title mt-2">
-				<h5>New Photo</h5>
+				<h5>Edit Photo</h5>
+			</div>
+			<div class="back-btn">
+				<a href="{{ url('/myphotos') }}" class="btn btn-primary">
+					<i class="fas fa-backward mr-2"></i>Back
+				</a>
 			</div>
 			<hr class="border-below mt-5">
 		</div>
@@ -37,11 +42,11 @@
 	<div class="row pt-2">
 		<div class="col-lg-6">
 			<h6>Title</h6>
-			<input type="text" class="form-control" placeholder="Hôm nay trời đẹp quá hihi" required name="tieude_photo">
+			<input type="text" class="form-control" placeholder="Hôm nay trời đẹp quá hihi" value="{{ $value['tieude'] }}" required name="tieude_photo">
 			<br>
 			<div class="d-lg-none">
 				<h6>Description</h6>
-				<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_photo"></textarea>
+				<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_photo">{{ $value['mota_photo'] }}</textarea>
 			</div>
 			<br>
 			<h6>Sharing mode</h6>
@@ -53,7 +58,7 @@
 		</div>
 		<div class="col-lg-6 d-none d-lg-block">
 			<h6>Description</h6>
-			<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_photo"></textarea>
+			<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_photo">{{ $value['mota_photo'] }}</textarea>
 		</div>
 	</div>
 </form>
@@ -73,7 +78,14 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="group-btn mb-3">
-			<input type="submit" id="submit-main-photo" name="submit" value="Save" class="btn btn-primary">
+			<div class="group-btn">
+				<a href="#" class="btn btn-primary">
+					Save
+				</a>
+				<a href="#" class="btn btn-danger float-right">
+					<i class="far fa-trash-alt mr-1"></i>Delete
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
@@ -125,7 +137,6 @@
 			acceptedFiles: "image/jpeg, image/png, image/jpg",
 			addRemoveLinks: true,
 			maxFiles:1,
-			dictMaxFilesExceeded: "You can only upload upto 1 images",
 			removedfile : function(file){
 				var name = file.name;
 				$.ajaxSetup({
@@ -220,3 +231,4 @@
 		})(jQuery, window); 
 	</script>
 @endsection
+

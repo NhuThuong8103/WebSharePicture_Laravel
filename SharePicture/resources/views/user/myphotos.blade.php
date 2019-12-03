@@ -22,170 +22,26 @@
 		</div>
 	</div>
 	<div class="row photo-lists">
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/10.jpeg')}}" alt="" class="img-thumbnail" title="Explanatory caption abccccccc.........">
-				<div class="private-img">
-					<h7>
-						<i class="fas fa-lock"></i>
-					</h7>
-				</div>
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc.........
-						<a href="../www.facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/2.jpeg')}}" alt="" class="img-thumbnail" title="Explanatory caption abccccccc.........">
-				<div class="private-img">
-					<h7>
-						<i class="fas fa-lock"></i>
-					</h7>
-				</div>
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/3.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/4.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/5.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="www.facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/6.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/11.jpeg')}}" alt="" class="img-thumbnail" >
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/8.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/9.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/11.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/11.jpeg')}}" alt="" class="img-thumbnail"> 
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/11.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="www.facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/11.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-6">
-			<figure class="one-photo">
-				<img src="{{URL::asset('image/11.jpeg')}}" alt="" class="img-thumbnail">
-				<figcaption>
-					<h4>
-						Explanatory caption abccccccc...
-						<a href="facebook.com"><i class="far fa-edit"></i></a>
-					</h4>
-				</figcaption>
-			</figure>
-		</div>
+		@foreach($array as $photo)
+			<div class="col-lg-3 col-md-4 col-sm-6 col-6">
+				<figure class="one-photo">
+					<img src="https://drive.google.com/uc?export=view&id={{$photo['path']}}" alt="" class="img-thumbnail" title="{{ $photo['tieude'] }}">
+					@if($photo['chedo_photo']==0)
+						<div class="private-img">
+							<h7>
+								<i class="fas fa-lock"></i>
+							</h7>
+						</div>
+					@endif
+					<figcaption>
+						<h4>
+							{{ substr($photo['tieude'],0,10).' ...' }}
+							<a href="{{ url('/myphotos/editphoto') }}/{{ $photo['idphoto'] }}"><i class="far fa-edit"></i></a>
+						</h4>
+					</figcaption>
+				</figure>
+			</div>
+		@endforeach
 	</div>
 @endsection
 

@@ -77,6 +77,7 @@ class AlbumUserController extends BaseController
             }
             closedir($handle);
         }
+        return back()->with('thongbao','The album has been successfully created :)');
     }
 
     public function store(Request $request){   
