@@ -48,7 +48,9 @@
 						<td class="basic-info"></td>
 						<td>
 							<div id="change-avatar">
-								<div class="image" style="background-image: url('{{ URL::asset('image/12.jpg') }}')"></div>
+								<div class="image" style="background-image: url('https://drive.google.com/uc?export=view&id={{$path}}')"></div>
+								<input class="img" type="hidden" name="ValueImageUser" value="{{ $data }}">
+								<input class="img" type="hidden" name="avatarImageUser" value="{{ $filename }}">
 								<a href="#" class="btn-overlay btn btn-default">
 									Change
 								</a>

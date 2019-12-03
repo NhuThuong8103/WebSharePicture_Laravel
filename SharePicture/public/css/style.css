@@ -948,6 +948,8 @@ header .title-header {
 }
 
 header .boder-icon {
+  width: 24px;
+  height: 24px;
   float: right;
   border-radius: 50%;
   max-width: 10%;

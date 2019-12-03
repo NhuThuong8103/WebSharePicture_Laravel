@@ -5,7 +5,9 @@
 			<span class="icon-user">
 				{{ Auth::user()->ho}}&nbsp;{{ Auth::user()->ten }}
 			</span>
-			<img src="" class="boder-icon">
+			<div class="avatar">
+				<img src="" class="boder-icon">
+			</div>
 		</a>
 	</div>
 </div>
@@ -16,29 +18,7 @@
 		</a>
 	</div>
 </div>
-<script>
-	$(document).ready(function() {
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-		$.ajax({
-			url: '{{ route('iconUser') }}',
-			type: 'GET',
-			dataType: 'text',
-		})
-		.done(function(result) {
-			$('.boder-icon').attr('src', result);
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
-		});
-	});
-</script>
+<script src="{{ URL::asset('js/ajax_get_avatar.js') }}"></script>
 @else
 <div class="col-lg-3 col-md-3 d-none d-md-block">
 		<!-- <div class="name-user">

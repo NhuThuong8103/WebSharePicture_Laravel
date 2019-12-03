@@ -60,9 +60,7 @@ Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 //thuong
 
 Route::group(['middleware' => 'ckUserLogin'], function() {
-	Route::get('/profile',function(){
-		return view('user.editprofile');
-	})->name('usereditprofile');
+	Route::get('/profile','ProfileUserController@index')->name('usereditprofile');
 
 	Route::post('/profile/editpassword','ProfileUserController@userEditPassword')->name('usereditpassword');
 

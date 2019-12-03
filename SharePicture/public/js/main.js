@@ -1,19 +1,5 @@
 $(document).ready(function(){
   
-  
-
-
-  //active tab page login
-  $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-    localStorage.setItem('activeTab', $(e.target).attr('href'));
-  });
-  var activeTab = localStorage.getItem('activeTab');
-  if(activeTab){
-    $('#myTab a[href="' + activeTab + '"]').tab('show');
-  }
-
-
-
   $(".far.fa-heart").click(function() {
     $(this).toggleClass("far fa-heart");
   });
@@ -157,7 +143,8 @@ function uploadImageAvatarUser() {
     var reader = new FileReader()
     reader.onload = function(event) {
       $('#change-avatar .image').remove();
-      images.prepend('<div class="image" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"></div>  <input type="hidden" name="ValueImageUser" value="'+ event.target.result+ '"><input type="hidden" name="avatarImageUser" value="'+ uploader.val().replace(/.*(\/|\\)/, '')+ '">')
+      $('#change-avatar .img').remove();
+      images.prepend('<div class="image" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"></div>  <input class="img" type="hidden" name="ValueImageUser" value="'+ event.target.result+ '"><input class="img" type="hidden" name="avatarImageUser" value="'+ uploader.val().replace(/.*(\/|\\)/, '')+ '">')
     }
     reader.readAsDataURL(uploader[0].files[0]);
   })

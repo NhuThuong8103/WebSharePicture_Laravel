@@ -148,7 +148,7 @@ class LoginController extends BaseController
 	{
 		$img=Auth::user()->anhdaidien;
 
-		$result=GetFileGoogleDriveService::getOneFileImage(Auth::user()->id,'Avatar',$img);
+		$result=GetFileGoogleDriveService::getIconAvatar(Auth::user()->id,'Avatar',$img);
 
 		return response($result,200)->header('Content-Type', 'text/plain');
 	}

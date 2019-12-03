@@ -1,4 +1,4 @@
-@extends('user.home')
+@extends('admin.home')
 
 @section('title','Edit Profile')
 @section('style')
