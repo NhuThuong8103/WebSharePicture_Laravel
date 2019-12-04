@@ -22,7 +22,7 @@ use Storage;
 					if($value['ten_album']==$value1['tieude_album']){
 						$data=Storage::disk('google')->get($value['data']);
 						$result="data:".$value['mimetype'].";base64,".base64_encode($data);
-						array_push($array,['tieude_album' => $value['ten_album'],'data'=>$result,'mota_album'=>$value1['mota_album']]);
+						array_push($array,['tieude_album' => $value['ten_album'],'data'=>$result,'mota_album'=>$value1['mota_album'],'chedo_album' => $value1['chedo_album'], 'idAlbum'=>$value1['id']]);
 					}		
 				}
 			}

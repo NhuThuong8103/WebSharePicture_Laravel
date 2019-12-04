@@ -24,6 +24,7 @@ use App\TaiKhoan;
 use App\Services\PhanQuyenService;
 use App\Services\TaiKhoanService;
 use App\Services\FolderGoogleDriveService;
+use App\Services\GetFileGoogleDriveService;
 
 
 class LoginController extends BaseController
@@ -143,10 +144,13 @@ class LoginController extends BaseController
 	}
 
 
-	function thuong(){
-		$p = TaiKhoan::find(1)->Album()->first();
-		//$p['so_like_album'];
-		print_r($p['tieude_album']);
+	public function showIconUser()
+	{
+		$img=Auth::user()->anhdaidien;
+
+		$result=GetFileGoogleDriveService::getIconAvatar(Auth::user()->id,'Avatar',$img);
+
+		return response($result,200)->header('Content-Type', 'text/plain');
 	}
 
 }

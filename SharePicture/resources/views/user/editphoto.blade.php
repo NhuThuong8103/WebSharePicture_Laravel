@@ -1,6 +1,6 @@
 @extends('user.home')
 
-@section('title','New Photo')
+@section('title','Edit Photo')
 
 @section('style')
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -15,7 +15,12 @@
 	<div class="row pt-3">
 		<div class="col-12">
 			<div class="main-title mt-2">
-				<h5>New Photo</h5>
+				<h5>Edit Photo</h5>
+			</div>
+			<div class="back-btn">
+				<a href="{{ url('/myphotos') }}" class="btn btn-primary">
+					<i class="fas fa-backward mr-2"></i>Back
+				</a>
 			</div>
 			<hr class="border-below mt-5">
 		</div>
@@ -33,15 +38,16 @@
 			}, 500);
 		</script>
 		@endif
-	<form id="form-newphoto" action="{{ route('savePhoto') }}" method="post" novalidate>{{ csrf_field() }}
+	<form id="form-newphoto" action="{{ route('updatePhoto') }}" method="post" novalidate>{{ csrf_field() }}
 	<div class="row pt-2">
 		<div class="col-lg-6">
+			<input type="hidden" id="id" name="idPhoto" value="{{ $value['idPhoto'] }}">
 			<h6>Title</h6>
-			<input type="text" class="form-control" placeholder="Hôm nay trời đẹp quá hihi" required name="tieude_photo">
+			<input type="text" class="form-control" placeholder="Hôm nay trời đẹp quá hihi" value="{{ $value['tieude'] }}" required name="tieude_photo">
 			<br>
 			<div class="d-lg-none">
 				<h6>Description</h6>
-				<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_photo"></textarea>
+				<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_photo">{{ $value['mota_photo'] }}</textarea>
 			</div>
 			<br>
 			<h6>Sharing mode</h6>
@@ -53,7 +59,7 @@
 		</div>
 		<div class="col-lg-6 d-none d-lg-block">
 			<h6>Description</h6>
-			<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_photo"></textarea>
+			<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_photo">{{ $value['mota_photo'] }}</textarea>
 		</div>
 	</div>
 </form>
@@ -73,7 +79,12 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="group-btn mb-3">
-			<input type="submit" id="submit-main-photo" name="submit" value="Save" class="btn btn-primary">
+			<div class="group-btn">
+				<input type="submit" id="submit-main-photo" class="btn btn-primary" value="Save">
+				<a href="" id="delete-photo" class="btn btn-danger float-right">
+					<i class="far fa-trash-alt mr-1"></i>Delete
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
@@ -87,6 +98,48 @@
 	<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 	<script>
+		$('#delete-photo').click(function(event) {
+			/* Act on the event */
+			event.preventDefault();
+			Swal.fire({
+			  title: 'Are you sure?',
+			  text: "Are You sure want to delete?",
+			  icon: 'question',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+			  if (result.value) {
+			  	var id=$('#id').val();
+				$.ajaxSetup({
+				    headers: {
+				        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				    }
+				});
+				$.ajax({
+					url: '{{ route('deletePhoto') }}',
+					type: 'POST',
+					data: {"_token": "{{ csrf_token() }}","id":id},
+				})
+				.done(function() {
+					Swal.fire(
+				      'Deleted!',
+				      'Your photo has been deleted.',
+				      'success'
+				    ).then(function() {
+						$(location).attr('href','{{ url('/myphotos') }}');
+				    });
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+				});
+			  }
+			})
+		});
+
 		$('#form-newphoto').validate({
 			rules:{
 				tieude_photo:{
@@ -125,7 +178,6 @@
 			acceptedFiles: "image/jpeg, image/png, image/jpg",
 			addRemoveLinks: true,
 			maxFiles:1,
-			dictMaxFilesExceeded: "You can only upload upto 1 images",
 			removedfile : function(file){
 				var name = file.name;
 				$.ajaxSetup({
@@ -143,7 +195,7 @@
 				});
 				var _ref;
 				return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0; 
-			}
+			},
 		}
 
 		if (typeof Dropzone != 'undefined') {
@@ -220,3 +272,4 @@
 		})(jQuery, window); 
 	</script>
 @endsection
+

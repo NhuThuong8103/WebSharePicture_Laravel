@@ -34,7 +34,7 @@ class ManagerUserService{
 	public static function getProFileUser($id)
 	{
 		try {
-			$user=TaiKhoan::find($id)->where('id_phanquyen',PhanQuyenService::getID_SlugWithUser())->first();
+			$user=TaiKhoan::find($id);//where('id_phanquyen',PhanQuyenService::getID_SlugWithUser())->get();
 			return $user;
 			
 		} catch (Exception $e) {

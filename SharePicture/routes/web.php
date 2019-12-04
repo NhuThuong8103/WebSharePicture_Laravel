@@ -14,18 +14,15 @@ use App\Http\Middleware\checkAdminLogin;
 */
 Route::get('/logout',function(){
 	Auth::logout();
-	return view('user.feedsphoto');
+	return Redirect('/');
 
 });
 
-Route::get('/', function () {
-	return view('user.feedsphoto');
-});
+Route::get('/iconUser','LoginController@showIconUser')->name('iconUser');
 
+Route::get('/','HomeController@showFeedPhoto');
 
-Route::get('/index', function () {
-	return view('user.feedsphoto');
-});
+Route::get('/index','HomeController@showFeedPhoto');
 
 Route::get('/feedsAlbum',function(){
 	return view('user.feedsalbum');
@@ -58,18 +55,22 @@ Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 //thuong
 
 Route::group(['middleware' => 'ckUserLogin'], function() {
-	Route::get('/profile',function(){
-		return view('user.editprofile');
-	})->name('usereditprofile');
+	Route::get('/profile','ProfileUserController@index')->name('usereditprofile');
 
 	Route::post('/profile/editpassword','ProfileUserController@userEditPassword')->name('usereditpassword');
 
 	Route::post('/profile/editinfo', 'ProfileUserController@userEditInformation')->name('usereditinfo');
 
+<<<<<<< HEAD
 	Route::get('/myphotos', function(){
 		return view('user.myphotos');
 	});
 
+=======
+	// Route::get('/myalbums', function(){
+	// 	return view('user.myalbums');
+	// });
+>>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 	Route::get('/myalbums','AlbumUserController@loadAlbum');
 
 	// Route::get('/myalbums/newalbum_upload', function(){
@@ -80,6 +81,12 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 
 	Route::post('/myalbums/newalbum','AlbumUserController@saveNewAlbum'); // luu album
+
+	Route::get('/myalbums/editalbum/{idAlbum}','AlbumUserController@editAlbum')->name('editAlbum');
+
+	Route::post('/myalbums/updatealbum','AlbumUserController@updateAlbum')->name('updateAlbum');
+
+	Route::post('/myalbums/deleteAlbum','AlbumUserController@deleteAlbum')->name('deleteAlbum');
 
 	Route::post('/myalbums/createFile','AlbumUserController@test');
 
@@ -93,10 +100,16 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 		return view('user.newphoto');
 	});
 
+	Route::get('/myphotos','PhotoUserController@index');
+
+	Route::post('/myphotos/savenewphoto','PhotoUserController@newPhoto')->name('savePhoto');
 	//Route::post('projects/media', 'AlbumUserController@storeMedia')->name('projects.storeMedia');
 
+	Route::get('/myphotos/editphoto/{idPhoto}','PhotoUserController@editPhoto')->name('editPhoto');
 
+	Route::post('/myphotos/updatephoto','PhotoUserController@updatePhoto')->name('updatePhoto');
 
+	Route::post('/myphotos/deletephoto','PhotoUserController@deletePhoto')->name('deletePhoto');
 
 	//Route::get('/myphotos/newPhoto/store','DriveController@store');
 

@@ -80,26 +80,26 @@
 
 									<div>
 										@if(Session::get('thongbaoerror'))
-											<script>
-												setTimeout(function() {
-													Swal.fire({
-													  icon: 'error',
-													  title: 'Oops...',
-													  text: '{{ Session::get('thongbaoerror') }}',
-													})
-												},500);
-											</script>
+										<script>
+											setTimeout(function() {
+												Swal.fire({
+													icon: 'error',
+													title: 'Oops...',
+													text: '{{ Session::get('thongbaoerror') }}',
+												})
+											},500);
+										</script>
 										@endif
 										@if(Session::get('thongbao_activesuccess'))
-											<script>
-												setTimeout(function() {
-													Swal.fire(
-													  'Congratulations <3',
-													  '{{ Session::get('thongbao_activesuccess') }}',
-													  'success'
+										<script>
+											setTimeout(function() {
+												Swal.fire(
+													'Congratulations <3',
+													'{{ Session::get('thongbao_activesuccess') }}',
+													'success'
 													)
-												},500);
-											</script>
+											},500);
+										</script>
 										@endif
 									</div>
 									<form class="form-login" method="post" action="{{ url('/login/checkLogin') }}" id="form-login">
@@ -125,27 +125,27 @@
 
 									<div>
 										@if(Session::get('thongbao_register'))
-											<script>
-												setTimeout(function() {
-													Swal.fire({
-														  icon: 'error',
-														  title: 'Oops...',
-														  text: '{{ Session::get('thongbao_register') }}',
-														})
-												},500);
-											</script>
+										<script>
+											setTimeout(function() {
+												Swal.fire({
+													icon: 'error',
+													title: 'Oops...',
+													text: '{{ Session::get('thongbao_register') }}',
+												})
+											},500);
+										</script>
 										@endif
 
 										@if(Session::get('thongbao_registersuccess'))
-											<script>
-												setTimeout(function() {
-													Swal.fire(
-													  'Congratulations <3',
-													  '{{ Session::get('thongbao_registersuccess') }}',
-													  'success'
+										<script>
+											setTimeout(function() {
+												Swal.fire(
+													'Congratulations <3',
+													'{{ Session::get('thongbao_registersuccess') }}',
+													'success'
 													)
-												},500);
-											</script>
+											},500);
+										</script>
 										@endif
 									</div>
 									<form class="form-signin" method="post" action="{{ url('/login/register') }}" id="form-register">
@@ -171,27 +171,27 @@
 									@include('error')
 
 									@if(Session::get('thongbao_forgot'))
-										<script>
-											setTimeout(function() {
-												Swal.fire({
-													  icon: 'error',
-													  title: 'Oops...',
-													  text: '{{Session::get('thongbao_forgot')}}',
-													})
-											},500);
-										</script>
+									<script>
+										setTimeout(function() {
+											Swal.fire({
+												icon: 'error',
+												title: 'Oops...',
+												text: '{{Session::get('thongbao_forgot')}}',
+											})
+										},500);
+									</script>
 									@endif
 									<div>
 										@if(Session::get('thongbao_forgotsuccess'))
-											<script>
-												setTimeout(function() {
-													Swal.fire(
-													  'Congratulations <3',
-													  '{{ Session::get('thongbao_forgotsuccess') }}',
-													  'success'
+										<script>
+											setTimeout(function() {
+												Swal.fire(
+													'Congratulations <3',
+													'{{ Session::get('thongbao_forgotsuccess') }}',
+													'success'
 													)
-												},500);
-											</script>
+											},500);
+										</script>
 										@endif
 									</div>
 									<form class="form-signin" method="post" action="{{ url('/password/reset')}}">
@@ -225,88 +225,98 @@
 		<footer>
 
 		</footer>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script>
+			 //active tab page login
+			 $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+			 	localStorage.setItem('activeTab', $(e.target).attr('href'));
+			 });
+			 var activeTab = localStorage.getItem('activeTab');
+			 if(activeTab){
+			 	$('#myTab a[href="' + activeTab + '"]').show();//.tabs('show');
+			 }
+			</script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-		
-		<script >
-			$('#form-login').validate({
-				rules:{
-					email:{
-						required:true,
-						email:true
-					},
-					password:{
-						required:true,
-						minlength:6,
-						maxlength:64
-					}
-				},
-				messages:{
-					email:{
-						required:"Please enter email",
-						email:"Please enter the correct email"
-					},
-					password:{
-						required:"Please enter password",
-						minlength:"Please enter more than 5 characters",
-						maxlength:"Please enter less than 65 characters"
-					}
-				}
-			});
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
-			$('#form-register').validate({
-				rules:{
-					emailre:{
-						required:true,
-						email:true
+			<script >
+				$('#form-login').validate({
+					rules:{
+						email:{
+							required:true,
+							email:true
+						},
+						password:{
+							required:true,
+							minlength:6,
+							maxlength:64
+						}
 					},
-					firstname:{
-						required:true,
-						maxlength:25
-					},
-					lastname:{
-						required:true,
-						maxlength:25
-					},
-					passwordre:{
-						required:true,
-						minlength:6,
-						maxlength:64
-					},
-					passconfirm:{
-						required:true,
-						minlength:6,
-						maxlength:64
+					messages:{
+						email:{
+							required:"Please enter email",
+							email:"Please enter the correct email"
+						},
+						password:{
+							required:"Please enter password",
+							minlength:"Please enter more than 5 characters",
+							maxlength:"Please enter less than 65 characters"
+						}
 					}
-				},
-				messages:{
-					emailre:{
-						required:"Please enter email",
-						email:"Please enter the correct email"
+				});
+
+				$('#form-register').validate({
+					rules:{
+						emailre:{
+							required:true,
+							email:true
+						},
+						firstname:{
+							required:true,
+							maxlength:25
+						},
+						lastname:{
+							required:true,
+							maxlength:25
+						},
+						passwordre:{
+							required:true,
+							minlength:6,
+							maxlength:64
+						},
+						passconfirm:{
+							required:true,
+							minlength:6,
+							maxlength:64
+						}
 					},
-					firstname:{
-						required:"Please enter firstname",
-						maxlength:"Please enter firstname less than 25 characters"
-					},
-					lastname:{
-						required:"Please enter lastname",
-						maxlength:"Please enter lastname less than 25 characters"
-					},
-					passwordre:{
-						required:"Please enter password",
-						minlength:"Please enter more than 5 characters",
-						maxlength:"Please enter less than 65 characters"
-					},
-					passconfirm:{
-						required:"Please enter password confirm",
-						minlength:"Please enter more than 5 characters",
-						maxlength:"Please enter less than 65 characters"
+					messages:{
+						emailre:{
+							required:"Please enter email",
+							email:"Please enter the correct email"
+						},
+						firstname:{
+							required:"Please enter firstname",
+							maxlength:"Please enter firstname less than 25 characters"
+						},
+						lastname:{
+							required:"Please enter lastname",
+							maxlength:"Please enter lastname less than 25 characters"
+						},
+						passwordre:{
+							required:"Please enter password",
+							minlength:"Please enter more than 5 characters",
+							maxlength:"Please enter less than 65 characters"
+						},
+						passconfirm:{
+							required:"Please enter password confirm",
+							minlength:"Please enter more than 5 characters",
+							maxlength:"Please enter less than 65 characters"
+						}
 					}
-				}
-			});
-		</script>
-		<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
-	</body>
-	</html>
+				});
+			</script>
+			<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
+		</body>
+		</html>

@@ -7,24 +7,36 @@ use App\Http\Requests\userEditInformationValidate;
 use App\Http\Requests\userEditPasswordValidate;
 use App\Services\GetFileGoogleDriveService;
 use App\Services\ProfileUserService;
+use App\Services\PutFileGoogleDriveService;
+use App\Services\PhanQuyenService;
 use Auth;
 
 
 class ProfileUserController extends Controller
 {
+    function index(){
+        $data=GetFileGoogleDriveService::getOneFileImage(Auth::user()->id, 'Avatar', Auth::user()->anhdaidien);
+
+        if(Auth::user()->id_phanquyen==PhanQuyenService::getID_SlugWithUser()){
+
+            return view('user.editprofile')->with(['data' => $data[0]['data'], 'path'=>$data[0]['id'], 'filename'=> $data[0]['filename'] ]);
+        }else {
+            return view('admin.editprofile')->with(['data' => $data[0]['data'], 'path'=>$data[0]['id'], 'filename'=> $data[0]['filename'] ]);
+        }
+    }
+
     function userEditInformation(userEditInformationValidate $request)
     {
-        $data= GetFileGoogleDriveService::getOneFileImage('avatar.png');
-
-        //dd($data);
+        //$data= GetFileGoogleDriveService::getOneFileImage(Auth::user()->id,'Avatar','avatar.png');
     	$data=$request->ValueImageUser;
-    	// //get the base-64 from data
-         $base64_str = substr($data, strpos($data, ",")+1);
-
+        $avatarImageUser=$request->avatarImageUser;
+    	//get the base-64 from data
+        $base64_str = substr($data, strpos($data, ",")+1);
         //decode base64 strings
         $image = base64_decode($base64_str);
-        dd($image);
-    	$avatarImageUser=$request->avatarImageUser;
+
+        PutFileGoogleDriveService::putAvatarFileImage(Auth::user()->id, $avatarImageUser, $image);
+
     	$firstname=$request->firstname;
     	$lastname=$request->lastname;
     	$email=$request->email;

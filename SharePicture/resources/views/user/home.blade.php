@@ -32,30 +32,6 @@
  </footer>
 
  @yield('script')
- <script>
-    $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.$.ajax({
-            url: '/path/to/file',
-            type: 'GET',
-            dataType: 'text',
-            data: {data: 'ok'},
-        })
-        .done(function() {
-            console.log("success");
-        })
-        .fail(function() {
-            console.log("error");
-        })
-        .always(function() {
-            console.log("complete");
-        });
-    });
-</script>
 
 </body>
 </html>

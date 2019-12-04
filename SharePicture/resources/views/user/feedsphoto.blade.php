@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{URL::asset('css/heart.css')}}">
+
     <link href="{{URL::asset('css/style.css')}}" rel="stylesheet" type="text/css">
 
     <link href="{{ URL::asset('css/main_hover_album.css') }}" rel="stylesheet" type="text/css"/>
@@ -28,58 +31,55 @@
     </div>
 </div>
 <div class="row feeds-album">
+    @foreach($value as $photo)
     <div class="col-lg-6 col-md-6 col-12">
         <div class="card mb-3 one-news-album">
             <div class="row no-gutters">
                 <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
+                    <div class="albums-tab-thumb sim-anim-3 p-3"  data-toggle="modal" data-target="#largeModal{{ $photo['idPhoto'] }}">
+                        <input type="hidden" value="{{ $photo['idPhoto'] }}">
+                        <img src="https://drive.google.com/uc?export=view&id={{ $photo['pathimg'] }}" class="all studio img-thumbnail album-feeds"/>
                     </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <h2 aria-hidden="true" class="text-primary">&times;</h2>
-                                    </button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="{{ URL::asset('image/1.jpg') }}"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
+                    <div class="modal fade" id="largeModal{{ $photo['idPhoto'] }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">{{ $photo['tieude'] }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="https://drive.google.com/uc?export=view&id={{ $photo['pathimg'] }}"/>
+                          </div>
+                          <div class="modal-footer" style="justify-content: normal">
+                            <p>{{ $photo['mota'] }}</p>
+                          </div>
                         </div>
+                      </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="card-body">
                         <div class="name-user user-in-feeds-title">
                             <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
+                                <span><img class="img-avatar" src="https://drive.google.com/uc?export=view&id={{ $photo['pathavatar'] }}" alt=""></span>
                                 <span class="name-acount">
-                                    Nhu Thuong
+                                   {{ $photo['username'] }}
                                 </span>
                             </a>
                         </div>
                         <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
+                            <strong class="mt-2 mb-2 tieude-photo">{{ substr($photo['tieude'],0,16) }}</strong>
                         </label>
-                        <p class="card-text description">with supporting text below</p>
+                        <p class="card-text description">{{ substr($photo['mota'],0,80) }}</p>
                     </div>
                     <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <i class="far fa-heart"></i>123
-                            </small>
-                        </p>
+                            <input type="checkbox" name="checkbox{{ $photo['idPhoto'] }}" id="checkbox{{ $photo['idPhoto'] }}" class="css-checkbox" />
+                            <label for="checkbox{{ $photo['idPhoto'] }}" class="css-label">1234</label>
                         <p class="info-album time-album">
                             <small class="text-muted text-right">
-                                4.56PM 01/01/2020
+                                {{ $photo['ngaygio']->format('d-m-Y H:i') }}
                             </small>
                         </p>
                     </div>
@@ -87,530 +87,11 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-12">
-        <div class="card mb-3 one-news-album">
-            <div class="row no-gutters">
-                <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <h2 aria-hidden="true" class="text-primary">&times;</h2>
-                                    </button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="{{ URL::asset('image/1.jpg') }}"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="name-user user-in-feeds-title">
-                            <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
-                                <span class="name-acount">
-                                    Nhu Thuong
-                                </span>
-                            </a>
-                        </div>
-                        <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
-                        </label>
-                        <p class="card-text description">with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <input class="heart" type="checkbox" name="check2"  />
-                                <label for="heart"><i class="fas fa-heart"></i></label>
-                                123
-                            </small>
-                        </p>
-                        <p class="info-album time-album">
-                            <small class="text-muted text-right">
-                                4.56PM 01/01/2020
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-12">
-        <div class="card mb-3 one-news-album">
-            <div class="row no-gutters">
-                <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <h2 aria-hidden="true" class="text-primary">&times;</h2>
-                                    </button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="{{ URL::asset('image/1.jpg') }}"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="name-user user-in-feeds-title">
-                            <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
-                                <span class="name-acount">
-                                    Nhu Thuong
-                                </span>
-                            </a>
-                        </div>
-                        <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
-                        </label>
-                        <p class="card-text description">with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <3 123
-                            </small>
-                        </p>
-                        <p class="info-album time-album">
-                            <small class="text-muted text-right">
-                                4.56PM 01/01/2020
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-12">
-        <div class="card mb-3 one-news-album">
-            <div class="row no-gutters">
-                <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="{{ URL::asset('image/1.jpg') }}"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="name-user user-in-feeds-title">
-                            <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
-                                <span class="name-acount">
-                                    Nhu Thuong
-                                </span>
-                            </a>
-                        </div>
-                        <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
-                        </label>
-                        <p class="card-text description">with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <3 123
-                            </small>
-                        </p>
-                        <p class="info-album time-album">
-                            <small class="text-muted text-right">
-                                4.56PM 01/01/2020
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-12">
-        <div class="card mb-3 one-news-album">
-            <div class="row no-gutters">
-                <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="image/1.jpg"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="name-user user-in-feeds-title">
-                            <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
-                                <span class="name-acount">
-                                    Nhu Thuong
-                                </span>
-                            </a>
-                        </div>
-                        <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
-                        </label>
-                        <p class="card-text description">with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <3 123
-                            </small>
-                        </p>
-                        <p class="info-album time-album">
-                            <small class="text-muted text-right">
-                                4.56PM 01/01/2020
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-12">
-        <div class="card mb-3 one-news-album">
-            <div class="row no-gutters">
-                <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="{{ URL::asset('image/1.jpg') }}"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="name-user user-in-feeds-title">
-                            <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
-                                <span class="name-acount">
-                                    Nhu Thuong
-                                </span>
-                            </a>
-                        </div>
-                        <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
-                        </label>
-                        <p class="card-text description">with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <3 123
-                            </small>
-                        </p>
-                        <p class="info-album time-album">
-                            <small class="text-muted text-right">
-                                4.56PM 01/01/2020
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-12">
-        <div class="card mb-3 one-news-album">
-            <div class="row no-gutters">
-                <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="{{ URL::asset('image/1.jpg') }}"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="name-user user-in-feeds-title">
-                            <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
-                                <span class="name-acount">
-                                    Nhu Thuong
-                                </span>
-                            </a>
-                        </div>
-                        <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
-                        </label>
-                        <p class="card-text description">with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <3 123
-                            </small>
-                        </p>
-                        <p class="info-album time-album">
-                            <small class="text-muted text-right">
-                                4.56PM 01/01/2020
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-12">
-        <div class="card mb-3 one-news-album">
-            <div class="row no-gutters">
-                <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="{{ URL::asset('image/1.jpg') }}"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="name-user user-in-feeds-title">
-                            <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
-                                <span class="name-acount">
-                                    Nhu Thuong
-                                </span>
-                            </a>
-                        </div>
-                        <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
-                        </label>
-                        <p class="card-text description">with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <3 123
-                            </small>
-                        </p>
-                        <p class="info-album time-album">
-                            <small class="text-muted text-right">
-                                4.56PM 01/01/2020
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-12">
-        <div class="card mb-3 one-news-album">
-            <div class="row no-gutters">
-                <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="{{ URL::asset('image/1.jpg') }}"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="name-user user-in-feeds-title">
-                            <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
-                                <span class="name-acount">
-                                    Nhu Thuong
-                                </span>
-                            </a>
-                        </div>
-                        <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
-                        </label>
-                        <p class="card-text description">with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <3 123
-                            </small>
-                        </p>
-                        <p class="info-album time-album">
-                            <small class="text-muted text-right">
-                                4.56PM 01/01/2020
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-12">
-        <div class="card mb-3 one-news-album">
-            <div class="row no-gutters">
-                <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3" data-toggle="modal" data-target="#exampleModal">
-                        <img src="{{ URL::asset('image/1.jpg') }}" class="all studio img-thumbnail album-feeds"/>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
-                                </div>
-                                <div class="modal-body">
-
-                                    <img src="{{ URL::asset('image/1.jpg') }}"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="modal-detail" id="exampleModalLabel">Detail</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="name-user user-in-feeds-title">
-                            <a href="google.com" title="Trang ca nhan" class="title-name">
-                                <span class="acount-image">NT</span>
-                                <span class="name-acount">
-                                    Nhu Thuong
-                                </span>
-                            </a>
-                        </div>
-                        <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">This is a wider card </strong>
-                        </label>
-                        <p class="card-text description">with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="info-card-album">
-                        <p class="info-album like-album">
-                            <small class="text-muted text-left">
-                                <3 123
-                            </small>
-                        </p>
-                        <p class="info-album time-album">
-                            <small class="text-muted text-right">
-                                4.56PM 01/01/2020
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+@endforeach
 </div>
 @endsection
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 

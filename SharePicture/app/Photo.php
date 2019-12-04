@@ -19,10 +19,11 @@ class Photo extends Model
 
     //26/11/2019
     protected $fillable = [
-        'hinhanh',
+        'hinh_anh',
         'mota',
         'tieude',
         'chedo_photo',
+        'taikhoan_id_photo'
     ];
 
 

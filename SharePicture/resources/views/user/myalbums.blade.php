@@ -5,6 +5,7 @@
 @section('style')
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 	<link href="{{URL::asset('css/style.css')}}" rel="stylesheet" type="text/css">
 
@@ -32,9 +33,20 @@
 							<img src="{{ $album['data']}}" class="all studio img-thumbnail"/>
 							<img src="{{ $album['data'] }}" class="all studio img-thumbnail"/>			
 						</div>
+						@if($album['chedo_album']==0)
+							<div class="private-img">
+								<h7>
+									<i class="fas fa-lock"></i>
+								</h7>
+							</div>
+						@endif
 						<div class="title-album">
 							<p class="info-album">{{ substr($album['mota_album'],0,10).' ...'}}</p>
+<<<<<<< HEAD
 							<a href="{{ url('/myalbums/editalbum') }}" target="_blank"><i class="far fa-edit edit-icon"></i></a>
+=======
+							<a href="{{ url('/myalbums/editalbum') }}/{{ $album['idAlbum'] }}" ><i class="far fa-edit edit-icon"></i></a>
+>>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 						</div>
 						<div class="albums-tab-text">
 							{{ $album['tieude_album'] }}
@@ -48,7 +60,6 @@
 @endsection
 
 @section('script')
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
