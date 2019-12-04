@@ -27,17 +27,17 @@ Route::get('/index','HomeController@showFeedPhoto');
 Route::get('/feedsalbum', 'HomeController@showFeedAlbum');
 
 Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
-	Route::get('/',function(){
-		return view('admin.managerPhotos');
-	});
+	Route::get('/','ManagerPhotoController@showManagerPhoto');
 
-	Route::get('/index',function(){
-		return view('admin.managerPhotos');
-	});
+	Route::get('/index','ManagerPhotoController@showManagerPhoto');
 
-	Route::get('/managerAlbums', function() {
-	    return view('admin.managerAlbums');
-	});
+	Route::get('/managerPhotos/edit/{idphoto}','ManagerPhotoController@editPhoto');
+
+	Route::post('/managerPhotos/edit/save','ManagerPhotoController@saveEditPhoto')->name('saveEditPhoto');
+
+	Route::post('/managerPhotos/delete','ManagerPhotoController@deletePhotoUser')->name('deletePhotoUser');
+
+	Route::get('/managerAlbums','ManagerAlbumController@showManagerAlbum');
 
 	Route::get('/managerUsers','ManagerUserController@index')->name('managerUserProfile');
 
@@ -59,15 +59,9 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 	Route::post('/profile/editinfo', 'ProfileUserController@userEditInformation')->name('usereditinfo');
 
-
 	Route::get('/myalbums','AlbumUserController@loadAlbum');
 
-	// Route::get('/myalbums/newalbum_upload', function(){
-	// 	return view('user.new_album');
-	// });
 	Route::get('/myalbums/newalbum_upload', 'AlbumUserController@newalbum');
-
-
 
 	Route::post('/myalbums/newalbum','AlbumUserController@saveNewAlbum'); // luu album
 
