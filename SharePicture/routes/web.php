@@ -61,15 +61,13 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 	Route::post('/profile/editinfo', 'ProfileUserController@userEditInformation')->name('usereditinfo');
 
-	// Route::get('/myalbums', function(){
-	// 	return view('user.myalbums');
-	// });
+
 	Route::get('/myalbums','AlbumUserController@loadAlbum');
 
-	Route::get('/myalbums/newalbum_upload', function(){
-		return view('user.new_album');
-	});
-
+	// Route::get('/myalbums/newalbum_upload', function(){
+	// 	return view('user.new_album');
+	// });
+	Route::get('/myalbums/newalbum_upload', 'AlbumUserController@newalbum');
 
 
 
@@ -86,6 +84,8 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 	Route::post('/myalbums/newalbum_upload', 'AlbumUserController@store')->name('dropzoneJs');
 
 	Route::post('/myalbums/GetFileNameDelete', 'AlbumUserController@getFileName')->name('deleteFile');
+
+	Route::get('/myalbums/editalbum', 'AlbumUserController@editAlbumUser');
 
 	Route::get('/myphotos/newPhoto', function(){
 		return view('user.newphoto');

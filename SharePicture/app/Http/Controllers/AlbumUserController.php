@@ -18,7 +18,13 @@ use App\Http\Requests\newAlbumValidate;
 
 class AlbumUserController extends BaseController
 {
-    private $drive;
+    public function newalbum(){
+        return view('user.new_album');
+    }
+
+    public function editAlbumUser(){
+        return view('user.editalbum');
+    }
 
     public function saveNewAlbum(newAlbumValidate $request){
         
@@ -122,6 +128,9 @@ class AlbumUserController extends BaseController
     public function editAlbum($idAlbum)
     {
 
+
+
+    
         $album = Album::where('taikhoan_id',Auth::user()->id)->where('id',$idAlbum)->first();
 
         return view('user.editalbum')->with('value',['tieude_album'=>$album['tieude_album'], 'mota_album'=> $album['mota_album'],'idAlbum'=>$idAlbum]);

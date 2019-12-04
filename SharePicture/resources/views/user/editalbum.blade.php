@@ -1,6 +1,7 @@
 
 @extends('user.home')
 
+@section('title','My Album')
 @section('title','Edit Album')
 
 @section('style')
@@ -28,6 +29,7 @@
 		<hr class="border-below mt-5">
 	</div>
 </div>
+
 @if(Session::get('thongbao'))
 <script>
 	setTimeout(function() {
@@ -58,6 +60,7 @@
 				<option value="1">Public</option>
 				<option value="0">Private</option>
 			</select>
+
 			<input type="submit" id="save" name="submit" value="Save" class="btn btn-primary submit-hidden">
 		</div>
 		<div class="col-lg-6 d-none d-lg-block">
@@ -171,12 +174,6 @@
 			}
 		}
 	});
-	
-</script>
-
-
-<script type="text/javascript">
-
 	Dropzone.options.fileupload = {
 		accept: function (file, done) {
 			if (file.type != "application/vnd.ms-excel" && file.type != "image/jpeg, image/png, image/jpg") {
@@ -224,7 +221,6 @@
     	if ($("#fileupload").length) {
     		var dz = new Dropzone("#fileupload"),
     		dze_info = $("#dze_info"),
-    		
     		status = {
     			uploaded: 0,
     			errors: 0
