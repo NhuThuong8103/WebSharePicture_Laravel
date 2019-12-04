@@ -2,7 +2,9 @@
 namespace App\Services;
 use Illuminate\Support\ServiceProvider;
 use App\Providers\GoogleDriveServiceProvider;
+use App\ChitietAlbum;
 use App\TaiKhoan;
+use App\Album;
 use Storage;
 use File;
 
@@ -118,6 +120,34 @@ class GetFileGoogleDriveService
 		//$result="data:".$file['mimetype'].";base64,".base64_encode($data);
 
 		return $file['basename'];
+	}
+
+	public static function getListImage($idUser, $Directory)
+	{
+		$dir = "/";
+		$recursive = false;
+		$contents = collect(Storage::disk('google')->list($dir, $recursive));
+		$dir = $contents->where('type', '=', 'dir')
+						->where('filename', '=', $idUser)
+						->first();
+
+		$contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
+		$dir = $contents->where('type', '=', 'dir')
+						->where('filename', '=', $Directory)
+						->first();
+
+		$arrFileName = array();
+
+		// $arrFileName = TaiKhoan::with(['id', ->	where('chitiet_album.hinhanh_album')->get();
+		// $arrr = TaiKhoan::where(function($query) use $a{
+		// 	$query->where
+		// })
+		//SELECT 	 chitiet_album.hinhanh_album
+		// from taikhoan, album, chitiet_album, likealbum
+		// where taikhoan.id = album.taikhoan_id and taikhoan.id = 11
+		// and album.id = chitiet_album.album_id and album.id = 135
+		// and likealbum.album_id = album.id
+
 	}
 
 	// public static function getOneFileImageSetDropZone($idUser, $Directory, $filename)

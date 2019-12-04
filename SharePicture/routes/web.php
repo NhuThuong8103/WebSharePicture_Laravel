@@ -24,9 +24,7 @@ Route::get('/','HomeController@showFeedPhoto');
 
 Route::get('/index','HomeController@showFeedPhoto');
 
-Route::get('/feedsAlbum',function(){
-	return view('user.feedsalbum');
-});
+Route::get('/feedsalbum', 'HomeController@showFeedAlbum');
 
 Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 	Route::get('/',function(){
@@ -86,6 +84,8 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 	Route::post('/myalbums/GetFileNameDelete', 'AlbumUserController@getFileName')->name('deleteFile');
 
 	Route::get('/myalbums/editalbum', 'AlbumUserController@editAlbumUser');
+
+
 
 	Route::get('/myphotos/newPhoto', function(){
 		return view('user.newphoto');
