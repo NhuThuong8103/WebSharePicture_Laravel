@@ -3,7 +3,9 @@
 		<div class="row p-1">
 			<div class="col-lg-2 col-md-3 col-sm-4 col-4">
 				<div class="logo-head">
-					<span class="title-header">Fotobook Admin</span>
+					<a href="{{ url('/admin/') }}">
+						<span class="title-header">Fotobook Admin</span>
+					</a>
 				</div>
 			</div>
 			<div class="col-lg-6 col-md-5 col-sm-5 col-6 pl-0">

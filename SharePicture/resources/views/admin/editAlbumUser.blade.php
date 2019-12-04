@@ -1,7 +1,7 @@
 
-@extends('user.home')
+@extends('admin.home')
 
-@section('title','Edit Album')
+@section('title','Edit Album User')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
