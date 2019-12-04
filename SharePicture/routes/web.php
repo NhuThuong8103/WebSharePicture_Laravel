@@ -61,16 +61,7 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 	Route::post('/profile/editinfo', 'ProfileUserController@userEditInformation')->name('usereditinfo');
 
-<<<<<<< HEAD
-	Route::get('/myphotos', function(){
-		return view('user.myphotos');
-	});
 
-=======
-	// Route::get('/myalbums', function(){
-	// 	return view('user.myalbums');
-	// });
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 	Route::get('/myalbums','AlbumUserController@loadAlbum');
 
 	// Route::get('/myalbums/newalbum_upload', function(){

@@ -1,11 +1,8 @@
 
 @extends('user.home')
 
-<<<<<<< HEAD
 @section('title','My Album')
-=======
 @section('title','Edit Album')
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -32,17 +29,7 @@
 		<hr class="border-below mt-5">
 	</div>
 </div>
-<<<<<<< HEAD
-<form id="form-newalbum" action="{{ url('/myalbums/newalbum') }}" method="post" novalidate>{{ csrf_field() }}
-	<div class="row pt-2">
-		<div class="col-lg-6">
-			<h6>Title</h6>
-			<input type="text" class="form-control" placeholder="Hôm nay trời đẹp quá hihi" required name="tieude_album">
-			<br>
-			<div class="d-lg-none">
-				<h6>Description</h6>
-				<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_album"></textarea>
-=======
+
 @if(Session::get('thongbao'))
 <script>
 	setTimeout(function() {
@@ -66,7 +53,6 @@
 			<div class="d-lg-none">
 				<h6>Description</h6>
 				<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_album">{{ $value['mota_album'] }}</textarea>
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 			</div>
 			<br>
 			<h6>Sharing mode</h6>
@@ -74,19 +60,12 @@
 				<option value="1">Public</option>
 				<option value="0">Private</option>
 			</select>
-<<<<<<< HEAD
-			<input type="submit" id="target" name="submit" value="Save" class="btn btn-primary submit-hidden">
-		</div>
-		<div class="col-lg-6 d-none d-lg-block">
-			<h6>Description</h6>
-			<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_album"></textarea>
-=======
+
 			<input type="submit" id="save" name="submit" value="Save" class="btn btn-primary submit-hidden">
 		</div>
 		<div class="col-lg-6 d-none d-lg-block">
 			<h6>Description</h6>
 			<textarea class="form-control" rows="5" placeholder="Bau troi that xanh <3" required name="mota_album">{{ $value['mota_album'] }}</textarea>
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 		</div>
 	</div>
 </form>
@@ -106,27 +85,18 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="group-btn mb-3">
-<<<<<<< HEAD
-			<input type="submit" id="other" name="submit" value="Save" class="btn btn-primary">
-			<input type="button" id="btn_delete" name="delete" value="Delete" class="btn btn-danger">
-=======
 			<div class="group-btn">
 				<input type="submit" id="save-album" class="btn btn-primary" value="Save">
 				<a href="" id="delete-album" class="btn btn-danger float-right">
 					<i class="far fa-trash-alt mr-1"></i>Delete
 				</a>
 			</div>
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 		</div>
 	</div>
 </div>
 @endsection
 
 @section('script')
-<<<<<<< HEAD
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-=======
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
@@ -135,9 +105,6 @@
 <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 
 <script>
-<<<<<<< HEAD
-	$('#form-newalbum').validate({
-=======
 	$('#save-album').click(function(event) {
 		/* Act on the event */
 		$('#save').click();
@@ -186,7 +153,6 @@
 		});
 
 	$('#form-updatealbum').validate({
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 		rules:{
 			tieude_album:{
 				required:true,
@@ -208,21 +174,6 @@
 			}
 		}
 	});
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
-</script>
-
-
-<script type="text/javascript">
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 	Dropzone.options.fileupload = {
 		accept: function (file, done) {
 			if (file.type != "application/vnd.ms-excel" && file.type != "image/jpeg, image/png, image/jpg") {
@@ -270,11 +221,6 @@
     	if ($("#fileupload").length) {
     		var dz = new Dropzone("#fileupload"),
     		dze_info = $("#dze_info"),
-<<<<<<< HEAD
-
-=======
-    		
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
     		status = {
     			uploaded: 0,
     			errors: 0

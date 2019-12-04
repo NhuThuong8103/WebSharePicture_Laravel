@@ -128,13 +128,10 @@ class AlbumUserController extends BaseController
     public function editAlbum($idAlbum)
     {
 
-<<<<<<< HEAD
 
 
     
-=======
         $album = Album::where('taikhoan_id',Auth::user()->id)->where('id',$idAlbum)->first();
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 
         return view('user.editalbum')->with('value',['tieude_album'=>$album['tieude_album'], 'mota_album'=> $album['mota_album'],'idAlbum'=>$idAlbum]);
     }

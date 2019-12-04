@@ -42,11 +42,8 @@
 						@endif
 						<div class="title-album">
 							<p class="info-album">{{ substr($album['mota_album'],0,10).' ...'}}</p>
-<<<<<<< HEAD
-							<a href="{{ url('/myalbums/editalbum') }}" target="_blank"><i class="far fa-edit edit-icon"></i></a>
-=======
+							{{-- <a href="{{ url('/myalbums/editalbum') }}" target="_blank"><i class="far fa-edit edit-icon"></i></a> --}}
 							<a href="{{ url('/myalbums/editalbum') }}/{{ $album['idAlbum'] }}" ><i class="far fa-edit edit-icon"></i></a>
->>>>>>> 44f04dab910ae85d24765190e6c873dd5b3f8b7c
 						</div>
 						<div class="albums-tab-text">
 							{{ $album['tieude_album'] }}
