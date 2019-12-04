@@ -31,7 +31,7 @@
 	        $filePath = 'image/avatar.png';
 	        $fileData = File::get($filePath);
 	        $dirSub = '/'.$root.'/';
-	        $recursiveSub = true;
+	        $recursiveSub = false;
 	        $contentsSub = collect(Storage::disk('google')->listContents($dirSub, $recursiveSub));
 	        $dirSub = $contentsSub->where('type', '=', 'dir')
 	                            ->where('filename', '=', 'Avatar')
@@ -81,7 +81,7 @@
 			$dir = $contents->where('type', '=', 'dir')
 	                        ->where('filename', '!==', 'Photo')
 	                        ->where('filename', '!==', 'Avatar');
-
+	        //dd($dir);
 	        $array=array();
 	        foreach ($dir as $key => $value) {
 	        	$contentsSub = collect(Storage::disk('google')->listContents($value['path'], $recursive));

@@ -18,7 +18,13 @@ use App\Http\Requests\newAlbumValidate;
 
 class AlbumUserController extends BaseController
 {
-    private $drive;
+    public function newalbum(){
+        return view('user.new_album');
+    }
+
+    public function editAlbumUser(){
+        return view('user.editalbum');
+    }
 
     public function saveNewAlbum(newAlbumValidate $request){
         
@@ -117,6 +123,8 @@ class AlbumUserController extends BaseController
         $arr=AlbumUserService::loadAlbumUser($userID);
         return view('user.myalbums')->with(['array'=>$arr]);
     }
+
+
 
 
     
