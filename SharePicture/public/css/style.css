@@ -8,6 +8,14 @@
 body{
   background-color: #f8f8f8;
 }
+.img-avatar{
+  width: 26px;
+  height: 26px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  float: left;
+}
 
 .one-album .private-img{
   right: 15%;
@@ -970,6 +978,8 @@ header .boder-icon {
   border-radius: 50%;
   max-width: 10%;
   margin-right: 2%;
+  object-fit: cover;
+  object-position: center;
 }
 
 header .form-control.input-search {

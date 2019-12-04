@@ -38,9 +38,10 @@
 			}, 500);
 		</script>
 		@endif
-	<form id="form-newphoto" action="{{ route('savePhoto') }}" method="post" novalidate>{{ csrf_field() }}
+	<form id="form-newphoto" action="{{ route('updatePhoto') }}" method="post" novalidate>{{ csrf_field() }}
 	<div class="row pt-2">
 		<div class="col-lg-6">
+			<input type="hidden" id="id" name="idPhoto" value="{{ $value['idPhoto'] }}">
 			<h6>Title</h6>
 			<input type="text" class="form-control" placeholder="Hôm nay trời đẹp quá hihi" value="{{ $value['tieude'] }}" required name="tieude_photo">
 			<br>
@@ -79,10 +80,8 @@
 	<div class="col-lg-12">
 		<div class="group-btn mb-3">
 			<div class="group-btn">
-				<a href="#" class="btn btn-primary">
-					Save
-				</a>
-				<a href="#" class="btn btn-danger float-right">
+				<input type="submit" id="submit-main-photo" class="btn btn-primary" value="Save">
+				<a href="" id="delete-photo" class="btn btn-danger float-right">
 					<i class="far fa-trash-alt mr-1"></i>Delete
 				</a>
 			</div>
@@ -99,6 +98,48 @@
 	<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 	<script>
+		$('#delete-photo').click(function(event) {
+			/* Act on the event */
+			event.preventDefault();
+			Swal.fire({
+			  title: 'Are you sure?',
+			  text: "Are You sure want to delete?",
+			  icon: 'question',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+			  if (result.value) {
+			  	var id=$('#id').val();
+				$.ajaxSetup({
+				    headers: {
+				        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				    }
+				});
+				$.ajax({
+					url: '{{ route('deletePhoto') }}',
+					type: 'POST',
+					data: {"_token": "{{ csrf_token() }}","id":id},
+				})
+				.done(function() {
+					Swal.fire(
+				      'Deleted!',
+				      'Your photo has been deleted.',
+				      'success'
+				    ).then(function() {
+						$(location).attr('href','{{ url('/myphotos') }}');
+				    });
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+				});
+			  }
+			})
+		});
+
 		$('#form-newphoto').validate({
 			rules:{
 				tieude_photo:{
@@ -154,7 +195,7 @@
 				});
 				var _ref;
 				return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0; 
-			}
+			},
 		}
 
 		if (typeof Dropzone != 'undefined') {

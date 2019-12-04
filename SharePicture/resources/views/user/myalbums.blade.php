@@ -42,7 +42,7 @@
 						@endif
 						<div class="title-album">
 							<p class="info-album">{{ substr($album['mota_album'],0,10).' ...'}}</p>
-							<a href="https://www.google.com.vn/?hl=vi" target="_blank"><i class="far fa-edit edit-icon"></i></a>
+							<a href="{{ url('/myalbums/editalbum') }}/{{ $album['idAlbum'] }}" ><i class="far fa-edit edit-icon"></i></a>
 						</div>
 						<div class="albums-tab-text">
 							{{ $album['tieude_album'] }}

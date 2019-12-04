@@ -13,7 +13,7 @@
 </div>
 <div class="col-lg-1 col-md-1 d-none d-md-block">
 	<div class="logout-acount">
-		<a href="{{ url('\logout')}}" title="Logout">
+		<a href="{{ url('/logout')}}" title="Logout">
 			<span class="link-log">Logout</span>
 		</a>
 	</div>

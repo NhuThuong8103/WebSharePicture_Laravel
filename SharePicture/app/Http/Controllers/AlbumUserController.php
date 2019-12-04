@@ -119,9 +119,22 @@ class AlbumUserController extends BaseController
         return view('user.myalbums')->with(['array'=>$arr]);
     }
 
+    public function editAlbum($idAlbum)
+    {
 
-    
+        $album = Album::where('taikhoan_id',Auth::user()->id)->where('id',$idAlbum)->first();
 
+        return view('user.editalbum')->with('value',['tieude_album'=>$album['tieude_album'], 'mota_album'=> $album['mota_album'],'idAlbum'=>$idAlbum]);
+    }
 
+    public function updateAlbum(newAlbumValidate $request)
+    {
+        
+    }
+
+    public function deleteAlbum(Request $request)
+    {
+        Album::find($request->id)->delete();
+    }
 
 }
