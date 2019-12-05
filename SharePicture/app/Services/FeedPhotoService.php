@@ -13,7 +13,7 @@ use Storage;
 		public static function getFeedPhoto()
 		{
 			//tieude, mota, ngaygio,idtk
-			$photo=Photo::where('chedo_photo','=',true)->orderBy('created_at', 'DESC')->get();//getImagePhoto
+			$photo=Photo::where('chedo_photo','=',true)->orderBy('updated_at', 'DESC')->get();//getImagePhoto
 
 			$array=array();
 

@@ -41,6 +41,12 @@ Route::group(['middleware' => 'checkAdmin','prefix' => '/admin' ],function(){
 
 	Route::get('/managerAlbums','ManagerAlbumController@showManagerAlbum');
 
+	Route::get('/managerAlbums/edit/{idalbum}','ManagerAlbumController@editAlbum');
+
+	Route::post('/managerAlbums/updateAlbum','ManagerAlbumController@updateAlbum');
+
+	Route::post('/managerAlbums/deleteAlbum','ManagerAlbumController@deleteAlbum')->name('deleteAlbum');
+
 	Route::get('/managerUsers','ManagerUserController@index')->name('managerUserProfile');
 
 	Route::post('/managerUsers/delete','ManagerUserController@deleteUser')->name('deleteUser');

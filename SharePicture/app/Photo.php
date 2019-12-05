@@ -23,7 +23,8 @@ class Photo extends Model
         'mota',
         'tieude',
         'chedo_photo',
-        'taikhoan_id_photo'
+        'taikhoan_id_photo',
+        'updated_at'
     ];
 
 
