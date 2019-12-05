@@ -6,7 +6,7 @@
 				{{ Auth::user()->ho}}&nbsp;{{ Auth::user()->ten }}
 			</span>
 			<div class="avatar">
-				<img src="" class="boder-icon">
+				{{-- <img src="" class="boder-icon"> --}}
 			</div>
 		</a>
 	</div>
@@ -33,7 +33,7 @@
 	<div class="col-lg-1 col-md-1 d-none d-md-block">
 		<div class="logout-acount">
 			<a href="{{ url('/login')}}" title="Login" onclick="location.reload(true);" >
-				<span class="link-log">Login</span>
+				<span class="link-log" onclick="localStorage.clear();">Login</span>
 			</a>
 		</div>
 	</div>
