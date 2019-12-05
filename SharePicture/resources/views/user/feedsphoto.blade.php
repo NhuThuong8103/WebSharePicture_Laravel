@@ -26,22 +26,22 @@
         <div class="btn-group btn-group-toggle">
 
             <a href="{{ url('/') }}" class="btn btn-secondary radio-seentype active">Photo</a>
-            <a href="{{ url('/feedsAlbum') }}" class="btn btn-secondary radio-seentype">Album</a>
+            <a href="{{ url('/feedsalbum') }}" class="btn btn-secondary radio-seentype">Album</a>
         </div>
     </div>
-</div>
+</div> 
 <div class="row feeds-album">
     @foreach($value as $photo)
     <div class="col-lg-6 col-md-6 col-12">
         <div class="card mb-3 one-news-album">
             <div class="row no-gutters">
                 <div class="col-lg-6 col-md-6 col-6">
-                    <div class="albums-tab-thumb sim-anim-3 p-3"  data-toggle="modal" data-target="#largeModal{{ $photo['idPhoto'] }}">
+                    <div class="albums-tab-thumb sim-anim-3 p-3"  data-toggle="modal" data-target="#exampleModal{{ $photo['idPhoto'] }}">
                         <input type="hidden" value="{{ $photo['idPhoto'] }}">
                         <img src="https://drive.google.com/uc?export=view&id={{ $photo['pathimg'] }}" class="all studio img-thumbnail album-feeds"/>
                     </div>
-                    <div class="modal fade" id="largeModal{{ $photo['idPhoto'] }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                      <div class="modal-dialog modal-lg">
+                    <div class="modal fade" id="exampleModal{{ $photo['idPhoto'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title">{{ $photo['tieude'] }}</h5>

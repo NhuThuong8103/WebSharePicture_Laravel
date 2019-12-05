@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\FeedPhotoService;
+use App\Services\FeedAlbumService;
 class HomeController extends Controller
 {
     /**
@@ -37,6 +38,7 @@ class HomeController extends Controller
 
     public function showFeedAlbum()
     {
-       // $album = 
+       $arr = FeedAlbumService::getFeedAlbum();
+       return view('user.feedsalbum')->with('value1',$arr);
     }
 }

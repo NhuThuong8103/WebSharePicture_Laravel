@@ -75,7 +75,7 @@
 	        $recursive = false;
 			$contents = collect(Storage::disk('google')->listContents($dir, $recursive));
 			$dir = $contents->where('type', '=', 'dir')
-	                        ->where('filename', '=', $idUser)
+	                        ->where('filename', '=', $idUser) // vao thu muc id tren gg
 	                        ->first();
 	        $contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
 			$dir = $contents->where('type', '=', 'dir')
