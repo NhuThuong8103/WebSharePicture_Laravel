@@ -202,7 +202,6 @@
 							</div>
 							<div class="text-center mt-2">
 								<ul class="list-inline mb-0" id="myTab">
-									<li class="mt-2">
 										<a class="text-muted " href="#login" data-toggle="tab" >Login</a>
 									</li>
 									<li class="mt-2">
