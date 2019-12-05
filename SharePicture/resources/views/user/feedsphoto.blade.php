@@ -70,9 +70,9 @@
                             </a>
                         </div>
                         <label class="strong-title-news">
-                            <strong class="mt-2 mb-2 tieude-photo">{{ substr($photo['tieude'],0,16) }}</strong>
+                            <strong class="mt-2 mb-2 tieude-photo">{{ substr($photo['tieude'],0,20).'...' }}</strong>
                         </label>
-                        <p class="card-text description">{{ substr($photo['mota'],0,80) }}</p>
+                        <p class="card-text description">{{ substr($photo['mota'],0,81).'...' }}</p>
                     </div>
                     <div class="info-card-album">
                             <input type="checkbox" name="checkbox{{ $photo['idPhoto'] }}" id="checkbox{{ $photo['idPhoto'] }}" class="css-checkbox" />
