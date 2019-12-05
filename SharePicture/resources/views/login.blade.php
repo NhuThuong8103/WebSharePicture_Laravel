@@ -205,13 +205,13 @@
 							<div class="text-center mt-2">
 								<ul class="list-inline mb-0" id="myTab">
 									<li class="mt-2">
-										<a class="text-muted " href="#login" data-toggle="tab" onclick="location.reload(true); ">Login</a>
+										<a class="text-muted " href="#login" data-toggle="tab">Login</a>
 									</li>
 									<li class="mt-2">
-										<a class="text-muted" href="#forgot" data-toggle="tab" onclick="location.reload(true); ">Forgot password</a>
+										<a class="text-muted" href="#forgot" data-toggle="tab">Forgot password</a>
 									</li>
 									<li class="mt-2">
-										<a class="text-muted" href="#signup" data-toggle="tab" onclick="location.reload(true); ">Create an account</a>
+										<a class="text-muted" href="#signup" data-toggle="tab">Create an account</a>
 									</li>
 								</ul>
 							</div>
