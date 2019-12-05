@@ -14,6 +14,7 @@ class Album extends Model
         'mota_album',
         'chedo_album',
         'taikhoan_id',
+        'updated_at'
     ];
 
 

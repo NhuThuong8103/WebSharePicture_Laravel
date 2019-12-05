@@ -42,11 +42,11 @@
 	}, 500);
 </script>
 @endif
-<form id="form-updatealbum" action="{{ url('/myalbums/updatealbum') }}" method="post" novalidate>{{ csrf_field() }}
+<form id="form-updatealbum" action="{{ url('/admin/managerAlbums/updateAlbum') }}" method="post" novalidate>{{ csrf_field() }}
 	<div class="row pt-2">
 		<div class="col-lg-6">
 			<h6>Title</h6>
-			<input type="hidden" id="idAlbum" value="{{ $value['idAlbum'] }}">
+			<input type="hidden" id="idAlbum" value="{{ $value['id'] }}">
 			<input type="text" class="form-control" placeholder="Hôm nay trời đẹp quá hihi" required name="tieude_album" value="{{ $value['tieude_album'] }}">
 			<br>
 			<div class="d-lg-none">
@@ -104,9 +104,23 @@
 <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 
 <script>
+	var ck=0;
 	$('#save-album').click(function(event) {
-		/* Act on the event */
-		$('#save').click();
+
+		if(ck!=0){
+			$('#save').click();
+		}
+		else{
+			setTimeout(function() {
+				Swal.fire({
+					title: "Congratulations <3",
+					text: "wtf",
+					icon: "success"
+				}, function() {
+					location.reload(true);
+				});
+			}, 500);
+		}
 	});
 
 	$('#delete-album').click(function(event) {
@@ -139,7 +153,7 @@
 				      'Your Album has been deleted.',
 				      'success'
 				    ).then(function() {
-						$(location).attr('href','{{ url('/myalbums') }}');
+						$(location).attr('href','{{ url('/admin/managerAlbums') }}');
 				    });
 				})
 				.fail(function() {
@@ -187,6 +201,7 @@
 		acceptedFiles: "image/jpeg, image/png, image/jpg",
 		addRemoveLinks: true,
 		removedfile : function(file){
+			ck--;
 			var name = file.name;
 			$.ajaxSetup({
 				headers:{
@@ -245,6 +260,7 @@
     			status.uploaded++;
 
     			dze_info.find('tfoot td').html('<span class="label label-success">' + status.uploaded + ' uploaded</span> <span class="label label-danger">' + status.errors + ' not uploaded</span>');
+				ck++;
 
             // toastr.success('Your File Uploaded Successfully!!', 'Success Alert', {
             //   timeOut: 50000000

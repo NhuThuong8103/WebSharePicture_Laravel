@@ -9,6 +9,7 @@ class ChitietAlbum extends Model
 	public $table="chitiet_album";
 
 	protected $fillable = [
+		'id',
         'hinhanh_album',
         'album_id',
     ];
