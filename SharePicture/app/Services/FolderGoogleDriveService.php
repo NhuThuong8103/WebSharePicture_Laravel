@@ -23,21 +23,13 @@
 	        Storage::disk('google')->makeDirectory($dir['path'].'/Photo');
 	        Storage::disk('google')->makeDirectory($dir['path'].'/Avatar');
 
-	        $root = "";
-	        foreach ($contents as $key => $value) {
-	            if($value['name'] == 'Avatar')
-	                $root = $value['path'];
-	        }
-	        $filePath = 'image/avatar.png';
+	        $filePath = "image/avatar.png";
 	        $fileData = File::get($filePath);
-	        $dirSub = '/'.$root.'/';
-	        $recursiveSub = false;
-	        $contentsSub = collect(Storage::disk('google')->listContents($dirSub, $recursiveSub));
-	        $dirSub = $contentsSub->where('type', '=', 'dir')
-	                            ->where('filename', '=', 'Avatar')
-	                            ->first();
-	        Storage::disk('google')->put($dirSub['path'].'/avatar.png', $fileData);
-
+	        $contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
+	        $dir = $contents->where('type','=','dir')
+	        				->where('filename','=','Avatar')
+	        				->first();
+	        Storage::disk('google')->put($dir['path'].'/avatar.png', $fileData);
 		}
 
 		public static function createSubFoderGoogleDrive($idUser, $tieude){ // tao thu muc ten album 
