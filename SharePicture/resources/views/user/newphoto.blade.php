@@ -87,6 +87,24 @@
 	<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 	<script>
+		var ck=0;
+		$('#submit-main-photo').click(function(){
+		    if(ck!=0){
+				$('#save-photo').click();
+			}
+			else{
+				setTimeout(function() {
+					Swal.fire({
+						title: "Oop...",
+						text: "Please select photo",
+						icon: "error",
+					}, function() {
+						
+					});
+				}, 500);
+		  };
+		});
+		
 		$('#form-newphoto').validate({
 			rules:{
 				tieude_photo:{
@@ -119,7 +137,7 @@
 					done();
 				}
 			}
-		}
+		};
 
 		Dropzone.options.fileupload = {
 			acceptedFiles: "image/jpeg, image/png, image/jpg",
@@ -127,6 +145,7 @@
 			maxFiles:1,
 			dictMaxFilesExceeded: "You can only upload upto 1 images",
 			removedfile : function(file){
+				ck--;
 				var name = file.name;
 				$.ajaxSetup({
 					headers:{
@@ -144,7 +163,7 @@
 				var _ref;
 				return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0; 
 			}
-		}
+		};
 
 		if (typeof Dropzone != 'undefined') {
 			Dropzone.autoDiscover = false;
@@ -185,6 +204,7 @@
 	    			status.uploaded++;
 
 	    			dze_info.find('tfoot td').html('<span class="label label-success">' + status.uploaded + ' uploaded</span> <span class="label label-danger">' + status.errors + ' not uploaded</span>');
+	    			ck++;
 
 	        })
 	    		.on('error', function (file) {

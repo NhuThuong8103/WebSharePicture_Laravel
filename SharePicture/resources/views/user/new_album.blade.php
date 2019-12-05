@@ -96,6 +96,24 @@
 <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 
 <script>
+	var ck=0;
+	$('#other').click(function(){
+	    if(ck!=0){
+			$('#target').click();
+		}
+		else{
+			setTimeout(function() {
+				Swal.fire({
+					title: "Oop...",
+					text: "Please select photo",
+					icon: "error",
+				}, function() {
+					
+				});
+			}, 500);
+	  };
+	});
+
 	$('#form-newalbum').validate({
 		rules:{
 			tieude_album:{
@@ -134,12 +152,13 @@
 				done();
 			}
 		}
-	}
+	};
 
 	Dropzone.options.fileupload = {
 		acceptedFiles: "image/jpeg, image/png, image/jpg",
 		addRemoveLinks: true,
 		removedfile : function(file){
+			ck--;
 			var name = file.name;
 			$.ajaxSetup({
 				headers:{
@@ -157,7 +176,7 @@
 			var _ref;
 			return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0; 
 		}
-	}
+	};
 
 	if (typeof Dropzone != 'undefined') {
 		Dropzone.autoDiscover = false;
@@ -198,6 +217,7 @@
     			status.uploaded++;
 
     			dze_info.find('tfoot td').html('<span class="label label-success">' + status.uploaded + ' uploaded</span> <span class="label label-danger">' + status.errors + ' not uploaded</span>');
+    			ck++;
 
         })
     		.on('error', function (file) {

@@ -52,7 +52,7 @@
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 	<script>
 		$("#tab").pagination({
-			items: 6,
+			items: 12,
 			contents: 'photo-lists',
 			previous: 'Previous',
 			next: 'Next',

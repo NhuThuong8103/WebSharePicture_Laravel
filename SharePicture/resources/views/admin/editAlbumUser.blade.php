@@ -111,17 +111,17 @@
 			$('#save').click();
 		}
 		else{
-			setTimeout(function() {
-				Swal.fire({
-					title: "Congratulations <3",
-					text: "wtf",
-					icon: "success"
-				}, function() {
-					location.reload(true);
-				});
-			}, 500);
-		}
-	});
+				setTimeout(function() {
+					Swal.fire({
+						title: "Oop...",
+						text: "Please select photo",
+						icon: "error",
+					}, function() {
+						
+					});
+				}, 500);
+		  };
+		});
 
 	$('#delete-album').click(function(event) {
 			event.preventDefault();
@@ -194,7 +194,7 @@
 				done();
 			}
 		}
-	}
+	};
 
 	Dropzone.options.fileupload = {
 		acceptedFiles: "image/jpeg, image/png, image/jpg",
@@ -218,7 +218,7 @@
 			var _ref;
 			return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0; 
 		}
-	}
+	};
 
 	if (typeof Dropzone != 'undefined') {
 		Dropzone.autoDiscover = false;
