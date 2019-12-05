@@ -99,7 +99,6 @@
     <script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
     <script>
-        //phaan trang 
         $("#tab").pagination({
             items: 6,
             contents: 'feeds-album',

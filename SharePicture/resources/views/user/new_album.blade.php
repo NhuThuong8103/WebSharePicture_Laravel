@@ -168,7 +168,6 @@
 		"use strict";
 
 		$(document).ready(function () {
-    // Dropzone Example
     if (typeof Dropzone != 'undefined') {
     	if ($("#fileupload").length) {
     		var dz = new Dropzone("#fileupload"),
@@ -200,10 +199,6 @@
 
     			dze_info.find('tfoot td').html('<span class="label label-success">' + status.uploaded + ' uploaded</span> <span class="label label-danger">' + status.errors + ' not uploaded</span>');
 
-            // toastr.success('Your File Uploaded Successfully!!', 'Success Alert', {
-            //   timeOut: 50000000
-            // });
-
         })
     		.on('error', function (file) {
     			var _$f = $f.clone();
@@ -222,10 +217,6 @@
     			status.errors++;
 
     			dze_info.find('tfoot td').html('<span class="label label-success">' + status.uploaded + ' uploaded</span> <span class="label label-danger">' + status.errors + ' not uploaded</span>');
-
-            // toastr.error('Your File Uploaded Not Successfully!!', 'Error Alert', {
-            //   timeOut: 5000
-            // });
         });
     	}
     }

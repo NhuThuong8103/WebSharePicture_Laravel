@@ -110,7 +110,6 @@
 	});
 
 	$('#delete-album').click(function(event) {
-			/* Act on the event */
 			event.preventDefault();
 			Swal.fire({
 			  title: 'Are you sure?',
@@ -245,11 +244,6 @@
     			status.uploaded++;
 
     			dze_info.find('tfoot td').html('<span class="label label-success">' + status.uploaded + ' uploaded</span> <span class="label label-danger">' + status.errors + ' not uploaded</span>');
-
-            // toastr.success('Your File Uploaded Successfully!!', 'Success Alert', {
-            //   timeOut: 50000000
-            // });
-
         })
     		.on('error', function (file) {
     			var _$f = $f.clone();
@@ -268,10 +262,6 @@
     			status.errors++;
 
     			dze_info.find('tfoot td').html('<span class="label label-success">' + status.uploaded + ' uploaded</span> <span class="label label-danger">' + status.errors + ' not uploaded</span>');
-
-            // toastr.error('Your File Uploaded Not Successfully!!', 'Error Alert', {
-            //   timeOut: 5000
-            // });
         });
     	}
     }

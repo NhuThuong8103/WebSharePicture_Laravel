@@ -233,7 +233,6 @@
 			});
 
 			$('#submit-password').click(function(event) {
-				/* Act on the event */
 				var password=$('#new-password').val();
 				var passwordconfirm=$('#password-confirm').val();
 				if(passwordconfirm != password){

@@ -35,14 +35,6 @@
 					</form>
 				</div>
 				<div class="col-lg-3 col-md-3 d-none d-md-block">
-					<!-- <div class="name-user">
-						<a href="google.com" title="Trang ca nhan">
-							<span class="icon-user">
-								Nhu Thuong
-							</span>
-							<img src="image/icon-user.jpg" class="boder-icon">
-						</a>
-					</div> -->
 				</div>
 				<div class="col-lg-1 col-md-1 d-none d-md-block">
 					<div class="logout-acount">
@@ -51,17 +43,9 @@
 						</a>
 					</div>
 				</div>
-					<!-- <div class="col-sm-3 d-md-none d-none d-sm-block">
-						<div class="name-user">
-							<a href="google.com" title="Trang ca nhan">
-								<img src="image/icon-user.jpg" class="boder-icon">
-								<img src="image/icon-user.jpg" class="boder-icon">
-							</a>
-						</div>
-					</div> -->
+
 					<div class="col-2 d-md-none">
 						<a href="#" title="Menu quản lý">
-							<!-- <h6 style="font-size: 16px;margin-top: 2%;float: right;">menu</h6> -->
 							<span class="navTrigger">
 								<i></i>
 								<i></i>
@@ -111,16 +95,11 @@
 									</div>
 									@endif
 								</div>
-								<!-- <div id="loading_reset">
-
-								</div> -->
 					            <form class="form-reset" method="post" action="{{url('/password/reset_success')}}">
 					            	{{ csrf_field() }}
-					            	<!-- <div class="form-group"> -->
 					            	<input type="email" class="form-control" value="{{ $email }}" readonly name="email_reset">
 							        <input type="password" class="form-control" placeholder="New password" required autofocus name="new_password">
 							        <input type="password" class="form-control" placeholder="Password Confirm" required name="confirm_password">
-							    <!-- </div> -->
 					                <input class="btn btn-lg btn-primary btn-block w-50 btn-reset" type="submit" value="Reset" id="reset_button" />				
 					            </form>
 					        </div>

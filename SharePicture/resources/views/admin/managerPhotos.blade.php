@@ -38,7 +38,6 @@
 <script src="{{URL::asset('js/pagination.js')}}"></script>
 <script src="{{URL::asset('js/main.js')}}"></script>
 <script>
-		//phaan trang 
 		$("#tab").pagination({
 			items: 12,
 			contents: 'photo-lists',

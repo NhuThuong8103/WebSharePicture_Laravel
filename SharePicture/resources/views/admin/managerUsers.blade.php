@@ -63,8 +63,6 @@
 			
 			$('.delete').click(function(event) {
 				event.preventDefault();
-				/* Act on the event */
-
 				Swal.fire({
 				  title: 'Are you sure?',
 				  text: "Are You sure want to delete?",

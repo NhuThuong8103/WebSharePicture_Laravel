@@ -56,7 +56,7 @@
 		<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 		
 		<script>
-			$('#tab').pagination({ // phaan trang danh sach album cua user
+			$('#tab').pagination({
 				items: 12,
 				contents: 'album-lists', 
 				previous: 'Previous',

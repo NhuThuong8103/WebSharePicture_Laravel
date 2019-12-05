@@ -115,32 +115,11 @@
 								</small>
 							</p>
 						</div>
-						{{-- <div class="info-card-album">
-							<p class="info-album like-album">
-								<small class="text-muted text-left">
-									<input id="heart" type="checkbox" />
-									<label for="heart"><i class="fas fa-heart"></i></label>
-									123
-								</small>
-							</p>
-							<p class="info-album time-album">
-								<small class="text-muted text-right">
-									4.56PM 01/01/2020
-								</small>
-							</p>
-						</div> --}}
 					</div>
 				</div>
 			</div>
 		</div>
 		@endforeach
-		
-
-
-
-
-
-
 	</div>
 @endsection
 
@@ -156,31 +135,12 @@
 
 
 		<script type="text/javascript">
-			$('#tab').pagination({ // phan trang feeds album
-				items: 4,
+			$('#tab').pagination({ 
+				items: 6,
 				contents: 'feeds-album',
 				previous: 'Previous',
 				next: 'Next',
 				position: 'bottom',
 			});
 		</script>
-		{{-- <script>
-			var slideIndex = 1;
-			//showDivs(slideIndex);
-
-			function plusDivs(n) {
-				showDivs(slideIndex += n);
-			}
-
-			function showDivs(n) {
-				var i;
-				var x = document.getElementsByClassName("mySlides");
-				if (n > x.length) {slideIndex = 1}
-					if (n < 1) {slideIndex = x.length}
-						for (i = 0; i < x.length; i++) {
-							x[i].style.display = "none";  
-						}
-						x[slideIndex-1].style.display = "block";  
-					}
-				</script> --}}
 @endsection

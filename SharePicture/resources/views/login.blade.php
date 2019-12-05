@@ -160,7 +160,6 @@
 										<label class="label-signup">Password Confirmation</label>
 										<input type="password" name="passconfirm" id="passconfirm" class="form-control" placeholder="******" required>
 										<input type="submit" class="btn btn-lg btn-primary btn-block w-50 btn-login" value="Sign Up">
-										{{-- <button class="btn btn-lg btn-primary btn-block w-50 btn-login" type="submit">Signup</button> --}}
 									</form>					              
 								</div>
 

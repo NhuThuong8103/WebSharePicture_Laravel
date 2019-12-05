@@ -20,7 +20,6 @@
 				
 				<div class="col-2 d-md-none">
 					<a href="#" title="Menu quản lý">
-						<!-- <h6 style="font-size: 16px;margin-top: 2%;float: right;">menu</h6> -->
 						<span class="navTrigger">
 							<i></i>
 							<i></i>
