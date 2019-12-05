@@ -53,7 +53,7 @@
 	<script>
 		//phaan trang 
 		$("#tab").pagination({
-			items: 12,
+			items: 6,
 			contents: 'photo-lists',
 			previous: 'Previous',
 			next: 'Next',

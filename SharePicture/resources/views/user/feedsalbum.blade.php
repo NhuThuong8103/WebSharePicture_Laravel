@@ -107,7 +107,7 @@
 							<p class="card-text description">{{$feedAlbum['mota']}}</p>
 						</div>
 						<div class="info-card-album">
-							<input type="checkbox" name="checkbox{{ $feedAlbum['idalbum'] }}" id="checkbox{{ $feedAlbum['idalbum'] }}" class="css-checkbox" />
+							<input type="checkbox" name="checkbox{{ $feedAlbum['idalbum'] }}" id="checkbox{{ $feedAlbum['idalbum'] }}" class="css-checkbox"/>
 							<label for="checkbox{{ $feedAlbum['idalbum'] }}" class="css-label">1234</label>
 							<p class="info-album time-album">
 								<small class="text-muted text-right">
