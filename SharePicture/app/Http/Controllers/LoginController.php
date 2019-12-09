@@ -29,6 +29,12 @@ use App\Services\GetFileGoogleDriveService;
 
 class LoginController extends BaseController
 {
+	public function logout()
+	{
+		Auth::logout();
+		return Redirect('/');
+	}
+
 	public function showLogin(){
 		return view('login');
 	}

@@ -3,7 +3,7 @@ input[type=checkbox].css-checkbox {
 						}
 
 						input[type=checkbox].css-checkbox + label.css-label {
-							padding-left:40px;
+							padding-left:35px;
 							height:35px; 
 							display:inline-block;
 							line-height:35px;

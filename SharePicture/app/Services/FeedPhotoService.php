@@ -3,6 +3,7 @@ namespace App\Services;
 use Auth;
 use App\Photo;
 use App\TaiKhoan;
+use App\LikePhoto;
 use App\Services\GetFileGoogleDriveService;
 use Illuminate\Support\Arr;
 use Storage;
@@ -23,7 +24,13 @@ use Storage;
 				$username=$user['ho']." ".$user['ten'];
 
 				$pathavatar=GetFileGoogleDriveService::getIconAvatar($value['taikhoan_id_photo'],'Avatar',$user['anhdaidien']);
-				$pathimg=GetFileGoogleDriveService::getImagePhoto($value['taikhoan_id_photo'],'Photo',$value['hinh_anh']);
+
+				$likecount= LikePhoto::where('photo_id',$value['id'])->count();
+				$checklike=0;
+				if(Auth::check()){
+					$checklike= LikePhoto::where('photo_id',$value['id'])->where('taikhoan_id',Auth::user()->id)->count();
+				}
+				// $pathimg=GetFileGoogleDriveService::getImagePhoto($value['taikhoan_id_photo'],'Photo',$value['hinh_anh']);
 				array_push($array,[
 					'idPhoto'		=>$value['id'],
 					'username'  	=>$username,
@@ -31,7 +38,9 @@ use Storage;
 					'tieude'		=>$value['tieude'],
 					'mota'			=>$value['mota'],
 					'ngaygio'		=>$value['created_at'],
-					'pathimg'		=>$pathimg  
+					'pathimg'		=>$value['basename_hinhanh'],
+					'likecount'		=>$likecount,
+					'checklike'		=>$checklike,
 				]);
 				
 			}			

@@ -29,13 +29,7 @@
 
 			</div>
 			<div id="menu-mobile" class="menu-lists d-md-none">
-				<ul>
-					<li>Hi, Nhu Thuong <3 </li>
-						<li>Manage Photos </li>
-						<li>Manage Albums</li>
-						<li>Manage Users</li>
-						<li>Sign In</li>
-					</ul>
+				@include('admin.navmobile')
 				</div>
 			</div>
 		</div>

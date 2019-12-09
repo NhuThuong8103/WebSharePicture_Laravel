@@ -1,9 +1,4 @@
 $(document).ready(function(){
-  
-  
-  $(".far.fa-heart").click(function() {
-    $(this).toggleClass("far fa-heart");
-  });
 
   $('.navTrigger').click(function () {
     $(this).toggleClass('active');

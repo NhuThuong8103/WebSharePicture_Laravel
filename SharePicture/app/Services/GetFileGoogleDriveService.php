@@ -17,26 +17,26 @@ class GetFileGoogleDriveService
 		$recursive = false;
 		$contents = collect(Storage::disk('google')->listContents($dir, $recursive));
 		$dir = $contents->where('type', '=', 'dir')
-						->where('filename', '=', $idUser) 
-						->first();
+		->where('filename', '=', $idUser) 
+		->first();
 
 		$contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
 		$dir = $contents->where('type', '=', 'dir')
-                        ->where('filename', '=', $Directory)
-                        ->first();
+		->where('filename', '=', $Directory)
+		->first();
 		$contents =collect(Storage::disk('google')->ListContents($dir['path'],$recursive));
 		$file=$contents
-					->where('type','=','file')
-					->where('filename','=',pathinfo($filename,PATHINFO_FILENAME))
-					->where('extension','=',pathinfo($filename,PATHINFO_EXTENSION))
-					->first();
+		->where('type','=','file')
+		->where('filename','=',pathinfo($filename,PATHINFO_FILENAME))
+		->where('extension','=',pathinfo($filename,PATHINFO_EXTENSION))
+		->first();
 		//set permission images
 		$service = Storage::disk('google')->getAdapter()->getService();
-        $permission = new \Google_Service_Drive_Permission();
-        $permission->setRole('reader');
-        $permission->setType('anyone');
-        $permission->setAllowFileDiscovery(false);
-        $permissions = $service->permissions->create($file['basename'], $permission);
+		$permission = new \Google_Service_Drive_Permission();
+		$permission->setRole('reader');
+		$permission->setType('anyone');
+		$permission->setAllowFileDiscovery(false);
+		$permissions = $service->permissions->create($file['basename'], $permission);
 
 		//$data=Storage::disk('google')->get($file['path']);
 
@@ -52,26 +52,26 @@ class GetFileGoogleDriveService
 		$recursive = false;
 		$contents = collect(Storage::disk('google')->listContents($dir, $recursive));
 		$dir = $contents->where('type', '=', 'dir')
-						->where('filename', '=', $idUser) 
-						->first();
+		->where('filename', '=', $idUser) 
+		->first();
 
 		$contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
 		$dir = $contents->where('type', '=', 'dir')
-                        ->where('filename', '=', $Directory)
-                        ->first();
+		->where('filename', '=', $Directory)
+		->first();
 		$contents =collect(Storage::disk('google')->ListContents($dir['path'],$recursive));
 		$file=$contents
-					->where('type','=','file')
-					->where('filename','=',pathinfo($filename,PATHINFO_FILENAME))
-					->where('extension','=',pathinfo($filename,PATHINFO_EXTENSION))
-					->first();
+		->where('type','=','file')
+		->where('filename','=',pathinfo($filename,PATHINFO_FILENAME))
+		->where('extension','=',pathinfo($filename,PATHINFO_EXTENSION))
+		->first();
 		//set permission images
 		$service = Storage::disk('google')->getAdapter()->getService();
-        $permission = new \Google_Service_Drive_Permission();
-        $permission->setRole('reader');
-        $permission->setType('anyone');
-        $permission->setAllowFileDiscovery(false);
-        $permissions = $service->permissions->create($file['basename'], $permission);
+		$permission = new \Google_Service_Drive_Permission();
+		$permission->setRole('reader');
+		$permission->setType('anyone');
+		$permission->setAllowFileDiscovery(false);
+		$permissions = $service->permissions->create($file['basename'], $permission);
 
 		$data=Storage::disk('google')->get($file['path']);
 
@@ -87,6 +87,46 @@ class GetFileGoogleDriveService
 	}
 
 
+	public static function getImageAddDropzone($idUser, $Directory, $filename)
+	{
+
+		$dir = '/';
+		$recursive = false;
+		$contents = collect(Storage::disk('google')->listContents($dir, $recursive));
+		$dir = $contents->where('type', '=', 'dir')
+		->where('filename', '=', $idUser) 
+		->first();
+
+		$contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
+		$dir = $contents->where('type', '=', 'dir')
+		->where('filename', '=', $Directory)
+		->first();
+		$contents =collect(Storage::disk('google')->ListContents($dir['path'],$recursive));
+		$file=$contents
+		->where('type','=','file')
+		->where('filename','=',pathinfo($filename,PATHINFO_FILENAME))
+		->where('extension','=',pathinfo($filename,PATHINFO_EXTENSION))
+		->first();
+		//set permission images
+		$service = Storage::disk('google')->getAdapter()->getService();
+		$permission = new \Google_Service_Drive_Permission();
+		$permission->setRole('reader');
+		$permission->setType('anyone');
+		$permission->setAllowFileDiscovery(false);
+		$permissions = $service->permissions->create($file['basename'], $permission);
+
+		$data=Storage::disk('google')->get($file['path']);
+
+		$array=array([
+			'id' =>$file['basename'],
+			'data' =>base64_encode($data),
+			'filename'=>$file['name'],
+			'size'=>$file['size'],
+		]);
+
+		return $array;
+	}
+
 	public static function getImagePhoto($idUser, $Directory, $filename)
 	{
 
@@ -94,26 +134,26 @@ class GetFileGoogleDriveService
 		$recursive = false;
 		$contents = collect(Storage::disk('google')->listContents($dir, $recursive));
 		$dir = $contents->where('type', '=', 'dir')
-						->where('filename', '=', $idUser) 
-						->first();
+		->where('filename', '=', $idUser) 
+		->first();
 
 		$contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
 		$dir = $contents->where('type', '=', 'dir')
-                        ->where('filename', '=', $Directory)
-                        ->first();
+		->where('filename', '=', $Directory)
+		->first();
 		$contents =collect(Storage::disk('google')->ListContents($dir['path'],$recursive));
 		$file=$contents
-					->where('type','=','file')
-					->where('filename','=',pathinfo($filename,PATHINFO_FILENAME))
-					->where('extension','=',pathinfo($filename,PATHINFO_EXTENSION))
-					->first();
+		->where('type','=','file')
+		->where('filename','=',pathinfo($filename,PATHINFO_FILENAME))
+		->where('extension','=',pathinfo($filename,PATHINFO_EXTENSION))
+		->first();
 		//set permission images
 		$service = Storage::disk('google')->getAdapter()->getService();
-        $permission = new \Google_Service_Drive_Permission();
-        $permission->setRole('reader');
-        $permission->setType('anyone');
-        $permission->setAllowFileDiscovery(false);
-        $permissions = $service->permissions->create($file['basename'], $permission);
+		$permission = new \Google_Service_Drive_Permission();
+		$permission->setRole('reader');
+		$permission->setType('anyone');
+		$permission->setAllowFileDiscovery(false);
+		$permissions = $service->permissions->create($file['basename'], $permission);
 
 		//$data=Storage::disk('google')->get($file['path']);
 
@@ -169,38 +209,38 @@ class GetFileGoogleDriveService
 		$recursive = false;
 		$contents = collect(Storage::disk('google')->list($dir, $recursive));
 		$dir = $contents->where('type', '=', 'dir')
-						->where('filename', '=', $idUser)
-						->first();
+		->where('filename', '=', $idUser)
+		->first();
 
 		$contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
 		$dir = $contents->where('type', '=', 'dir')
-	                    ->where('filename', '!==', 'Photo')
-	                    ->where('filename', '!==', 'Avatar');
+		->where('filename', '!==', 'Photo')
+		->where('filename', '!==', 'Avatar');
 
 		$arrFileName = array();
 
 		$arrFileName = TaiKhoan::with('taikhoan', 'album', 'chitiet_album')
 		 							->select(['taikhoan.id','album.id','album.tieude_album','chitiet_album.hinhanh_album'])->get();// ten hinh o csdl
 
-		$contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
-		$list = array();
-		$file;
+		 							$contents = collect(Storage::disk('google')->listContents($dir['path'], $recursive));
+		 							$list = array();
+		 							$file;
 
-		foreach ($arrFileName as $value) {
-			$file = $contents->where('type','=','file')
-							-> where('filename','=',pathinfo($value['hinhanh_album'], PATHINFO_FILENAME))
-							->where('extension','=',pathinfo($value['hinhanh_album'],PATHINFO_EXTENSION))
-							->get();
-			$service = Storage::disk('google')->getAdapter()->getService();
-			$permission = new \Google_Service_Drive_Permission();
-	        $permission->setRole('reader');
-	        $permission->setType('anyone');
-	        $permission->setAllowFileDiscovery(false);
-	        $permissions = $service->permissions->create($file['basename'], $permission);
-	        array_push($list, $file['basename']);
-		}
-		return $list;
-	}
+		 							foreach ($arrFileName as $value) {
+		 								$file = $contents->where('type','=','file')
+		 								-> where('filename','=',pathinfo($value['hinhanh_album'], PATHINFO_FILENAME))
+		 								->where('extension','=',pathinfo($value['hinhanh_album'],PATHINFO_EXTENSION))
+		 								->get();
+		 								$service = Storage::disk('google')->getAdapter()->getService();
+		 								$permission = new \Google_Service_Drive_Permission();
+		 								$permission->setRole('reader');
+		 								$permission->setType('anyone');
+		 								$permission->setAllowFileDiscovery(false);
+		 								$permissions = $service->permissions->create($file['basename'], $permission);
+		 								array_push($list, $file['basename']);
+		 							}
+		 							return $list;
+		 						}
 
 
 
@@ -275,4 +315,4 @@ class GetFileGoogleDriveService
 
 	// 	return $data ;
 	// }
-}
+		 					}

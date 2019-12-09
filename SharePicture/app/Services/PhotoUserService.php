@@ -19,7 +19,8 @@ use Illuminate\Support\Arr;
 
 			foreach ($arrPhotoDB as $key =>$value) {
 
-				$path=GetFileGoogleDriveService::getImagePhoto($idUser,'Photo',$value['hinh_anh']);
+				//$path=GetFileGoogleDriveService::getImagePhoto($idUser,'Photo',$value['hinh_anh']);
+				$path=$value['basename_hinhanh'];
 
 				array_push($array, ['tieude'=>$value['tieude'], 'path'=>$path,'chedo_photo'=>$value['chedo_photo'],'idphoto' =>$value['id']]);
 			}

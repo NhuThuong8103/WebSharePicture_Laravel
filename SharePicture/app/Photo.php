@@ -24,6 +24,7 @@ class Photo extends Model
         'tieude',
         'chedo_photo',
         'taikhoan_id_photo',
+        'basename_hinhanh',
         'updated_at'
     ];
 

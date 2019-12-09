@@ -63,7 +63,7 @@
 												
 												 @foreach($feedAlbum['path'] as $img)
 												 	
-												       <div class="carousel-item {{$img['stt'] == 1 ? 'active' : '' }}">
+												       <div class="carousel-item {{$img['stt'] == 0 ? 'active' : '' }}">
 												           <img class="img-fluid" src="https://drive.google.com/uc?export=view&id={{ $img['img']}}">
 												       </div>
 												     
@@ -82,7 +82,7 @@
 										</div>                                                                                                         
 									</div>
 
-									<div class="modal-footer">
+									<div class="modal-footer" style="justify-content: normal">
 										<p class="modal-detail" id="exampleModalLabel">{{$feedAlbum['mota']}}</p>
 									</div>
 								</div>
@@ -107,8 +107,21 @@
 							<p class="card-text description">{{$feedAlbum['mota']}}</p>
 						</div>
 						<div class="info-card-album">
-							<input type="checkbox" name="checkbox{{ $feedAlbum['idalbum'] }}" id="checkbox{{ $feedAlbum['idalbum'] }}" class="css-checkbox"/>
-							<label for="checkbox{{ $feedAlbum['idalbum'] }}" class="css-label">1234</label>
+                        @if($feedAlbum['checklike']!=0)
+							<input type="checkbox" name="checkbox{{ $feedAlbum['idalbum'] }}" id="checkbox{{ $feedAlbum['idalbum'] }}" class="css-checkbox" data-id="{{ $feedAlbum['idalbum'] }}" checked />
+                            <label for="checkbox{{ $feedAlbum['idalbum'] }}" class="css-label"> 
+                                <a href="">
+                                    <p id="count{{ $feedAlbum['idalbum'] }}">{{ $feedAlbum['likecount'] }}</p>
+                                </a>
+                            </label>
+						@else
+							<input type="checkbox" name="checkbox{{ $feedAlbum['idalbum'] }}" id="checkbox{{$feedAlbum['idalbum'] }}" class="css-checkbox" data-id="{{ $feedAlbum['idalbum'] }}" />
+                            <label for="checkbox{{ $feedAlbum['idalbum'] }}" class="css-label"> 
+                                <a href="">
+                                    <p id="count{{ $feedAlbum['idalbum'] }}">{{ $feedAlbum['likecount'] }}</p>
+                                </a>
+                            </label>
+						@endif
 							<p class="info-album time-album">
 								<small class="text-muted text-right">
 									{{ $feedAlbum['ngaygio']->format('d-m-Y H:i') }}
@@ -121,26 +134,80 @@
 		</div>
 		@endforeach
 	</div>
+	<div class="row pagi">
+	  {{ $value1->links() }}
+	</div>
 @endsection
 
 @section('script')
-
+	<script>
+        $(document).ready(function() {
+            $('input[type=checkbox]').click(function() {
+                @if(Auth::check())
+                    var id=$(this).data('id');
+                    var value=Number($('#count'+id).text());
+                    if($(this).is(':checked')){
+                        $.ajaxSetup({
+                            headers:{
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url: '{{ route('likealbum') }}',
+                            type: 'POST',
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                "idAlbumLike": id
+                            },
+                        })
+                        .done(function() {
+                            $('#count'+id).text(value+1);
+                            console.log("success");
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+                        
+                    }
+                    else{
+                        $.ajaxSetup({
+                            headers:{
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url: '{{ route('removelikealbum') }}',
+                            type: 'POST',
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                "idAlbumLike": id
+                            },
+                        })
+                        .done(function() {
+                            $('#count'+id).text(value-1);
+                            console.log("success");
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+                    }
+                @else
+                    location.reload(true);
+                    $(location).attr('href','{{ url('/login') }}');
+                @endif
+            });
+        });
+    </script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
 
 
-	<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
-
-
-		<script type="text/javascript">
-			$('#tab').pagination({ 
-				items: 6,
-				contents: 'feeds-album',
-				previous: 'Previous',
-				next: 'Next',
-				position: 'bottom',
-			});
-		</script>
 @endsection

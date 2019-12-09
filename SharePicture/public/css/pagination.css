@@ -1,4 +1,36 @@
-#page-navi {
+.pagi{
+  justify-content: center;
+  text-align: center;
+}
+.pagination {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin-top: 10px;
+}
+.pagination li {
+  display: inline;
+  text-align: center;
+  float: left;
+}
+.pagination .page-item {
+  float: left;
+  display: block;
+  font-size: 14px;
+  text-decoration: none;
+  color: #fff;
+  margin-left: -1px;
+  border: 1px solid transparent;
+  line-height: 1.5;
+}
+.page-item.active span.page-link{
+  outline: none;
+  cursor: default;
+  color: #fff; 
+  background-color: #3c5999;
+
+}
+/* #page-navi {
   width:50%;
   margin:10px auto;
   margin-bottom:10px;
@@ -39,3 +71,4 @@
   color: #3c5999;
   border: 1px solid #3c5999;
 }
+ */

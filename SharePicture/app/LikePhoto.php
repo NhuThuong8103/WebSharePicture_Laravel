@@ -8,7 +8,11 @@ class LikePhoto extends Model
 {
     //
     public $table ="likephoto";
-
+    
+	protected $fillable = [
+			'taikhoan_id',
+	        'photo_id',
+	    ];
     public function taikhoan(){
     	return $this->belongsTo(TaiKhoan::class,'id');
     }

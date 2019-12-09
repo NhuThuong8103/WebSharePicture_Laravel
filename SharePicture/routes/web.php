@@ -12,11 +12,7 @@ use App\Http\Middleware\checkAdminLogin;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/logout',function(){
-	Auth::logout();
-	return Redirect('/');
-
-});
+Route::get('/logout','LoginController@logout');
 
 Route::get('/iconUser','LoginController@showIconUser')->name('iconUser');
 
@@ -85,11 +81,7 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 	Route::get('/myalbums/editalbum', 'AlbumUserController@editAlbumUser');
 
-
-
-	Route::get('/myphotos/newPhoto', function(){
-		return view('user.newphoto');
-	});
+	Route::get('/myphotos/newPhoto','PhotoUserController@shownewphoto');
 
 	Route::get('/myphotos','PhotoUserController@index');
 
@@ -102,7 +94,18 @@ Route::group(['middleware' => 'ckUserLogin'], function() {
 
 	Route::post('/myphotos/deletephoto','PhotoUserController@deletePhoto')->name('deletePhoto');
 
+	Route::post('/myphotos/deletephotolocal','PhotoUserController@deletePhotoLocal')->name('deleteFileLocal');
+
 	//Route::get('/myphotos/newPhoto/store','DriveController@store');
+
+	Route::post('/likephoto','LikePhotoController@likePhoto')->name('likephoto');
+
+	Route::post('/removelikephoto','LikePhotoController@removeLikePhoto')->name('removelikephoto');
+
+	Route::post('/likealbum','LikeAlbumController@likeAlbum')->name('likealbum');
+
+	Route::post('/removelikealbum','LikeAlbumController@removeLikeAlbum')->name('removelikealbum');
+
 
 });
 

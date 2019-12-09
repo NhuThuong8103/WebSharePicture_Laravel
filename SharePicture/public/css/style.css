@@ -8,6 +8,9 @@
 body{
   background-color: #f8f8f8;
 }
+.bg-white{
+  min-height: 90vh;
+}
 
 i.fas.fa-chevron-left {
     position: absolute;
@@ -53,7 +56,11 @@ a.right.carousel-control {
 }
 
 
-
+.info-card-album a{
+  font-size: 13px;
+  text-decoration: none;
+  color: #6c757d; 
+}
 
 .img-avatar{
   width: 26px;
@@ -153,6 +160,11 @@ form#fileupload.dropzone.newphoto .dz-default.dz-message{
   border-image: none;
   width: 100%;
 
+}
+.dropzone .dz-preview .dz-image img{
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
 }
 
 #exampledt_wrapper select{
@@ -1645,7 +1657,7 @@ main .one-photo{
   }
   .card.mb-3.one-news-album {
     border: none;
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
     box-shadow: 1px 1px 0px 0px #ced4da;
   }
   .info-card-album {

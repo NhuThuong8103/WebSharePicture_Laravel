@@ -12,6 +12,7 @@ class ChitietAlbum extends Model
 		'id',
         'hinhanh_album',
         'album_id',
+        'basename_hinhanh'
     ];
 
     public function album(){

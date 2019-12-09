@@ -27,8 +27,8 @@
 					title: "Congratulations <3",
 					text: "{{ Session::get('thongbao') }}",
 					icon: "success"
-				}, function() {
-					location.reload(true);
+				}).then(function() {
+					$(location).attr('href','{{ url('/myphotos') }}');
 				});
 			}, 500);
 		</script>

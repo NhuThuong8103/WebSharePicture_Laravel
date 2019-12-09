@@ -8,6 +8,10 @@ class LikeAlbum extends Model
 {
     //
     public $table ="likealbum";
+    protected $fillable = [
+			'taikhoan_id',
+	        'album_id',
+	    ];
     public function taikhoan(){
     	return $this->belongsTo(TaiKhoan::class,'id');
     }

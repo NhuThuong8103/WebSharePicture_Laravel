@@ -32,8 +32,8 @@
 					title: "Congratulations <3",
 					text: "{{ Session::get('thongbao') }}",
 					icon: "success"
-				}, function() {
-					location.reload(true);
+				}).then(function() {
+					$(location).attr('href','{{ url('/myphotos') }}');
 				});
 			}, 500);
 		</script>
@@ -99,6 +99,21 @@
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 	<script>
 		var ck=0;
+		$(function() {
+			var mockFile = { name: "{{ $value['filename'] }}", size: "{{ $value['size'] }}" };
+
+			if(mockFile)
+				ck=1;
+			
+		  	var myDropzone = new Dropzone("#fileupload");
+
+			myDropzone.options.addedfile.call(myDropzone, mockFile);
+
+			myDropzone.options. thumbnail.call(myDropzone, mockFile, "https://drive.google.com/uc?export=view&id={{ $value['basename'] }}");
+			myDropzone.destroy();
+		});
+
+
 		$('#submit-main-photo').click(function(){
 		    if(ck!=0){
 				$('#save-photo').click();
@@ -281,6 +296,41 @@
 	    }
 	});
 		})(jQuery, window); 
+
+	</script>
+	<script>
+		$(document).ready(function() {
+			/*$(window).bind('beforeunload', function(){
+				var Ans = confirm("Are you sure you want change page!");
+	           	if(Ans==true){
+	           		return true;
+	           }
+	           	else{
+	               return false;
+	           	}
+			});*/
+			$(window).bind('unload', function(){
+				$.ajaxSetup({
+					headers:{
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+	       		$.ajax({
+	       			url: '{{ route('deleteFileLocal') }}',
+	       			type: 'POST',
+	       			data: {"_token": "{{ csrf_token() }}"},
+	       		})
+	       		.done(function() {
+	       		})
+	       		.fail(function() {
+	       			console.log("error");
+	       		})
+	       		.always(function() {
+	       			console.log("complete");
+	       		});
+			});
+		});
+		
 	</script>
 @endsection
 

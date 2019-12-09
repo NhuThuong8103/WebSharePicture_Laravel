@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar d-none d-md-block">
 	<ul>
 		<li><a href="{{ url('/') }}">Feeds</a> </li>
 		<li><a href="{{url('/myphotos')}}">My Photo</a></li>
