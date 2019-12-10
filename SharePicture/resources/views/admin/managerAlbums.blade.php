@@ -45,6 +45,9 @@
 			</div>
 		@endforeach
 	</div>
+	<div class="row pagi">
+	 {{ $album->links() }}
+	</div>
 @endsection
 
 @section('script')
@@ -52,16 +55,5 @@
 
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
 
-		<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
-		
-		<script>
-			$('#tab').pagination({
-				items: 12,
-				contents: 'album-lists', 
-				previous: 'Previous',
-				next: 'Next',
-				position: 'bottom',
-			});
-		</script>
 @endsection

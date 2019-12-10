@@ -107,12 +107,12 @@ class PhotoUserController extends Controller
         $path = public_path(Auth::user()->id.'/'.$arrImg[0]['filename']);
 
         file_put_contents($path, $image);
-
+            
+        /*'imgadd_dz' =>$arrImg , */
         return view('user.editphoto')->with('value',[
             'tieude'    =>$photo['tieude'], 
             'mota_photo'=> $photo['mota'],
             'idPhoto'   =>$idPhoto, 
-            'imgadd_dz' =>$arrImg , 
             'basename'  =>$arrImg[0]['id'],
             'filename'  =>$arrImg[0]['filename'],
             'size'      =>$arrImg[0]['size'],

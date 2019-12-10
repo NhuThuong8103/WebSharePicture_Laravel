@@ -95,7 +95,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="{{ URL::asset('js/pagination.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 	<script>
 		var ck=0;

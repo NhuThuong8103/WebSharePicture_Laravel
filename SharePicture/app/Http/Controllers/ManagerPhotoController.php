@@ -8,14 +8,35 @@ use Illuminate\Http\Request;
 use App\Services\ManagerPhotoService;
 use App\Http\Requests\editPhotoUserValidate;
 use App\Services\PutFileGoogleDriveService;
+use App\Services\GetFileGoogleDriveService;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class ManagerPhotoController extends Controller
 {
-    public function showManagerPhoto()
+    public function showManagerPhoto(Request $request)
     {
-    	$photo= ManagerPhotoService::loadAllPhoto();
-    	return view('admin.managerPhotos')->with('photo',$photo);
+    	$items= ManagerPhotoService::loadAllPhoto();
+
+        // Get current page form url e.x. &page=1
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+ 
+        // Create a new Laravel collection from the array data
+        $itemCollection = collect($items);
+ 
+        // Define how many items we want to be visible in each page
+        $perPage = 12;
+ 
+        // Slice the collection to get the items to display in current page
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+ 
+        // Create our paginator and pass it to the view
+        $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+ 
+        // set url path for generted links
+        $paginatedItems->setPath($request->url());
+        
+    	return view('admin.managerPhotos')->with('photo',$paginatedItems);
     }
 
     public function editPhoto($idphoto)
@@ -24,7 +45,24 @@ class ManagerPhotoController extends Controller
 
     	// dd($array);
 
-    	return view('admin.editPhotoUser')->with('value',$array);
+    	//return view('admin.editPhotoUser')->with('value',$array);
+
+        $arrImg= GetFileGoogleDriveService::getImageAddDropzone($array['taikhoan_id_photo'],'Photo',$array['hinh_anh']);
+
+        $image = base64_decode($arrImg[0]['data']);
+
+        $path = public_path(Auth::user()->id.'/'.$arrImg[0]['filename']);
+
+        file_put_contents($path, $image);
+
+        return view('admin.editPhotoUser')->with('value',[
+            'tieude'    =>$array['tieude'], 
+            'mota'=> $array['mota'],
+            'idPhoto'   =>$idphoto, 
+            'basename'  =>$arrImg[0]['id'],
+            'filename'  =>$arrImg[0]['filename'],
+            'size'      =>$arrImg[0]['size'],
+        ]);
     }
 
     public function saveEditPhoto(editPhotoUserValidate $request)

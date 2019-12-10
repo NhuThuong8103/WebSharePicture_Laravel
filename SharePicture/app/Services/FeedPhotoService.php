@@ -30,7 +30,6 @@ use Storage;
 				if(Auth::check()){
 					$checklike= LikePhoto::where('photo_id',$value['id'])->where('taikhoan_id',Auth::user()->id)->count();
 				}
-				// $pathimg=GetFileGoogleDriveService::getImagePhoto($value['taikhoan_id_photo'],'Photo',$value['hinh_anh']);
 				array_push($array,[
 					'idPhoto'		=>$value['id'],
 					'username'  	=>$username,

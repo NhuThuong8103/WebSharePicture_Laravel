@@ -46,7 +46,8 @@
 	<div class="row pt-2">
 		<div class="col-lg-6">
 			<h6>Title</h6>
-			<input type="hidden" id="idAlbum" value="{{ $value['id'] }}">
+			<input type="hidden" id="idtaikhoan" name="idtaikhoan" value="{{ $value['taikhoan_id'] }}">
+			<input type="hidden" id="id" name="id" value="{{ $value['id'] }}">
 			<input type="text" class="form-control" placeholder="Hôm nay trời đẹp quá hihi" required name="tieude_album" value="{{ $value['tieude_album'] }}">
 			<br>
 			<div class="d-lg-none">
@@ -106,7 +107,6 @@
 <script>
 	var ck=0;
 	$('#save-album').click(function(event) {
-
 		if(ck!=0){
 			$('#save').click();
 		}
@@ -135,7 +135,7 @@
 			  confirmButtonText: 'Yes, delete it!'
 			}).then((result) => {
 			  if (result.value) {
-			  	var id=$('#idAlbum').val();
+			  	var id=$('#id').val();
 				$.ajaxSetup({
 				    headers: {
 				        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

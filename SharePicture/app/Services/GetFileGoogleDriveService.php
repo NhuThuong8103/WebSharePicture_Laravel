@@ -155,10 +155,6 @@ class GetFileGoogleDriveService
 		$permission->setAllowFileDiscovery(false);
 		$permissions = $service->permissions->create($file['basename'], $permission);
 
-		//$data=Storage::disk('google')->get($file['path']);
-
-		//$result="data:".$file['mimetype'].";base64,".base64_encode($data);
-
 		return $file['basename'];
 	}
 

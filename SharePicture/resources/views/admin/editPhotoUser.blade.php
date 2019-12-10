@@ -43,8 +43,7 @@
 	<form id="form-editphoto" action="{{ url('/admin/managerPhotos/edit/save') }}" method="post" novalidate>{{ csrf_field() }}
 	<div class="row pt-2">
 		<div class="col-lg-6">
-			<input type="hidden" name="idUser_Photo" value="{{ $value['taikhoan_id_photo'] }}">
-			<input type="hidden" id="id" name="idPhoto" value="{{ $value['id'] }}">
+			<input type="hidden" id="id" name="idPhoto" value="{{ $value['idPhoto'] }}">
 			<h6>Title</h6>
 			<input type="text" class="form-control" placeholder="Hôm nay trời đẹp quá hihi" value="{{ $value['tieude'] }}" required name="tieude_photo">
 			<br>
@@ -102,6 +101,19 @@
 	<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
 	<script>
 		var ck=0;
+		$(function() {
+			var mockFile = { name: "{{ $value['filename'] }}", size: "{{ $value['size'] }}" };
+
+			if(mockFile)
+				ck=1;
+			
+		  	var myDropzone = new Dropzone("#fileupload");
+
+			myDropzone.options.addedfile.call(myDropzone, mockFile);
+
+			myDropzone.options. thumbnail.call(myDropzone, mockFile, "https://drive.google.com/uc?export=view&id={{ $value['basename'] }}");
+			myDropzone.destroy();
+		});
 		  $('#submit-main-photo').click(function(){
 		    if(ck!=0){
 			$('#save-photo').click();
@@ -283,6 +295,40 @@
 	    }
 	});
 		})(jQuery, window); 
+	</script>
+	<script>
+		$(document).ready(function() {
+			/*$(window).bind('beforeunload', function(){
+				var Ans = confirm("Are you sure you want change page!");
+	           	if(Ans==true){
+	           		return true;
+	           }
+	           	else{
+	               return false;
+	           	}
+			});*/
+			$(window).bind('unload', function(){
+				$.ajaxSetup({
+					headers:{
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+	       		$.ajax({
+	       			url: '{{ route('deleteFileLocal') }}',
+	       			type: 'POST',
+	       			data: {"_token": "{{ csrf_token() }}"},
+	       		})
+	       		.done(function() {
+	       		})
+	       		.fail(function() {
+	       			console.log("error");
+	       		})
+	       		.always(function() {
+	       			console.log("complete");
+	       		});
+			});
+		});
+		
 	</script>
 @endsection
 
